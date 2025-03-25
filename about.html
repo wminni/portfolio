@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Me | Minnin Cyber Security Portfolio</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DejaVu+Sans+Mono:wght@400;700&display=swap');
+
+    :root {
+      --primary: #7B1113;
+      --primary-dark: #5A0D0F;
+      --primary-glow: rgba(123, 17, 19, 0.5);
+      --primary-transparent: rgba(123, 17, 19, 0.2);
+      --dark: #000000;
+      --darker: #000000;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scrollbar-width: thin;
+      scrollbar-color: var(--primary) var(--darker);
+    }
+
+    *::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    *::-webkit-scrollbar-track {
+      background: var(--darker);
+    }
+
+    *::-webkit-scrollbar-thumb {
+      background-color: var(--primary);
+      border-radius: 4px;
+    }
+
+    body {
+      font-family: 'DejaVu Sans Mono', monospace;
+      background-color: #000000;
+      color: #a0a0a0;
+      line-height: 1.6;
+      overflow-x: hidden;
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding-top: 40px;
+    }
+
+    .header-container {
+      position: relative;
+      z-index: 2;
+      width: 900px;
+      max-width: 90%;
+    }
+
+    .header-box {
+      width: 100%;
+      margin-bottom: 0;
+      padding: 30px;
+      text-align: center;
+      background-color: #000000;
+      border: 1px solid var(--primary);
+      border-radius: 10px 10px 0 0;
+      border-bottom: none;
+      box-shadow: 0 0 15px var(--primary-glow),
+                  0 0 30px var(--primary-glow),
+                  inset 0 0 8px var(--primary-transparent);
+    }
+
+    .nav {
+      width: 100%;
+      background-color: #000000;
+      border: 1px solid var(--primary);
+      border-top: none;
+      border-bottom: none;
+      box-shadow: 0 0 15px var(--primary-glow),
+                  0 0 30px var(--primary-glow),
+                  inset 0 0 8px var(--primary-transparent);
+      padding: 15px;
+    }
+    
+    .content-box {
+      width: 100%;
+      min-height: 400px;
+      padding: 30px 40px;
+      background-color: #000000;
+      border: 1px solid var(--primary);
+      border-top: none;
+      border-radius: 0 0 10px 10px;
+      box-shadow: 0 0 15px var(--primary-glow),
+                  0 0 30px var(--primary-glow),
+                  inset 0 0 8px var(--primary-transparent);
+      margin-top: 0;
+    }
+    
+    .section-title {
+      font-family: 'DejaVu Sans Mono', monospace;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 20px;
+      text-shadow: 0 0 5px var(--primary-glow);
+      display: flex;
+      align-items: center;
+    }
+    
+    .section-title::before {
+      content: ">_";
+      margin-right: 10px;
+      font-weight: bold;
+      opacity: 0.7;
+      text-shadow: 0 0 3px var(--primary-glow);
+      animation: blink 4s infinite;
+    }
+    
+    @keyframes blink {
+      0%, 100% { opacity: 0.7; }
+      50% { opacity: 0.2; }
+    }
+    
+    @keyframes letter-glow {
+      0%, 100% {
+        color: #7B1113;
+        text-shadow: 
+          0 0 5px rgba(123, 17, 19, 0.4),
+          0 0 10px rgba(123, 17, 19, 0.2);
+      }
+      50% {
+        color: #cc2428;
+        text-shadow: 
+          0 0 10px rgba(204, 36, 40, 0.7),
+          0 0 20px rgba(204, 36, 40, 0.4),
+          0 0 30px rgba(204, 36, 40, 0.2);
+      }
+    }
+    
+    .letter {
+      display: inline-block;
+      animation: letter-glow 4s infinite;
+    }
+
+    .about-text {
+      color: #a0a0a0;
+      font-size: 1.1rem;
+      line-height: 1.8;
+      margin-bottom: 25px;
+    }
+    
+    .profile-container {
+      float: right;
+      width: 200px;
+      margin-left: 30px;
+      margin-bottom: 20px;
+    }
+    
+    .profile-image {
+      width: 200px;
+      height: 200px;
+      border: 2px solid var(--primary);
+      border-radius: 5px;
+      object-fit: cover;
+      box-shadow: 0 0 15px var(--primary-glow),
+                  0 0 30px var(--primary-glow);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .profile-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .profile-image::before,
+    .profile-image::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: transparent;
+      border: 2px solid var(--primary);
+      border-radius: 5px;
+      animation: glitch-profile 3s infinite linear alternate-reverse;
+      z-index: 0;
+    }
+    
+    .profile-image::before {
+      animation-delay: 0.5s;
+      opacity: 0.5;
+      transform: translateX(-2px);
+      border-color: var(--primary);
+    }
+    
+    .profile-image::after {
+      animation-delay: 1s;
+      opacity: 0.3;
+      transform: translateX(2px);
+      border-color: var(--primary-dark);
+    }
+    
+    @keyframes glitch-profile {
+      0%, 90%, 100% {
+        transform: translateX(0);
+      }
+      20% {
+        transform: translateX(-2px);
+      }
+      40% {
+        transform: translateX(2px);
+      }
+      60% {
+        transform: translateY(-1px);
+      }
+      80% {
+        transform: translateY(1px);
+      }
+    }
+    
+    .cv-button-container {
+      margin: 30px 0;
+      text-align: center;
+    }
+    
+    .cv-button {
+      display: inline-block;
+      padding: 12px 25px;
+      background-color: var(--primary-transparent);
+      border: 2px solid var(--primary);
+      border-radius: 5px;
+      color: var(--primary);
+      font-size: 1.2rem;
+      font-weight: bold;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      letter-spacing: 1px;
+      text-shadow: 0 0 2px var(--primary-glow);
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+    
+    .cv-button:hover {
+      background-color: rgba(123, 17, 19, 0.4);
+      transform: translateY(-3px);
+      box-shadow: 0 0 20px var(--primary-glow);
+      color: #a0a0a0;
+    }
+    
+    .cv-button::before {
+      content: "";
+      position: absolute;
+      top: -5px;
+      left: -5px;
+      right: -5px;
+      bottom: -5px;
+      border: 1px solid var(--primary);
+      opacity: 0;
+      transition: all 0.3s ease;
+      z-index: -1;
+    }
+    
+    .cv-button:hover::before {
+      opacity: 0.5;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+    }
+    
+    .skill-section {
+      margin-top: 40px;
+    }
+    
+    .skill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-top: 15px;
+    }
+    
+    .skill-item {
+      background-color: rgba(123, 17, 19, 0.1);
+      border: 1px solid var(--primary);
+      padding: 8px 15px;
+      border-radius: 5px;
+      color: #a0a0a0;
+      display: inline-block;
+      transition: all 0.3s ease;
+      min-width: 150px;
+      text-align: center;
+    }
+    
+    .skill-item:hover {
+      background-color: rgba(123, 17, 19, 0.3);
+      transform: translateY(-2px);
+      box-shadow: 0 0 10px var(--primary-glow);
+    }
+    
+    .typing-effect {
+      overflow: hidden;
+      white-space: nowrap;
+      animation: typing 3.5s steps(30, end);
+      width: 100%;
+    }
+    
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+
+    .logo {
+      font-family: 'DejaVu Sans Mono', monospace;
+      font-size: 3.5rem;
+      font-weight: 900;
+      color: #7B1113;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+      letter-spacing: 2px;
+      position: relative;
+    }
+    
+    .logo::before, .logo::after {
+      display: none;
+    }
+
+    .logo::before {
+      color: var(--primary);
+      animation: glitch-1 2s infinite linear alternate-reverse;
+    }
+
+    .logo::after {
+      color: var(--primary-dark);
+      animation: glitch-2 3s infinite linear alternate-reverse;
+    }
+
+    @keyframes glitch-1 {
+      0%, 100% { opacity: 0; }
+    }
+
+    @keyframes glitch-2 {
+      0%, 100% { opacity: 0; }
+    }
+
+    .nav-list {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      list-style: none;
+      background-color: #000000;
+      padding: 10px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .nav-item a {
+      color: var(--primary);
+      text-decoration: none;
+      font-size: 1.5rem;
+      padding: 8px 12px;
+      position: relative;
+      transition: all 0.3s ease;
+      display: inline-block;
+      font-family: 'DejaVu Sans Mono', monospace;
+      letter-spacing: 1px;
+      text-shadow: 0 0 2px var(--primary-glow);
+    }
+
+    .nav-item a:hover {
+      color: #cc2428;
+      transform: scale(1.05);
+      text-shadow: 
+        0 0 10px rgba(204, 36, 40, 0.7),
+        0 0 20px rgba(204, 36, 40, 0.4),
+        0 0 30px rgba(204, 36, 40, 0.2);
+      transition: all 0.3s ease;
+    }
+    
+    .nav-item a.active {
+      color: #cc2428;
+      background-color: transparent;
+      border-bottom: 2px solid var(--primary);
+      text-shadow: 
+        0 0 5px var(--primary-glow),
+        0 0 10px var(--primary-glow);
+    }
+
+    #matrix-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    @media (max-width: 768px) {
+      .header-container {
+        width: 90%;
+      }
+      
+      .header-box {
+        padding: 20px 15px;
+      }
+      
+      .content-box {
+        padding: 20px 15px;
+      }
+      
+      .logo {
+        font-size: 2.5rem;
+      }
+      
+      .nav-list {
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      
+      .nav-item a {
+        font-size: 1.3rem;
+        padding: 5px 8px;
+      }
+      
+      .section-title {
+        font-size: 1.5rem;
+      }
+      
+      .about-text {
+        font-size: 1rem;
+      }
+      
+      .skill-list {
+        gap: 10px;
+      }
+      
+      .profile-container {
+        float: none;
+        width: 150px;
+        margin: 0 auto 20px auto;
+      }
+      
+      .profile-image {
+        width: 150px;
+        height: 150px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="matrix-canvas"></canvas>
+  
+  <div class="header-container">
+    <div class="header-box">
+      <h1 class="logo" data-text="About">&lt;About&gt;</h1>
+    </div>
+
+    <nav class="nav">
+      <ul class="nav-list">
+        <li class="nav-item"><a href="index.html">&lt;home&gt;</a></li>
+        <li class="nav-item"><a href="about.html" class="active">&lt;about&gt;</a></li>
+        <li class="nav-item"><a href="projects.html">&lt;projects&gt;</a></li>
+        <li class="nav-item"><a href="contact.html">&lt;contact&gt;</a></li>
+      </ul>
+    </nav>
+    
+    <div class="content-box">
+      <div class="section-title">About Me</div>
+      
+      <div class="profile-container">
+        <div class="profile-image">
+          <img src="your-image.jpg" alt="Picture">
+        </div>
+      </div>
+      
+      <p class="about-text">
+        Hi! My name is Minni, and I am a cybersecurity student with a strong interest in ethical hacking and penetration testing. I am currently looking for an internship where I can apply the skills I've learned and continue to develop them in a real-world setting.
+      </p>
+      
+      <p class="about-text">
+        Before starting this path, I completed a Vocational Qualification in Safety and Security and have worked in the field, which has given me a solid understanding of practical security concepts. During my studies, I have gained hands-on experience using tools like Kali Linux, Burp Suite, Wireshark, and Metasploit. I've also studied Python and Bash, and I enjoy working on personal projects. I strongly believe in ethical practices and responsible disclosure, and I am eager to continue expanding my knowledge in this rapidly evolving field.
+      </p>
+      
+      <p class="about-text">
+        In my free time, I enjoy diving into cybersecurity-related content, testing my skills, and participating in CTF challenges. I also relax by playing video games. It would be great to have the opportunity to apply what I've learned in a professional environment where I can grow and develop as a professional.
+      </p>
+      
+      <div class="cv-button-container">
+        <a href="cv.html" class="cv-button">View My CV</a>
+      </div>
+      
+      <div class="skill-section">
+        <div class="section-title">Skills I'm Learning</div>
+        <div class="skill-list">
+          <span class="skill-item">Penetration Testing</span>
+          <span class="skill-item">-</span>
+          <span class="skill-item">-</span>
+          <span class="skill-item">-</span>
+          <span class="skill-item">-</span>
+          <span class="skill-item">-</span>
+          <span class="skill-item">-</span>
+          <span class="skill-item">-</span>
+          <span class="skill-item">-</span>
+        </div>
+      </div>
+      
+      <div class="skill-section">
+        <div class="section-title">Coming...</div>
+        <div class="skill-list">
+          <span class="skill-item">-</span>
+          <span class="skill-item">-</span>
+          <span class="skill-item">-</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    window.addEventListener('load', function() {
+      try {
+        const canvas = document.getElementById('matrix-canvas');
+        if (!canvas) return;
+        
+        const ctx = canvas.getContext('2d');
+        if (!ctx) return;
+        
+        function resizeCanvas() {
+          canvas.width = window.innerWidth;
+          canvas.height = window.innerHeight;
+        }
+        
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+        
+        const matrixChars = [
+          "0", "1", "0", "1", "0", "1", "0", "1", 
+          "0", "1", "0", "1", "0", "1", "0", "1", 
+          "0", "1", "0", "1", "0", "1", "0", "1", 
+          "{", "}", "[", "]", "<", ">", "(", ")",
+          ";", ":", "/", "\\", "|", ".", ",", "_",
+          "+", "-", "*", "=", "&", "%", "$", "#"
+        ];
+        
+        const columnWidth = 20; 
+        const rowHeight = 25;
+        const columns = Math.floor(canvas.width / columnWidth);
+        const rows = Math.floor(canvas.height / rowHeight) + 1;
+        
+        const matrix = [];
+        for (let i = 0; i < columns; i++) {
+          matrix[i] = [];
+          for (let j = 0; j < rows; j++) {
+            const charIndex = Math.floor(Math.random() * matrixChars.length);
+            matrix[i][j] = matrixChars[charIndex];
+          }
+        }
+        
+        const glowPositions = [];
+        const glowSpeeds = [];
+        for (let i = 0; i < columns; i++) {
+          glowPositions[i] = -Math.floor(Math.random() * 20); 
+          glowSpeeds[i] = 0.01 + Math.random() * 0.015;
+        }
+        
+        function draw() {
+          ctx.fillStyle = "rgba(0, 0, 0, 1)";
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+          
+          ctx.font = "16px 'DejaVu Sans Mono', monospace";
+          
+          for (let i = 0; i < columns; i++) {
+            for (let j = 0; j < rows; j++) {
+              const char = matrix[i][j];
+              const x = i * columnWidth;
+              const y = j * rowHeight;
+              
+              const glowPos = glowPositions[i];
+              const distance = Math.abs(j - glowPos);
+              
+              let brightness;
+              if (distance < 8) { 
+                brightness = 0.5 - (distance * 0.06);
+              } else {
+                brightness = 0.04;
+              }
+              
+              ctx.fillStyle = `rgba(123, 17, 19, ${brightness})`;
+              ctx.fillText(char, x, y);
+            }
+            
+            glowPositions[i] += glowSpeeds[i];
+            
+            if (glowPositions[i] > rows + 5) {
+              glowPositions[i] = -5;
+              
+              for (let j = 0; j < rows; j++) {
+                if (Math.random() < 0.2) {
+                  const charIndex = Math.floor(Math.random() * matrixChars.length);
+                  matrix[i][j] = matrixChars[charIndex];
+                }
+              }
+            }
+          }
+          
+          requestAnimationFrame(draw);
+        }
+        
+        function createLetterByLetterEffect(element, delay) {
+          const text = element.textContent;
+          element.textContent = '';
+          
+          for (let i = 0; i < text.length; i++) {
+            const span = document.createElement('span');
+            span.className = 'letter';
+            span.textContent = text[i];
+            span.style.animationDelay = `${i * delay}s`;
+            element.appendChild(span);
+          }
+        }
+        
+        const logoElement = document.querySelector('.logo');
+        createLetterByLetterEffect(logoElement, 0.25);
+        
+        document.fonts.ready.then(() => {
+          draw();
+        });
+      } catch (e) {
+        console.error('Matrix animation error:', e);
+      }
+    });
+  </script>
+</body>
+</html>
