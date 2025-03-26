@@ -54,8 +54,8 @@
     .header-container {
       position: relative;
       z-index: 2;
-      width: 700px;
-      max-width: 90%;
+      width: 90%;
+      max-width: 1200px;
     }
 
     .header-box {
@@ -84,47 +84,42 @@
       padding: 15px;
     }
     
-  .intro-box {
-  width: 100%;
-  min-height: 250px;
-  padding: 30px 50px;
-  background-color: #000000;
-  border: 1px solid var(--primary);
-  border-top: none;
-  border-radius: 0 0 10px 10px;
-  box-shadow: 0 0 15px var(--primary-glow),
-              0 0 30px rgba(123, 17, 19, 0.3),
-              inset 0 0 8px rgba(123, 17, 19, 0.2);
-  text-align: center;
-  margin-top: 0;
-  display: block;
-}
+    .intro-box {
+      width: 100%;
+      padding: 30px 40px;
+      background-color: #000000;
+      border: 1px solid var(--primary);
+      border-top: none;
+      border-radius: 0 0 10px 10px;
+      box-shadow: 0 0 15px var(--primary-glow),
+                  0 0 30px rgba(123, 17, 19, 0.3),
+                  inset 0 0 8px rgba(123, 17, 19, 0.2);
+      text-align: center;
+      margin-top: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .intro-text {
+      color: var(--primary);
+      font-size: 1.2rem;
+      line-height: 1.7;
+      text-shadow: 0 0 5px var(--primary-glow);
+    }
 
-.intro-text {
-  color: var(--primary);
-  font-size: 1.3rem;
-  line-height: 1.7;
-  text-shadow: 0 0 5px var(--primary-glow);
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.intro-text p {
-  margin-bottom: 15px;
-}
-
-.big-o {
-  display: block;
-  font-size: 2.2rem;
-  font-weight: bold;
-  text-shadow: 
-    0 0 5px var(--primary-glow),
-    0 0 10px var(--primary-glow),
-    0 0 15px var(--primary-glow);
-  margin-bottom: 15px;
-  text-align: center;
-  animation: pulse 2s infinite;
-}
+    .big-o {
+      font-size: 1.8rem;
+      font-weight: bold;
+      text-shadow: 
+        0 0 5px var(--primary-glow),
+        0 0 10px var(--primary-glow),
+        0 0 15px var(--primary-glow);
+      position: relative;
+      display: inline-block;
+      vertical-align: middle;
+      animation: pulse 2s infinite;
+    }
 
     @keyframes pulse {
       0%, 100% { text-shadow: 0 0 5px var(--primary-glow), 0 0 10px var(--primary-glow); }
@@ -289,17 +284,10 @@
       </ul>
     </nav>
     
-   <div class="intro-box">
-  <div class="intro-text">
-    <span class="big-o">Hi!</span>
-
-    <p>I'm Minni, a cybersecurity student passionate about the field, with particular interest in ethical hacking and penetration testing. I'm currently looking for an internship where I can apply the skills I've learned and continue developing.</p>
-    
-    <p>I quickly pick up new skills and techniques, and when faced with a challenge, I actively seek solutions rather than waiting for them to appear. I'm fascinated by solving puzzles, even the challenging ones – I dive into them with focus and determination, exploring different approaches.</p>
-    
-    <p>A humble learner at heart, I recognize that cybersecurity is a field where knowledge is constantly evolving. I'm eager to learn from experienced professionals. My keyboard may be worn out, but my curiosity never fades.</p>
+    <div class="intro-box">
+      <p class="intro-text"><span class="big-o">Hi!</span> I'm Minni, a cybersecurity student with a strong interest in ethical hacking and penetration testing. I am looking for opportunities to apply the skills I've learned in practice and grow as a security professional in a professional environment.</p>
+    </div>
   </div>
-</div>
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
