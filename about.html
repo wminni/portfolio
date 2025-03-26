@@ -27,11 +27,9 @@
     *::-webkit-scrollbar {
       width: 8px;
     }
-
     *::-webkit-scrollbar-track {
       background: var(--darker);
     }
-
     *::-webkit-scrollbar-thumb {
       background-color: var(--primary);
       border-radius: 4px;
@@ -51,7 +49,7 @@
       align-items: center;
       justify-content: flex-start;
       margin: 0;
-      padding: 20px 0;
+      padding: 0;
     }
 
     #matrix-canvas {
@@ -96,7 +94,6 @@
                   inset 0 0 8px rgba(123, 17, 19, 0.2);
       padding: 8px;
     }
-
     .nav-list {
       display: flex;
       justify-content: center;
@@ -107,7 +104,6 @@
       position: relative;
       z-index: 1;
     }
-
     .nav-item a {
       color: var(--primary);
       text-decoration: none;
@@ -119,7 +115,6 @@
       letter-spacing: 1px;
       text-shadow: 0 0 2px var(--primary-glow);
     }
-
     .nav-item a:hover {
       color: #cc2428;
       transform: scale(1.05);
@@ -127,8 +122,8 @@
         0 0 10px rgba(204, 36, 40, 0.7),
         0 0 20px rgba(204, 36, 40, 0.4),
         0 0 30px rgba(204, 36, 40, 0.2);
+      transition: all 0.3s ease;
     }
-    
     .nav-item a.active {
       color: #cc2428;
       border-bottom: 2px solid var(--primary);
@@ -150,36 +145,24 @@
       margin-top: 0;
     }
 
-    .section-title {
+    .logo {
       font-family: 'DejaVu Sans Mono', monospace;
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: var(--primary);
-      margin-bottom: 20px;
-      text-shadow: 0 0 5px var(--primary-glow);
-      display: flex;
-      align-items: center;
+      font-size: 3.5rem;
+      font-weight: 900;
+      color: #7B1113;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+      letter-spacing: 2px;
+      position: relative;
     }
 
-    .section-title::before {
-      content: ">_";
-      margin-right: 10px;
-      font-weight: bold;
-      opacity: 0.7;
-      text-shadow: 0 0 3px var(--primary-glow);
-      animation: blink 4s infinite;
+    .logo::before, .logo::after {
+      display: none;
     }
-
-    @keyframes blink {
-      0%, 100% { opacity: 0.7; }
-      50% { opacity: 0.2; }
-    }
-
     .letter {
       display: inline-block;
       animation: letter-glow 4s infinite;
     }
-
     @keyframes letter-glow {
       0%, 100% {
         color: #7B1113;
@@ -196,13 +179,35 @@
       }
     }
 
+    .section-title {
+      font-family: 'DejaVu Sans Mono', monospace;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 20px;
+      text-shadow: 0 0 5px var(--primary-glow);
+      display: flex;
+      align-items: center;
+    }
+    .section-title::before {
+      content: ">_";
+      margin-right: 10px;
+      font-weight: bold;
+      opacity: 0.7;
+      text-shadow: 0 0 3px var(--primary-glow);
+      animation: blink 4s infinite;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 0.7; }
+      50% { opacity: 0.2; }
+    }
+
     .profile-container {
       float: right;
       width: 200px;
       margin-left: 30px;
       margin-bottom: 20px;
     }
-    
     .profile-image {
       width: 200px;
       height: 200px;
@@ -210,11 +215,10 @@
       border-radius: 5px;
       object-fit: cover;
       box-shadow: 0 0 15px var(--primary-glow),
-                  0 0 30px var(--primary-glow);
+                  0 0 30px rgba(123, 17, 19, 0.3);
       position: relative;
       overflow: hidden;
     }
-    
     .profile-image img {
       width: 100%;
       height: 100%;
@@ -237,21 +241,18 @@
       animation: glitch-profile 3s infinite linear alternate-reverse;
       z-index: 0;
     }
-    
     .profile-image::before {
       animation-delay: 0.5s;
       opacity: 0.5;
       transform: translateX(-2px);
       border-color: var(--primary);
     }
-    
     .profile-image::after {
       animation-delay: 1s;
       opacity: 0.3;
       transform: translateX(2px);
       border-color: var(--primary-dark);
     }
-    
     @keyframes glitch-profile {
       0%, 90%, 100% {
         transform: translateX(0);
@@ -275,13 +276,15 @@
       font-size: 1.1rem;
       line-height: 1.8;
       margin-bottom: 25px;
+      white-space: normal;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
     }
-    
+
     .cv-button-container {
       margin: 30px 0;
       text-align: center;
     }
-    
     .cv-button {
       display: inline-block;
       padding: 12px 25px;
@@ -299,14 +302,12 @@
       overflow: hidden;
       z-index: 1;
     }
-    
     .cv-button:hover {
       background-color: rgba(123, 17, 19, 0.4);
       transform: translateY(-3px);
       box-shadow: 0 0 20px var(--primary-glow);
       color: #a0a0a0;
     }
-    
     .cv-button::before {
       content: "";
       position: absolute;
@@ -319,7 +320,6 @@
       transition: all 0.3s ease;
       z-index: -1;
     }
-    
     .cv-button:hover::before {
       opacity: 0.5;
       top: -2px;
@@ -327,18 +327,17 @@
       right: -2px;
       bottom: -2px;
     }
-    
+
     .skill-section {
       margin-top: 40px;
+      clear: both;
     }
-    
     .skill-list {
       display: flex;
       flex-wrap: wrap;
       gap: 15px;
       margin-top: 15px;
     }
-    
     .skill-item {
       background-color: rgba(123, 17, 19, 0.1);
       border: 1px solid var(--primary);
@@ -350,7 +349,6 @@
       min-width: 150px;
       text-align: center;
     }
-    
     .skill-item:hover {
       background-color: rgba(123, 17, 19, 0.3);
       transform: translateY(-2px);
@@ -361,39 +359,37 @@
       .header-container {
         width: 90%;
       }
-      
       .header-box {
         padding: 20px 15px;
       }
-      
+      .nav {
+        padding: 5px;
+      }
       .content-box {
         padding: 30px 15px;
       }
-      
+      .logo {
+        font-size: 2.8rem;
+      }
       .nav-list {
         flex-wrap: wrap;
         gap: 10px;
       }
-      
       .nav-item a {
         font-size: 1.3rem;
         padding: 5px 8px;
       }
-      
       .section-title {
         font-size: 1.5rem;
       }
-      
       .about-text {
         font-size: 1rem;
       }
-      
       .profile-container {
         float: none;
         width: 150px;
-        margin: 0 auto 20px auto;
+        margin: 0 auto 20px;
       }
-      
       .profile-image {
         width: 150px;
         height: 150px;
@@ -428,15 +424,15 @@
       </div>
       
       <p class="about-text">
-        Hi! My name is Minni.............................................................................................................................
+        Hi! My name is Minni........................................................................................................................................................................................
       </p>
       
       <p class="about-text">
-        Before starting this path, I completed a Vocational Qualification in Safety and Security and have worked in the field, which has given me a solid understanding of practical security concepts.........................................
+        Before starting this path, I completed a Vocational Qualification in Safety and Security and have worked in the field, which has given me a solid understanding of practical security concepts............................................................................................
       </p>
       
       <p class="about-text">
-        In my free time, I enjoy diving into cybersecurity-related content, testing my skills, and participating in CTF challenges. I also relax by playing video games.............................................................
+        In my free time, I enjoy diving into cybersecurity-related content, testing my skills, and participating in CTF challenges. I also relax by playing video games............................................................................................
       </p>
       
       <div class="cv-button-container">
@@ -459,7 +455,7 @@
       </div>
       
       <div class="skill-section">
-        <div class="section-title">----------</div>
+        <div class="section-title">---------</div>
         <div class="skill-list">
           <span class="skill-item">-</span>
           <span class="skill-item">-</span>
@@ -470,117 +466,105 @@
   </div>
 
   <script>
-    window.addEventListener('load', function() {
-      try {
-        const canvas = document.getElementById('matrix-canvas');
-        if (!canvas) return;
-        
-        const ctx = canvas.getContext('2d');
-        if (!ctx) return;
-        
-        function resizeCanvas() {
-          canvas.width = window.innerWidth;
-          canvas.height = window.innerHeight;
-        }
-        
-        resizeCanvas();
-        window.addEventListener('resize', resizeCanvas);
-        
-        const matrixChars = [
-          "0", "1", "0", "1", "0", "1", "0", "1", 
-          "0", "1", "0", "1", "0", "1", "0", "1", 
-          "0", "1", "0", "1", "0", "1", "0", "1", 
-          "{", "}", "[", "]", "<", ">", "(", ")",
-          ";", ":", "/", "\\", "|", ".", ",", "_",
-          "+", "-", "*", "=", "&", "%", "$", "#"
-        ];
-        
-        const columnWidth = 20; 
-        const rowHeight = 25;
-        const columns = Math.floor(canvas.width / columnWidth);
-        const rows = Math.floor(canvas.height / rowHeight) + 1;
-        
-        const matrix = [];
-        for (let i = 0; i < columns; i++) {
-          matrix[i] = [];
-          for (let j = 0; j < rows; j++) {
-            const charIndex = Math.floor(Math.random() * matrixChars.length);
-            matrix[i][j] = matrixChars[charIndex];
-          }
-        }
-        
-        const glowPositions = [];
-        const glowSpeeds = [];
-        for (let i = 0; i < columns; i++) {
-          glowPositions[i] = -Math.floor(Math.random() * 20); 
-          glowSpeeds[i] = 0.01 + Math.random() * 0.015;
-        }
-        
-        function draw() {
-          ctx.fillStyle = "rgba(0, 0, 0, 1)";
-          ctx.fillRect(0, 0, canvas.width, canvas.height);
-          
-          ctx.font = "16px 'DejaVu Sans Mono', monospace";
-          
-          for (let i = 0; i < columns; i++) {
-            for (let j = 0; j < rows; j++) {
-              const char = matrix[i][j];
-              const x = i * columnWidth;
-              const y = j * rowHeight;
-              
-              const glowPos = glowPositions[i];
-              const distance = Math.abs(j - glowPos);
-              
-              let brightness;
-              if (distance < 8) { 
-                brightness = 0.5 - (distance * 0.06);
-              } else {
-                brightness = 0.04;
-              }
-              
-              ctx.fillStyle = `rgba(123, 17, 19, ${brightness})`;
-              ctx.fillText(char, x, y);
-            }
-            
-            glowPositions[i] += glowSpeeds[i];
-            
-            if (glowPositions[i] > rows + 5) {
-              glowPositions[i] = -5;
-              
-              for (let j = 0; j < rows; j++) {
-                if (Math.random() < 0.2) {
-                  const charIndex = Math.floor(Math.random() * matrixChars.length);
-                  matrix[i][j] = matrixChars[charIndex];
-                }
-              }
-            }
-          }
-          
-          requestAnimationFrame(draw);
-        }
-        
-        function createLetterByLetterEffect(element, delay) {
-          const text = element.textContent;
-          element.textContent = '';
-          
-          for (let i = 0; i < text.length; i++) {
-            const span = document.createElement('span');
-            span.className = 'letter';
-            span.textContent = text[i];
-            span.style.animationDelay = `${i * delay}s`;
-            element.appendChild(span);
-          }
-        }
-        
-        const logoElement = document.querySelector('.logo');
-        createLetterByLetterEffect(logoElement, 0.25);
-        
-        document.fonts.ready.then(() => {
-          draw();
-        });
-      } catch (e) {
-        console.error('Matrix animation error:', e);
+    document.addEventListener('DOMContentLoaded', function() {
+      const canvas = document.getElementById('matrix-canvas');
+      const ctx = canvas.getContext('2d');
+
+      function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
       }
+      resizeCanvas();
+      window.addEventListener('resize', resizeCanvas);
+      
+      const matrixChars = [
+        "0", "1", "0", "1", "0", "1", "0", "1", 
+        "0", "1", "0", "1", "0", "1", "0", "1", 
+        "0", "1", "0", "1", "0", "1", "0", "1", 
+        "{", "}", "[", "]", "<", ">", "(", ")",
+        ";", ":", "/", "\\", "|", ".", ",", "_",
+        "+", "-", "*", "=", "&", "%", "$", "#"
+      ];
+      
+      const columnWidth = 20; 
+      const rowHeight = 25;
+      const columns = Math.floor(canvas.width / columnWidth);
+      const rows = Math.floor(canvas.height / rowHeight) + 1;
+      
+      const matrix = [];
+      for (let i = 0; i < columns; i++) {
+        matrix[i] = [];
+        for (let j = 0; j < rows; j++) {
+          const charIndex = Math.floor(Math.random() * matrixChars.length);
+          matrix[i][j] = matrixChars[charIndex];
+        }
+      }
+      
+      const glowPositions = [];
+      const glowSpeeds = [];
+      for (let i = 0; i < columns; i++) {
+        glowPositions[i] = -Math.floor(Math.random() * 20); 
+        glowSpeeds[i] = 0.02 + Math.random() * 0.03;
+      }
+      
+      function draw() {
+        ctx.fillStyle = "rgba(0, 0, 0, 1)";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
+        ctx.font = "16px 'DejaVu Sans Mono', monospace";
+        
+        for (let i = 0; i < columns; i++) {
+          for (let j = 0; j < rows; j++) {
+            const char = matrix[i][j];
+            const x = i * columnWidth;
+            const y = j * rowHeight;
+            
+            const glowPos = glowPositions[i];
+            const distance = Math.abs(j - glowPos);
+            
+            let brightness;
+            if (distance < 8) { 
+              brightness = 0.8 - (distance * 0.09);
+            } else {
+              brightness = 0.08;
+            }
+            
+            ctx.fillStyle = `rgba(123, 17, 19, ${brightness})`;
+            ctx.fillText(char, x, y);
+          }
+          
+          glowPositions[i] += glowSpeeds[i];
+          
+          if (glowPositions[i] > rows + 5) {
+            glowPositions[i] = -5;
+            
+            for (let j = 0; j < rows; j++) {
+              if (Math.random() < 0.2) {
+                const charIndex = Math.floor(Math.random() * matrixChars.length);
+                matrix[i][j] = matrixChars[charIndex];
+              }
+            }
+          }
+        }
+        
+        requestAnimationFrame(draw);
+      }
+      draw();
+
+      function createLetterByLetterEffect(element, delay) {
+        const text = element.textContent;
+        element.textContent = '';
+        
+        for (let i = 0; i < text.length; i++) {
+          const span = document.createElement('span');
+          span.className = 'letter';
+          span.textContent = text[i];
+          span.style.animationDelay = `${i * delay}s`;
+          element.appendChild(span);
+        }
+      }
+      const logoElement = document.querySelector('.logo');
+      createLetterByLetterEffect(logoElement, 0.25);
     });
   </script>
 </body>
