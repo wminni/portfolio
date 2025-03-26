@@ -217,6 +217,41 @@
       text-align: justify;
     }
 
+    .challenge-quote {
+  margin: 20px 0;
+  padding: 15px 20px;
+  border-left: 4px solid var(--primary);
+  background-color: rgba(123, 17, 19, 0.1);
+  color: #a0a0a0;
+  font-style: italic;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  position: relative;
+}
+
+.challenge-quote::before {
+  content: """;
+  font-size: 3rem;
+  font-family: Georgia, serif;
+  position: absolute;
+  top: -10px;
+  left: 5px;
+  color: var(--primary);
+  opacity: 0.4;
+}
+
+.writeup-text a {
+  color: var(--primary);
+  text-decoration: underline;
+  font-weight: bold;
+  transition: all 0.2s ease;
+}
+
+.writeup-text a:hover {
+  color: #cc2428;
+  text-shadow: 0 0 3px rgba(204, 36, 40, 0.3);
+}
+
     .back-button-container {
       margin: 30px 0;
       text-align: center;
@@ -343,16 +378,15 @@
       <div class="section-title">Task 3. OSINT / Catch Me if You Can 2</div>
 
       <div class="image-container">
-        <img src="catchmeifucan2_osint.png" alt="Challenge Description" class="challenge-image">
+        <img src="images/catchmeifucan2_osint.png" alt="Challenge Description" class="challenge-image">
       </div>
 
-      <p class="writeup-text">
-      "After leaving the restaurant, Phicer was seen enjoying the incredible street art Beco do Batman offers. However, he spent a while looking at this one. We believe they used some sort of cipher to communicate a location with each other. 
-      Flag format: THM{location_name}, no capitals, separate words with an underscore."
-      </p>
+      <blockquote class="challenge-quote">
+        "After leaving the restaurant, Phicer was seen enjoying the incredible street art Beco do Batman offers. However, he spent a while looking at this one. We believe they used some sort of cipher to communicate a location with each other. Flag format: THM{location_name}, no capitals, separate words with an underscore."
+      </blockquote>
 
       <div class="image-container">
-        <img src="beco-batman-2-1741192876782.png" alt="Beco do Batmanr" class="challenge-image">
+        <img src="images/beco-batman-2-1741192876782.png" alt="Beco do Batmanr" class="challenge-image">
       </div>
 
       <p class="writeup-text">
@@ -360,11 +394,11 @@
       </p>
 
       <p class="writeup-text">
-      Based on this, I examined the text more closely and identified the Pigpen cipher. Using the <a href="https://planetcalc.com/" style="color: inherit; text-decoration: none;">PlanetCalc</a> online tool, I was able to decode the message.
+      Based on this, I examined the text more closely and identified the Pigpen cipher. Using the <a href="https://planetcalc.com/">PlanetCalc</a> online tool, I was able to decode the message.
       </p>
 
       <div class="image-container">
-        <img src="pigpencipher.png" alt="Pigpen Cipher" class="challenge-image">
+        <img src="images/pigpencipher.png" alt="Pigpen Cipher" class="challenge-image">
       </div>
 
       <p class="writeup-text">
@@ -374,7 +408,7 @@
         <div class="section-title">Task 7. WEB / Dark Encryptor 2</div>
 
       <div class="image-container">
-        <img src="darkencryptor2_3.png" alt="Dark Encryptor 2" class="challenge-image">
+        <img src="images/darkencryptor2_3.png" alt="Dark Encryptor 2" class="challenge-image">
       </div>
 
       <p class="writeup-text">
