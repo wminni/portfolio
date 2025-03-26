@@ -9,7 +9,7 @@
 
     :root {
       --primary: #7B1113;
-      --primary-dark: #5A0D0F;
+      --primary-dark: #5d0d0f;
       --primary-glow: rgba(123, 17, 19, 0.5);
       --primary-transparent: rgba(123, 17, 19, 0.2);
       --dark: #000000;
@@ -18,7 +18,6 @@
 
     html {
       overflow-y: scroll;
-      scrollbar-gutter: stable;
     }
 
     * {
@@ -32,11 +31,9 @@
     *::-webkit-scrollbar {
       width: 8px;
     }
-
     *::-webkit-scrollbar-track {
       background: var(--darker);
     }
-
     *::-webkit-scrollbar-thumb {
       background-color: var(--primary);
       border-radius: 4px;
@@ -45,18 +42,13 @@
     body {
       font-family: 'DejaVu Sans Mono', monospace;
       background-color: #000000;
-      color: #a0a0a0;
+      color: #ffffff;
       line-height: 1.6;
       overflow-x: hidden;
       position: relative;
       min-height: 100vh;
-      
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
       margin: 0;
-      padding-top: 40px; 
+      padding: 0;
     }
 
     #matrix-canvas {
@@ -132,6 +124,7 @@
         0 0 10px rgba(204, 36, 40, 0.7),
         0 0 20px rgba(204, 36, 40, 0.4),
         0 0 30px rgba(204, 36, 40, 0.2);
+      transition: all 0.3s ease;
     }
     
     .nav-item a.active {
@@ -165,9 +158,21 @@
       letter-spacing: 2px;
       position: relative;
     }
-    .logo::before, .logo::after {
+    .sublogo {
+      font-family: 'DejaVu Sans Mono', monospace;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #7B1113;
+      text-transform: uppercase;
+      margin-bottom: 15px;
+      letter-spacing: 2px;
+      position: relative;
+    }
+    .logo::before, .logo::after,
+    .sublogo::before, .sublogo::after {
       display: none;
     }
+
     .letter {
       display: inline-block;
       white-space: pre;
@@ -263,35 +268,8 @@
       margin-bottom: 15px;
       font-size: 1rem;
     }
-    .description {
-      color: #a0a0a0;
-      margin-bottom: 20px;
-    }
 
     @media (max-width: 768px) {
-      .header-container {
-        width: 90%;
-      }
-      .header-box {
-        padding: 20px 15px;
-      }
-      .content-box {
-        padding: 20px 15px;
-      }
-      .logo {
-        font-size: 2.8rem;
-      }
-      .nav-list {
-        flex-wrap: wrap;
-        gap: 10px;
-      }
-      .nav-item a {
-        font-size: 1.3rem;
-        padding: 5px 8px;
-      }
-      .section-title {
-        font-size: 1.5rem;
-      }
       .project-card {
         flex: 1 1 100%;
         max-width: 100%;
@@ -299,6 +277,15 @@
       }
       .project-title {
         font-size: 1.2rem;
+      }
+      .section-title {
+        font-size: 1.5rem;
+      }
+      .logo {
+        font-size: 2.8rem;
+      }
+      .sublogo {
+        font-size: 1.6rem;
       }
     }
   </style>
@@ -308,7 +295,8 @@
   
   <div class="header-container">
     <div class="header-box">
-      <h1 class="logo" data-text="Projects">&lt;Projects&gt;</h1>
+      <h1 class="logo" data-text="PORTFOLIO">PORTFOLIO</h1>
+      <h2 class="sublogo" data-text="MINNI WESSMAN">MINNI WESSMAN</h2>
     </div>
 
     <nav class="nav">
@@ -336,8 +324,7 @@
             </p>
           </div>
         </a>
-        
-        <!-- Project 2 -->
+
         <a href="project2.html" class="project-link">
           <div class="project-card">
             <div class="project-title">Project 2</div>
@@ -346,8 +333,7 @@
             </p>
           </div>
         </a>
-        
-        <!-- Project 3 -->
+
         <a href="project3.html" class="project-link">
           <div class="project-card">
             <div class="project-title">Project 3</div>
@@ -356,8 +342,7 @@
             </p>
           </div>
         </a>
-        
-        <!-- Project 4 -->
+
         <a href="project4.html" class="project-link">
           <div class="project-card">
             <div class="project-title">Project 4</div>
@@ -366,8 +351,7 @@
             </p>
           </div>
         </a>
-        
-        <!-- Project 5 -->
+
         <a href="project5.html" class="project-link">
           <div class="project-card">
             <div class="project-title">Project 5</div>
@@ -376,8 +360,7 @@
             </p>
           </div>
         </a>
-        
-        <!-- Project 6 -->
+
         <a href="project6.html" class="project-link">
           <div class="project-card">
             <div class="project-title">Project 6</div>
@@ -391,114 +374,111 @@
   </div>
 
   <script>
-    window.addEventListener('load', function() {
-      try {
-        const canvas = document.getElementById('matrix-canvas');
-        if (!canvas) return;
-        
-        const ctx = canvas.getContext('2d');
-        if (!ctx) return;
-        
-        function resizeCanvas() {
-          canvas.width = window.innerWidth;
-          canvas.height = window.innerHeight;
-        }
-        
-        resizeCanvas();
-        window.addEventListener('resize', resizeCanvas);
-        
-        const matrixChars = [
-          "0", "1", "0", "1", "0", "1", "0", "1", 
-          "0", "1", "0", "1", "0", "1", "0", "1", 
-          "0", "1", "0", "1", "0", "1", "0", "1", 
-          "{", "}", "[", "]", "<", ">", "(", ")",
-          ";", ":", "/", "\\", "|", ".", ",", "_",
-          "+", "-", "*", "=", "&", "%", "$", "#"
-        ];
-        
-        const columnWidth = 20; 
-        const rowHeight = 25;
-        const columns = Math.floor(canvas.width / columnWidth);
-        const rows = Math.floor(canvas.height / rowHeight) + 1;
-        
-        const matrix = [];
-        for (let i = 0; i < columns; i++) {
-          matrix[i] = [];
-          for (let j = 0; j < rows; j++) {
-            const charIndex = Math.floor(Math.random() * matrixChars.length);
-            matrix[i][j] = matrixChars[charIndex];
-          }
-        }
-        
-        const glowPositions = [];
-        const glowSpeeds = [];
-        for (let i = 0; i < columns; i++) {
-          glowPositions[i] = -Math.floor(Math.random() * 20); 
-          glowSpeeds[i] = 0.01 + Math.random() * 0.015;
-        }
-        
-        function draw() {
-          ctx.fillStyle = "rgba(0, 0, 0, 1)";
-          ctx.fillRect(0, 0, canvas.width, canvas.height);
-          
-          ctx.font = "16px 'DejaVu Sans Mono', monospace";
-          
-          for (let i = 0; i < columns; i++) {
-            for (let j = 0; j < rows; j++) {
-              const char = matrix[i][j];
-              const x = i * columnWidth;
-              const y = j * rowHeight;
-              
-              const glowPos = glowPositions[i];
-              const distance = Math.abs(j - glowPos);
-              
-              let brightness;
-              if (distance < 8) { 
-                brightness = 0.8 - (distance * 0.09);
-              } else {
-                brightness = 0.08;
-              }
-              
-              ctx.fillStyle = `rgba(123, 17, 19, ${brightness})`;
-              ctx.fillText(char, x, y);
-            }
-            
-            glowPositions[i] += glowSpeeds[i];
-            
-            if (glowPositions[i] > rows + 5) {
-              glowPositions[i] = -5;
-              
-              for (let j = 0; j < rows; j++) {
-                if (Math.random() < 0.2) {
-                  const charIndex = Math.floor(Math.random() * matrixChars.length);
-                  matrix[i][j] = matrixChars[charIndex];
-                }
-              }
-            }
-          }
-          
-          requestAnimationFrame(draw);
-        }
-        draw();
+    document.addEventListener('DOMContentLoaded', function() {
+      const canvas = document.getElementById('matrix-canvas');
+      const ctx = canvas.getContext('2d');
 
-        function createLetterByLetterEffect(element, delay) {
-          const text = element.textContent;
-          element.textContent = '';
-          
-          for (let i = 0; i < text.length; i++) {
-            const span = document.createElement('span');
-            span.className = 'letter';
-            span.textContent = text[i];
-            span.style.animationDelay = `${i * delay}s`;
-            element.appendChild(span);
-          }
-        }
-
-        const logoElement = document.querySelector('.logo');
-        createLetterByLetterEffect(logoElement, 0.25);
-      } catch (e) {
-        console.error('Matrix animation error:', e);
+      function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
       }
+      
+      resizeCanvas();
+      window.addEventListener('resize', resizeCanvas);
+
+      const matrixChars = [
+        "0", "1", "0", "1", "0", "1", "0", "1", 
+        "0", "1", "0", "1", "0", "1", "0", "1", 
+        "0", "1", "0", "1", "0", "1", "0", "1", 
+        "{", "}", "[", "]", "<", ">", "(", ")",
+        ";", ":", "/", "\\", "|", ".", ",", "_",
+        "+", "-", "*", "=", "&", "%", "$", "#"
+      ];
+      
+      const columnWidth = 20; 
+      const rowHeight = 25;
+      const columns = Math.floor(canvas.width / columnWidth);
+      const rows = Math.floor(canvas.height / rowHeight) + 1;
+      
+      const matrix = [];
+      for (let i = 0; i < columns; i++) {
+        matrix[i] = [];
+        for (let j = 0; j < rows; j++) {
+          const charIndex = Math.floor(Math.random() * matrixChars.length);
+          matrix[i][j] = matrixChars[charIndex];
+        }
+      }
+      
+      const glowPositions = [];
+      const glowSpeeds = [];
+      for (let i = 0; i < columns; i++) {
+        glowPositions[i] = -Math.floor(Math.random() * 20); 
+        glowSpeeds[i] = 0.02 + Math.random() * 0.03;
+      }
+      
+      function draw() {
+        ctx.fillStyle = "rgba(0, 0, 0, 1)";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
+        ctx.font = "16px 'DejaVu Sans Mono', monospace";
+        
+        for (let i = 0; i < columns; i++) {
+          for (let j = 0; j < rows; j++) {
+            const char = matrix[i][j];
+            const x = i * columnWidth;
+            const y = j * rowHeight;
+            
+            const glowPos = glowPositions[i];
+            const distance = Math.abs(j - glowPos);
+            
+            let brightness;
+            if (distance < 8) { 
+              brightness = 0.8 - (distance * 0.09);
+            } else {
+              brightness = 0.08;
+            }
+            
+            ctx.fillStyle = `rgba(123, 17, 19, ${brightness})`;
+            ctx.fillText(char, x, y);
+          }
+          
+          glowPositions[i] += glowSpeeds[i];
+          
+          if (glowPositions[i] > rows + 5) {
+            glowPositions[i] = -5;
+            
+            for (let j = 0; j < rows; j++) {
+              if (Math.random() < 0.2) {
+                const charIndex = Math.floor(Math.random() * matrixChars.length);
+                matrix[i][j] = matrixChars[charIndex];
+              }
+            }
+          }
+        }
+        
+        requestAnimationFrame(draw);
+      }
+      
+      draw();
+
+      function createLetterByLetterEffect(element, delay) {
+        const text = element.textContent;
+        element.textContent = '';
+        
+        for (let i = 0; i < text.length; i++) {
+          const span = document.createElement('span');
+          span.className = 'letter';
+          span.textContent = text[i];
+          span.style.animationDelay = `${i * delay}s`;
+          element.appendChild(span);
+        }
+      }
+
+      const logoElement = document.querySelector('.logo');
+      const sublogoElement = document.querySelector('.sublogo');
+      
+      createLetterByLetterEffect(logoElement, 0.25);
+      createLetterByLetterEffect(sublogoElement, 0.25);
     });
   </script>
 </body>
