@@ -9,13 +9,13 @@
 
     :root {
       --primary: #7B1113;
-      --primary-dark: #5A0D0F;
+      --primary-dark: #5d0d0f;
       --primary-glow: rgba(123, 17, 19, 0.5);
       --primary-transparent: rgba(123, 17, 19, 0.2);
       --dark: #000000;
       --darker: #000000;
     }
-    
+
     html {
       overflow-y: scroll;
     }
@@ -27,7 +27,7 @@
       scrollbar-width: thin;
       scrollbar-color: var(--primary) var(--darker);
     }
-    
+
     *::-webkit-scrollbar {
       width: 8px;
     }
@@ -42,7 +42,7 @@
     body {
       font-family: 'DejaVu Sans Mono', monospace;
       background-color: #000000;
-      color: #a0a0a0;
+      color: #ffffff;
       line-height: 1.6;
       overflow-x: hidden;
       position: relative;
@@ -51,9 +51,8 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: flex-start;
+      justify-content: flex-start; 
       margin: 0;
-      padding-top: 40px;
     }
 
     #matrix-canvas {
@@ -126,6 +125,7 @@
         0 0 10px rgba(204, 36, 40, 0.7),
         0 0 20px rgba(204, 36, 40, 0.4),
         0 0 30px rgba(204, 36, 40, 0.2);
+      transition: all 0.3s ease;
     }
     .nav-item a.active {
       color: #cc2428;
@@ -161,6 +161,21 @@
     .logo::before, .logo::after {
       display: none;
     }
+
+    .sublogo {
+      font-family: 'DejaVu Sans Mono', monospace;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #7B1113;
+      text-transform: uppercase;
+      margin-bottom: 15px;
+      letter-spacing: 2px;
+      position: relative;
+    }
+    .sublogo::before, .sublogo::after {
+      display: none;
+    }
+
     .letter {
       display: inline-block;
       white-space: pre;
@@ -228,39 +243,6 @@
       object-fit: cover;
       position: relative;
       z-index: 1;
-    }
-    .profile-image::before,
-    .profile-image::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: transparent;
-      border: 2px solid var(--primary);
-      border-radius: 5px;
-      animation: glitch-profile 3s infinite linear alternate-reverse;
-      z-index: 0;
-    }
-    .profile-image::before {
-      animation-delay: 0.5s;
-      opacity: 0.5;
-      transform: translateX(-2px);
-      border-color: var(--primary);
-    }
-    .profile-image::after {
-      animation-delay: 1s;
-      opacity: 0.3;
-      transform: translateX(2px);
-      border-color: var(--primary-dark);
-    }
-    @keyframes glitch-profile {
-      0%, 90%, 100% { transform: translateX(0); }
-      20% { transform: translateX(-2px); }
-      40% { transform: translateX(2px); }
-      60% { transform: translateY(-1px); }
-      80% { transform: translateY(1px); }
     }
 
     .about-text {
@@ -363,6 +345,9 @@
       .logo {
         font-size: 2.8rem;
       }
+      .sublogo {
+        font-size: 1.6rem;
+      }
       .nav-list {
         flex-wrap: wrap;
         gap: 10px;
@@ -395,7 +380,7 @@
   <div class="header-container">
     <div class="header-box">
       <h1 class="logo" data-text="Portfolio">Portfolio</h1>
-      <h2 class="sublogo" data-text="Minni Wessman">Minni Wessman</h2>
+      <h2 class="sublogo" data-text="MINNI WESSMAN">MINNI WESSMAN</h2>
     </div>
 
     <nav class="nav">
@@ -435,7 +420,7 @@
       <div class="skill-section">
         <div class="section-title">Skills I'm Learning</div>
         <div class="skill-list">
-          <span class="skill-item">-</span>
+          <span class="skill-item">Penetration Testing</span>
           <span class="skill-item">-</span>
           <span class="skill-item">-</span>
           <span class="skill-item">-</span>
@@ -448,7 +433,7 @@
       </div>
       
       <div class="skill-section">
-        <div class="section-title">------</div>
+        <div class="section-title">Coming...</div>
         <div class="skill-list">
           <span class="skill-item">-</span>
           <span class="skill-item">-</span>
