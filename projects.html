@@ -93,7 +93,6 @@
                   inset 0 0 8px rgba(123, 17, 19, 0.2);
       padding: 8px;
     }
-
     .nav-list {
       display: flex;
       justify-content: center;
@@ -104,7 +103,6 @@
       position: relative;
       z-index: 1;
     }
-
     .nav-item a {
       color: var(--primary);
       text-decoration: none;
@@ -116,7 +114,6 @@
       letter-spacing: 1px;
       text-shadow: 0 0 2px var(--primary-glow);
     }
-
     .nav-item a:hover {
       color: #cc2428;
       transform: scale(1.05);
@@ -126,7 +123,6 @@
         0 0 30px rgba(204, 36, 40, 0.2);
       transition: all 0.3s ease;
     }
-    
     .nav-item a.active {
       color: #cc2428;
       border-bottom: 2px solid var(--primary);
@@ -232,7 +228,8 @@
       transition: all 0.3s ease;
       overflow: hidden;
       cursor: pointer;
-      flex: 1 1 calc(33.33% - 25px);
+
+      flex: 0 0 calc(33.33% - 25px);
       max-width: calc(33.33% - 25px);
     }
     .project-card:hover {
@@ -270,22 +267,38 @@
     }
 
     @media (max-width: 768px) {
-      .project-card {
-        flex: 1 1 100%;
-        max-width: 100%;
-        padding: 15px;
+      .header-container {
+        width: 90%;
       }
-      .project-title {
-        font-size: 1.2rem;
+      .header-box {
+        padding: 20px 15px;
       }
-      .section-title {
-        font-size: 1.5rem;
+      .content-box {
+        padding: 30px 15px;
       }
       .logo {
         font-size: 2.8rem;
       }
       .sublogo {
         font-size: 1.6rem;
+      }
+      .nav-list {
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .nav-item a {
+        font-size: 1.3rem;
+        padding: 5px 8px;
+      }
+      .section-title {
+        font-size: 1.5rem;
+      }
+      .project-card {
+        flex: 0 0 calc(33.33% - 25px);
+        max-width: calc(33.33% - 25px);
+      }
+      .project-title {
+        font-size: 1.2rem;
       }
     }
   </style>
@@ -385,7 +398,7 @@
       
       resizeCanvas();
       window.addEventListener('resize', resizeCanvas);
-
+      
       const matrixChars = [
         "0", "1", "0", "1", "0", "1", "0", "1", 
         "0", "1", "0", "1", "0", "1", "0", "1", 
@@ -412,7 +425,7 @@
       const glowPositions = [];
       const glowSpeeds = [];
       for (let i = 0; i < columns; i++) {
-        glowPositions[i] = -Math.floor(Math.random() * 20); 
+        glowPositions[i] = -Math.floor(Math.random() * 20);
         glowSpeeds[i] = 0.02 + Math.random() * 0.03;
       }
       
