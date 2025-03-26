@@ -214,6 +214,7 @@
       white-space: normal;
       word-wrap: break-word;
       overflow-wrap: break-word;
+      text-align: justify;
     }
 
     .back-button-container {
@@ -261,6 +262,20 @@
       left: -2px;
       right: -2px;
       bottom: -2px;
+    }
+
+    .image-container {
+      display: flex;
+      justify-content: center;
+      margin: 20px 0;
+      width: 100%;
+    }
+
+    .challenge-image {
+      max-width: 90%;
+      border: 1px solid #7B1113;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(123, 17, 19, 0.5);
     }
 
     @media (max-width: 768px) {
@@ -314,7 +329,58 @@
     </nav>
     
     <div class="content-box">
-      <!-- Tähän voit lisätä write-upin -->
+      <!-- Write-up sisältö alkaa tästä -->
+      <div class="section-title">TryHackMe Hackfinity Battle CTF</div>
+
+      <p class="writeup-text">
+      I participated in TryHackMe's Hackfinity Battle in March 2025. Below is a write-up of some of the CTF challenges I solved.
+      </p>
+
+      <p class="writeup-text">
+      TryHackMe requested that flags should not be fully revealed in write-ups. For this reason I have obscured them.
+      </p>
+
+      <div class="section-title">Task 3. OSINT / Catch Me if You Can 2</div>
+
+      <div class="image-container">
+        <img src="catchmeifucan2_osint.png" alt="Challenge Description" class="challenge-image">
+      </div>
+
+      <p class="writeup-text">
+      "After leaving the restaurant, Phicer was seen enjoying the incredible street art Beco do Batman offers. However, he spent a while looking at this one. We believe they used some sort of cipher to communicate a location with each other. 
+      Flag format: THM{location_name}, no capitals, separate words with an underscore."
+      </p>
+
+      <div class="image-container">
+        <img src="beco-batman-2-1741192876782.png" alt="Beco do Batmanr" class="challenge-image">
+      </div>
+
+      <p class="writeup-text">
+      The challenge image contained embedded text that was not present in the original artwork. The challenge description also provided a hint: "We believe they used some sort of cipher to communicate a location with each other."
+      </p>
+
+      <p class="writeup-text">
+      Based on this, I examined the text more closely and identified the Pigpen cipher. Using the <a href="https://planetcalc.com/" style="color: inherit; text-decoration: none;">PlanetCalc</a> online tool, I was able to decode the message.
+      </p>
+
+      <div class="image-container">
+        <img src="pigpencipher.png" alt="Pigpen Cipher" class="challenge-image">
+      </div>
+
+      <p class="writeup-text">
+      The location shown here was the flag.
+      </p>
+
+        <div class="section-title">Task 7. WEB / Dark Encryptor 2</div>
+
+      <div class="image-container">
+        <img src="darkencryptor2_3.png" alt="Dark Encryptor 2" class="challenge-image">
+      </div>
+
+      <p class="writeup-text">
+      “After pivoting through their internal network, we have found yet another encryption tool. Can you hack into the server and extract the secret data? Our intel tells us that the app is using the gpg tool.” 
+      </p>
+      <!-- Write-up sisältö päättyy tähän -->
 
       <div class="back-button-container">
         <a href="projects.html" class="back-button">Back to Projects</a>
@@ -407,3 +473,27 @@
         requestAnimationFrame(draw);
       }
       draw();
+
+      function createLetterByLetterEffect(element, delay) {
+        if (!element) return;
+        
+        const text = element.textContent;
+        element.textContent = '';
+        
+        for (let i = 0; i < text.length; i++) {
+          const span = document.createElement('span');
+          span.className = 'letter';
+          span.textContent = text[i];
+          span.style.animationDelay = `${i * delay}s`;
+          element.appendChild(span);
+        }
+      }
+      
+      const titleElement = document.querySelector('.title');
+      if (titleElement) {
+        createLetterByLetterEffect(titleElement, 0.1);
+      }
+    });
+  </script>
+</body>
+</html>
