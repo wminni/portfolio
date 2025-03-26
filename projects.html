@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Projects | Minnin Cyber Security Portfolio</title>
+  <title>Projects | Minni's Cybersecurity Portfolio</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=DejaVu+Sans+Mono:wght@400;700&display=swap');
 
@@ -14,6 +14,10 @@
       --primary-transparent: rgba(123, 17, 19, 0.2);
       --dark: #000000;
       --darker: #000000;
+    }
+
+    html {
+      overflow-y: scroll;
     }
 
     * {
@@ -45,32 +49,44 @@
       overflow-x: hidden;
       position: relative;
       min-height: 100vh;
+      
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: flex-start;
-      padding-top: 40px;
+      margin: 0;
+      padding-top: 40px; 
+    }
+
+    #matrix-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
     }
 
     .header-container {
       position: relative;
       z-index: 2;
-      width: 900px;
-      max-width: 90%;
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
     }
 
     .header-box {
       width: 100%;
       margin-bottom: 0;
-      padding: 30px;
+      padding: 20px;
       text-align: center;
       background-color: #000000;
       border: 1px solid var(--primary);
       border-radius: 10px 10px 0 0;
       border-bottom: none;
       box-shadow: 0 0 15px var(--primary-glow),
-                  0 0 30px var(--primary-glow),
-                  inset 0 0 8px var(--primary-transparent);
+                  0 0 30px rgba(123, 17, 19, 0.3),
+                  inset 0 0 8px rgba(123, 17, 19, 0.2);
     }
 
     .nav {
@@ -80,106 +96,9 @@
       border-top: none;
       border-bottom: none;
       box-shadow: 0 0 15px var(--primary-glow),
-                  0 0 30px var(--primary-glow),
-                  inset 0 0 8px var(--primary-transparent);
-      padding: 15px;
-    }
-    
-    .content-box {
-      width: 100%;
-      min-height: 400px;
-      padding: 30px 40px;
-      background-color: rgba(0, 0, 0, 0.9);
-      border: 1px solid var(--primary);
-      border-top: none;
-      border-radius: 0 0 10px 10px;
-      box-shadow: 0 0 15px var(--primary-glow),
-                  0 0 30px var(--primary-glow),
-                  inset 0 0 8px var(--primary-transparent);
-      margin-top: 0;
-      backdrop-filter: blur(2px);
-      -webkit-backdrop-filter: blur(2px);
-    }
-    
-    .section-title {
-      font-family: 'DejaVu Sans Mono', monospace;
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: var(--primary);
-      margin-bottom: 20px;
-      text-shadow: 0 0 5px var(--primary-glow);
-      display: flex;
-      align-items: center;
-    }
-    
-    .section-title::before {
-      content: ">_";
-      margin-right: 10px;
-      font-weight: bold;
-      opacity: 0.7;
-      text-shadow: 0 0 3px var(--primary-glow);
-      animation: blink 4s infinite;
-    }
-    
-    @keyframes blink {
-      0%, 100% { opacity: 0.7; }
-      50% { opacity: 0.2; }
-    }
-    
-    @keyframes letter-glow {
-      0%, 100% {
-        color: #7B1113;
-        text-shadow: 
-          0 0 5px rgba(123, 17, 19, 0.4),
-          0 0 10px rgba(123, 17, 19, 0.2);
-      }
-      50% {
-        color: #cc2428;
-        text-shadow: 
-          0 0 10px rgba(204, 36, 40, 0.7),
-          0 0 20px rgba(204, 36, 40, 0.4),
-          0 0 30px rgba(204, 36, 40, 0.2);
-      }
-    }
-    
-    .letter {
-      display: inline-block;
-      animation: letter-glow 4s infinite;
-    }
-
-    .typing-effect {
-      overflow: hidden;
-      white-space: nowrap;
-      animation: typing 3.5s steps(30, end);
-      width: 100%;
-    }
-    
-    @keyframes typing {
-      from { width: 0 }
-      to { width: 100% }
-    }
-
-    .logo {
-      font-family: 'DejaVu Sans Mono', monospace;
-      font-size: 3.5rem;
-      font-weight: 900;
-      color: #7B1113;
-      text-transform: uppercase;
-      margin-bottom: 5px;
-      letter-spacing: 2px;
-      position: relative;
-    }
-    
-    .logo::before, .logo::after {
-      display: none;
-    }
-
-    @keyframes glitch-1 {
-      0%, 100% { opacity: 0; }
-    }
-
-    @keyframes glitch-2 {
-      0%, 100% { opacity: 0; }
+                  0 0 30px rgba(123, 17, 19, 0.3),
+                  inset 0 0 8px rgba(123, 17, 19, 0.2);
+      padding: 8px;
     }
 
     .nav-list {
@@ -188,7 +107,7 @@
       gap: 20px;
       list-style: none;
       background-color: #000000;
-      padding: 10px;
+      padding: 0;
       position: relative;
       z-index: 1;
     }
@@ -198,7 +117,6 @@
       text-decoration: none;
       font-size: 1.5rem;
       padding: 8px 12px;
-      position: relative;
       transition: all 0.3s ease;
       display: inline-block;
       font-family: 'DejaVu Sans Mono', monospace;
@@ -218,57 +136,104 @@
     
     .nav-item a.active {
       color: #cc2428;
-      background-color: transparent;
       border-bottom: 2px solid var(--primary);
       text-shadow: 
         0 0 5px var(--primary-glow),
         0 0 10px var(--primary-glow);
     }
 
-    #matrix-canvas {
-      position: fixed;
-      top: 0;
-      left: 0;
+    .content-box {
       width: 100%;
-      height: 100%;
-      z-index: -1;
+      padding: 40px 40px;
+      background-color: #000000;
+      border: 1px solid var(--primary);
+      border-top: none;
+      border-radius: 0 0 10px 10px;
+      box-shadow: 0 0 15px var(--primary-glow),
+                  0 0 30px rgba(123, 17, 19, 0.3),
+                  inset 0 0 8px rgba(123, 17, 19, 0.2);
+      margin-top: 0;
     }
 
-    /* Projects styles */
+    .logo {
+      font-family: 'DejaVu Sans Mono', monospace;
+      font-size: 3.5rem;
+      font-weight: 900;
+      color: #7B1113;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+      letter-spacing: 2px;
+      position: relative;
+    }
+    .logo::before, .logo::after {
+      display: none;
+    }
+    .letter {
+      display: inline-block;
+      white-space: pre;
+      animation: letter-glow 4s infinite;
+    }
+    @keyframes letter-glow {
+      0%, 100% {
+        color: #7B1113;
+        text-shadow: 
+          0 0 5px rgba(123, 17, 19, 0.4),
+          0 0 10px rgba(123, 17, 19, 0.2);
+      }
+      50% {
+        color: #cc2428;
+        text-shadow: 
+          0 0 10px rgba(204, 36, 40, 0.7),
+          0 0 20px rgba(204, 36, 40, 0.4),
+          0 0 30px rgba(204, 36, 40, 0.2);
+      }
+    }
+
+    .section-title {
+      font-family: 'DejaVu Sans Mono', monospace;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 20px;
+      text-shadow: 0 0 5px var(--primary-glow);
+      display: flex;
+      align-items: center;
+    }
+    .section-title::before {
+      content: ">_";
+      margin-right: 10px;
+      font-weight: bold;
+      opacity: 0.7;
+      text-shadow: 0 0 3px var(--primary-glow);
+      animation: blink 4s infinite;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 0.7; }
+      50% { opacity: 0.2; }
+    }
+
     .project-list {
       display: flex;
-      flex-direction: column;
+      flex-wrap: wrap;
       gap: 25px;
       margin-top: 20px;
+      justify-content: center;
     }
-    
     .project-card {
       border: 1px solid var(--primary);
       border-radius: 5px;
       padding: 20px;
       background-color: rgba(0, 0, 0, 0.7);
-      position: relative;
       transition: all 0.3s ease;
       overflow: hidden;
       cursor: pointer;
+      flex: 1 1 calc(50% - 25px);
+      max-width: calc(50% - 25px);
     }
-    
-    .project-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(45deg, transparent 0%, rgba(123, 17, 19, 0.05) 50%, transparent 100%);
-      z-index: -1;
-    }
-    
     .project-card:hover {
       box-shadow: 0 0 15px var(--primary-glow);
       transform: translateY(-2px);
     }
-    
     .project-title {
       color: var(--primary);
       font-size: 1.3rem;
@@ -278,13 +243,11 @@
       align-items: center;
       gap: 10px;
     }
-    
     .project-title::before {
       content: '//';
       font-size: 1rem;
       color: rgba(123, 17, 19, 0.7);
     }
-    
     .project-link {
       text-decoration: none;
       color: var(--primary);
@@ -292,17 +255,14 @@
       position: relative;
       cursor: pointer;
     }
-    
     .project-link:hover {
       text-shadow: 0 0 5px var(--primary-glow);
     }
-    
     .project-description {
       color: #a0a0a0;
       margin-bottom: 15px;
       font-size: 1rem;
     }
-    
     .description {
       color: #a0a0a0;
       margin-bottom: 20px;
@@ -312,37 +272,31 @@
       .header-container {
         width: 90%;
       }
-      
       .header-box {
         padding: 20px 15px;
       }
-      
       .content-box {
         padding: 20px 15px;
       }
-      
       .logo {
-        font-size: 2.5rem;
+        font-size: 2.8rem;
       }
-      
       .nav-list {
         flex-wrap: wrap;
         gap: 10px;
       }
-      
       .nav-item a {
         font-size: 1.3rem;
         padding: 5px 8px;
       }
-      
       .section-title {
         font-size: 1.5rem;
       }
-      
       .project-card {
+        flex: 1 1 100%;
+        max-width: 100%;
         padding: 15px;
       }
-      
       .project-title {
         font-size: 1.2rem;
       }
@@ -374,35 +328,33 @@
       </p>
       
       <div class="project-list">
-        <!-- Project 1 -->
         <a href="project1.html" class="project-link">
           <div class="project-card">
-            <div class="project-title">---------------------</div>
+            <div class="project-title">Project 1</div>
             <p class="project-description">
-              ------------------------
+              Brief description of Project 1.
             </p>
           </div>
         </a>
         
-        <!-- Project 2 -->
         <a href="project2.html" class="project-link">
           <div class="project-card">
-            <div class="project-title">---------------------</div>
+            <div class="project-title">Project 2</div>
             <p class="project-description">
-              ------------------------
+              Brief description of Project 2.
             </p>
           </div>
         </a>
         
-        <!-- Project 3 -->
         <a href="project3.html" class="project-link">
           <div class="project-card">
-            <div class="project-title">---------------------</div>
+            <div class="project-title">Project 3</div>
             <p class="project-description">
-              ------------------------
+              Brief description of Project 3.
             </p>
           </div>
         </a>
+        
       </div>
     </div>
   </div>
@@ -471,9 +423,9 @@
               
               let brightness;
               if (distance < 8) { 
-                brightness = 0.5 - (distance * 0.06);
+                brightness = 0.8 - (distance * 0.09);
               } else {
-                brightness = 0.04;
+                brightness = 0.08;
               }
               
               ctx.fillStyle = `rgba(123, 17, 19, ${brightness})`;
@@ -496,7 +448,8 @@
           
           requestAnimationFrame(draw);
         }
-        
+        draw();
+
         function createLetterByLetterEffect(element, delay) {
           const text = element.textContent;
           element.textContent = '';
@@ -509,13 +462,8 @@
             element.appendChild(span);
           }
         }
-        
         const logoElement = document.querySelector('.logo');
         createLetterByLetterEffect(logoElement, 0.25);
-        
-        document.fonts.ready.then(() => {
-          draw();
-        });
       } catch (e) {
         console.error('Matrix animation error:', e);
       }
