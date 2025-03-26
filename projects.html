@@ -18,6 +18,7 @@
 
     html {
       overflow-y: scroll;
+      scrollbar-gutter: stable;
     }
 
     * {
@@ -131,7 +132,6 @@
         0 0 10px rgba(204, 36, 40, 0.7),
         0 0 20px rgba(204, 36, 40, 0.4),
         0 0 30px rgba(204, 36, 40, 0.2);
-      transition: all 0.3s ease;
     }
     
     .nav-item a.active {
@@ -227,8 +227,8 @@
       transition: all 0.3s ease;
       overflow: hidden;
       cursor: pointer;
-      flex: 1 1 calc(50% - 25px);
-      max-width: calc(50% - 25px);
+      flex: 1 1 calc(33.33% - 25px);
+      max-width: calc(33.33% - 25px);
     }
     .project-card:hover {
       box-shadow: 0 0 15px var(--primary-glow);
@@ -337,6 +337,7 @@
           </div>
         </a>
         
+        <!-- Project 2 -->
         <a href="project2.html" class="project-link">
           <div class="project-card">
             <div class="project-title">Project 2</div>
@@ -346,6 +347,7 @@
           </div>
         </a>
         
+        <!-- Project 3 -->
         <a href="project3.html" class="project-link">
           <div class="project-card">
             <div class="project-title">Project 3</div>
@@ -355,6 +357,35 @@
           </div>
         </a>
         
+        <!-- Project 4 -->
+        <a href="project4.html" class="project-link">
+          <div class="project-card">
+            <div class="project-title">Project 4</div>
+            <p class="project-description">
+              Brief description of Project 4.
+            </p>
+          </div>
+        </a>
+        
+        <!-- Project 5 -->
+        <a href="project5.html" class="project-link">
+          <div class="project-card">
+            <div class="project-title">Project 5</div>
+            <p class="project-description">
+              Brief description of Project 5.
+            </p>
+          </div>
+        </a>
+        
+        <!-- Project 6 -->
+        <a href="project6.html" class="project-link">
+          <div class="project-card">
+            <div class="project-title">Project 6</div>
+            <p class="project-description">
+              Brief description of Project 6.
+            </p>
+          </div>
+        </a>
       </div>
     </div>
   </div>
@@ -462,6 +493,7 @@
             element.appendChild(span);
           }
         }
+
         const logoElement = document.querySelector('.logo');
         createLetterByLetterEffect(logoElement, 0.25);
       } catch (e) {
