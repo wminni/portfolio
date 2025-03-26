@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TryHackMe Hackfinity Battle CTF | Minni's Cybersecurity Portfolio</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DejaVu+Sans+Mono:wght@400;700&display=swap');
+
+    :root {
+      --primary: #7B1113;
+      --primary-dark: #5d0d0f;
+      --primary-glow: rgba(123, 17, 19, 0.5);
+      --primary-transparent: rgba(123, 17, 19, 0.2);
+      --dark: #000000;
+      --darker: #000000;
+    }
+
+    html {
+      overflow-y: scroll;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scrollbar-width: thin;
+      scrollbar-color: var(--primary) var(--darker);
+    }
+
+    *::-webkit-scrollbar {
+      width: 8px;
+    }
+    *::-webkit-scrollbar-track {
+      background: var(--darker);
+    }
+    *::-webkit-scrollbar-thumb {
+      background-color: var(--primary);
+      border-radius: 4px;
+    }
+
+    body {
+      font-family: 'DejaVu Sans Mono', monospace;
+      background-color: #000000;
+      color: #ffffff;
+      line-height: 1.6;
+      overflow-x: hidden;
+      position: relative;
+      min-height: 100vh;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start; 
+      margin: 0;
+    }
+
+    #matrix-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    .header-container {
+      position: relative;
+      z-index: 2;
+      width: 90%;
+      max-width: 1200px;
+      margin: 40px auto 0;
+    }
+
+    .header-box {
+      width: 100%;
+      margin-bottom: 0;
+      padding: 20px;
+      text-align: center;
+      background-color: #000000;
+      border: 1px solid var(--primary);
+      border-radius: 10px 10px 0 0;
+      border-bottom: none;
+      box-shadow: 0 0 15px var(--primary-glow),
+                  0 0 30px rgba(123, 17, 19, 0.3),
+                  inset 0 0 8px rgba(123, 17, 19, 0.2);
+    }
+
+    .nav {
+      width: 100%;
+      background-color: #000000;
+      border: 1px solid var(--primary);
+      border-top: none;
+      border-bottom: none;
+      box-shadow: 0 0 15px var(--primary-glow),
+                  0 0 30px rgba(123, 17, 19, 0.3),
+                  inset 0 0 8px rgba(123, 17, 19, 0.2);
+      padding: 8px;
+    }
+    .nav-list {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      list-style: none;
+      background-color: #000000;
+      padding: 0;
+      position: relative;
+      z-index: 1;
+    }
+    .nav-item a {
+      color: var(--primary);
+      text-decoration: none;
+      font-size: 1.5rem;
+      padding: 8px 12px;
+      transition: all 0.3s ease;
+      display: inline-block;
+      font-family: 'DejaVu Sans Mono', monospace;
+      letter-spacing: 1px;
+      text-shadow: 0 0 2px var(--primary-glow);
+    }
+    .nav-item a:hover {
+      color: #cc2428;
+      transform: scale(1.05);
+      text-shadow: 
+        0 0 10px rgba(204, 36, 40, 0.7),
+        0 0 20px rgba(204, 36, 40, 0.4),
+        0 0 30px rgba(204, 36, 40, 0.2);
+      transition: all 0.3s ease;
+    }
+    .nav-item a.active {
+      color: #cc2428;
+      border-bottom: 2px solid var(--primary);
+      text-shadow: 
+        0 0 5px var(--primary-glow),
+        0 0 10px var(--primary-glow);
+    }
+
+    .content-box {
+      width: 100%;
+      min-height: 500px;
+      padding: 40px 40px;
+      background-color: #000000;
+      border: 1px solid var(--primary);
+      border-top: none;
+      border-radius: 0 0 10px 10px;
+      box-shadow: 0 0 15px var(--primary-glow),
+                  0 0 30px rgba(123, 17, 19, 0.3),
+                  inset 0 0 8px rgba(123, 17, 19, 0.2);
+      margin-top: 0;
+      margin-bottom: 40px;
+    }
+
+    .title {
+      font-family: 'DejaVu Sans Mono', monospace;
+      font-size: 2.5rem;
+      font-weight: 900;
+      color: #7B1113;
+      text-transform: uppercase;
+      margin-bottom: 30px;
+      letter-spacing: 2px;
+      position: relative;
+      text-align: center;
+    }
+    
+    .letter {
+      display: inline-block;
+      white-space: pre;
+      animation: letter-glow 4s infinite;
+    }
+    @keyframes letter-glow {
+      0%, 100% {
+        color: #7B1113;
+        text-shadow: 
+          0 0 5px rgba(123, 17, 19, 0.4),
+          0 0 10px rgba(123, 17, 19, 0.2);
+      }
+      50% {
+        color: #cc2428;
+        text-shadow: 
+          0 0 10px rgba(204, 36, 40, 0.7),
+          0 0 20px rgba(204, 36, 40, 0.4),
+          0 0 30px rgba(204, 36, 40, 0.2);
+      }
+    }
+
+    .section-title {
+      font-family: 'DejaVu Sans Mono', monospace;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 20px;
+      text-shadow: 0 0 5px var(--primary-glow);
+      display: flex;
+      align-items: center;
+    }
+    .section-title::before {
+      content: ">_";
+      margin-right: 10px;
+      font-weight: bold;
+      opacity: 0.7;
+      text-shadow: 0 0 3px var(--primary-glow);
+      animation: blink 4s infinite;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 0.7; }
+      50% { opacity: 0.2; }
+    }
+
+    .writeup-text {
+      color: #a0a0a0;
+      font-size: 1.1rem;
+      line-height: 1.8;
+      margin-bottom: 25px;
+      white-space: normal;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      text-align: justify;
+    }
+
+    .challenge-quote {
+  margin: 20px 0;
+  padding: 15px 20px;
+  border-left: 4px solid var(--primary);
+  background-color: rgba(123, 17, 19, 0.1);
+  color: #a0a0a0;
+  font-style: italic;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  position: relative;
+}
+
+.challenge-quote::before {
+  content: """;
+  font-size: 3rem;
+  font-family: Georgia, serif;
+  position: absolute;
+  top: -10px;
+  left: 5px;
+  color: var(--primary);
+  opacity: 0.4;
+}
+
+.writeup-text a {
+  color: var(--primary);
+  text-decoration: underline;
+  font-weight: bold;
+  transition: all 0.2s ease;
+}
+
+.writeup-text a:hover {
+  color: #cc2428;
+  text-shadow: 0 0 3px rgba(204, 36, 40, 0.3);
+}
+
+    .back-button-container {
+      margin: 30px 0;
+      text-align: center;
+    }
+    .back-button {
+      display: inline-block;
+      padding: 12px 25px;
+      background-color: var(--primary-transparent);
+      border: 2px solid var(--primary);
+      border-radius: 5px;
+      color: var(--primary);
+      font-size: 1.2rem;
+      font-weight: bold;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      letter-spacing: 1px;
+      text-shadow: 0 0 2px var(--primary-glow);
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+    .back-button:hover {
+      background-color: rgba(123, 17, 19, 0.4);
+      transform: translateY(-3px);
+      box-shadow: 0 0 20px var(--primary-glow);
+      color: #a0a0a0;
+    }
+    .back-button::before {
+      content: "";
+      position: absolute;
+      top: -5px;
+      left: -5px;
+      right: -5px;
+      bottom: -5px;
+      border: 1px solid var(--primary);
+      opacity: 0;
+      transition: all 0.3s ease;
+      z-index: -1;
+    }
+    .back-button:hover::before {
+      opacity: 0.5;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+    }
+  .navigation-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin: 30px 0;
+}
+    
+.next-button {
+  display: inline-block;
+  padding: 12px 25px;
+  background-color: var(--primary-transparent);
+  border: 2px solid var(--primary);
+  border-radius: 5px;
+  color: var(--primary);
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  letter-spacing: 1px;
+  text-shadow: 0 0 2px var(--primary-glow);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.next-button:hover {
+  background-color: rgba(123, 17, 19, 0.4);
+  transform: translateY(-3px);
+  box-shadow: 0 0 20px var(--primary-glow);
+  color: #a0a0a0;
+}
+
+    .image-container {
+      display: flex;
+      justify-content: center;
+      margin: 20px 0;
+      width: 100%;
+    }
+
+    .challenge-image {
+      max-width: 90%;
+      border: 1px solid #7B1113;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(123, 17, 19, 0.5);
+    }
+
+    @media (max-width: 768px) {
+      .header-container {
+        width: 90%;
+      }
+      .header-box {
+        padding: 20px 15px;
+      }
+      .nav {
+        padding: 5px;
+      }
+      .content-box {
+        padding: 30px 15px;
+      }
+      .title {
+        font-size: 2rem;
+      }
+      .nav-list {
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .nav-item a {
+        font-size: 1.3rem;
+        padding: 5px 8px;
+      }
+      .section-title {
+        font-size: 1.5rem;
+      }
+      .writeup-text {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="matrix-canvas"></canvas>
+  
+  <div class="header-container">
+    <div class="header-box">
+      <h1 class="title" data-text="TryHackMe Hackfinity Battle CTF - Part 2">TryHackMe Hackfinity Battle CTF - Part 2</h1>
+    </div>
+
+    <nav class="nav">
+      <ul class="nav-list">
+        <li class="nav-item"><a href="index.html">&lt;home&gt;</a></li>
+        <li class="nav-item"><a href="about.html">&lt;about&gt;</a></li>
+        <li class="nav-item"><a href="projects.html" class="active">&lt;projects&gt;</a></li>
+        <li class="nav-item"><a href="contact.html">&lt;contact&gt;</a></li>
+      </ul>
+    </nav>
+    
+    <div class="content-box">
+      <!-- Write-up sisältö alkaa tästä -->
+      <div class="section-title">TryHackMe Hackfinity Battle CTF</div>
+
+      <p class="writeup-text">
+      I participated in TryHackMe's Hackfinity Battle in March 2025. Below is a write-up of some of the CTF challenges I solved.
+      </p>
+
+      <p class="writeup-text">
+      TryHackMe requested that flags should not be fully revealed in write-ups. For this reason I have obscured them.
+      </p>
+
+      <div class="section-title">XXX / XXX</div>
+
+      <div class="image-container">
+        <img src="images/tähän.png" alt="Challenge Description" class="challenge-image">
+      </div>
+
+      <blockquote class="challenge-quote">
+        ".........…HAASTEEN KUVAUS.............."
+      </blockquote>
+
+      <div class="image-container">
+        <img src="images/tähän.png" alt="kuvan kuvaus tähän" class="challenge-image">
+      </div>
+
+      <p class="writeup-text">
+      ------------------------------------------------------
+      </p>
+
+      <p class="writeup-text">
+      ---------------------------------------------------------
+      </p>
+
+      <div class="image-container">
+        <img src="images/tähän.png" alt="kuvan kuvaus" class="challenge-image">
+      </div>
+
+      <p class="writeup-text">
+      ---------------------------------------
+      </p>
+
+        <div class="section-title">XXX / XXX</div>
+
+      <div class="image-container">
+        <img src="images/tähän.png" alt="kuvan kuvaus" class="challenge-image">
+      </div>
+
+      <blockquote class="challenge-quote">
+        “haasteen kuvaus tähän.” 
+      </blockquote>
+
+       <div class="image-container">
+        <img src="images/tähän.png" alt="kuvan kuvaus" class="challenge-image">
+      </div>
+
+      <p class="writeup-text">
+      -----------------------------------------
+      </p>
+
+      <div class="image-container">
+        <img src="images/tähän.png" alt="kuvan kuvaus" class="challenge-image">
+      </div>
+
+      <p class="writeup-text">
+      -----------------------------------------
+      </p>
+
+      <div class="image-container">
+        <img src="images/tähän.png" alt="kuvan kuvaus" class="challenge-image">
+      </div>
+
+      <p class="writeup-text">
+      -----------------------------------------
+      </p>
+
+
+       <div class="section-title">XXX / XXX</div>
+
+      <div class="image-container">
+        <img src="images/tähän.png" alt="kuvan kuvaus" class="challenge-image">
+      </div>
+
+      <blockquote class="challenge-quote">
+        “haasteen kuvaus.” 
+      </blockquote>
+
+       <div class="image-container">
+        <img src="images/tähän.png" alt="kuvan kuvaus" class="challenge-image">
+      </div>
+
+      <p class="writeup-text">
+      -----------------------------------------
+      </p>
+
+      
+
+      <!-- Write-up sisältö päättyy tähän -->
+
+      <div class="navigation-buttons">
+  <a href="hackfinity-ctf.html" class="next-button">Back to Part 1</a>
+  <a href="projects.html" class="back-button">Back to Projects</a>
+</div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const canvas = document.getElementById('matrix-canvas');
+      const ctx = canvas.getContext('2d');
+
+      function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+      resizeCanvas();
+      window.addEventListener('resize', resizeCanvas);
+      
+      const matrixChars = [
+        "0", "1", "0", "1", "0", "1", "0", "1", 
+        "0", "1", "0", "1", "0", "1", "0", "1", 
+        "0", "1", "0", "1", "0", "1", "0", "1", 
+        "{", "}", "[", "]", "<", ">", "(", ")",
+        ";", ":", "/", "\\", "|", ".", ",", "_",
+        "+", "-", "*", "=", "&", "%", "$", "#"
+      ];
+      
+      const columnWidth = 20; 
+      const rowHeight = 25;
+      const columns = Math.floor(canvas.width / columnWidth);
+      const rows = Math.floor(canvas.height / rowHeight) + 1;
+      
+      const matrix = [];
+      for (let i = 0; i < columns; i++) {
+        matrix[i] = [];
+        for (let j = 0; j < rows; j++) {
+          const charIndex = Math.floor(Math.random() * matrixChars.length);
+          matrix[i][j] = matrixChars[charIndex];
+        }
+      }
+      
+      const glowPositions = [];
+      const glowSpeeds = [];
+      for (let i = 0; i < columns; i++) {
+        glowPositions[i] = -Math.floor(Math.random() * 20); 
+        glowSpeeds[i] = 0.02 + Math.random() * 0.03;
+      }
+      
+      function draw() {
+        ctx.fillStyle = "rgba(0, 0, 0, 1)";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
+        ctx.font = "16px 'DejaVu Sans Mono', monospace";
+        
+        for (let i = 0; i < columns; i++) {
+          for (let j = 0; j < rows; j++) {
+            const char = matrix[i][j];
+            const x = i * columnWidth;
+            const y = j * rowHeight;
+            
+            const glowPos = glowPositions[i];
+            const distance = Math.abs(j - glowPos);
+            
+            let brightness;
+            if (distance < 8) { 
+              brightness = 0.8 - (distance * 0.09);
+            } else {
+              brightness = 0.08;
+            }
+            
+            ctx.fillStyle = `rgba(123, 17, 19, ${brightness})`;
+            ctx.fillText(char, x, y);
+          }
+          
+          glowPositions[i] += glowSpeeds[i];
+          
+          if (glowPositions[i] > rows + 5) {
+            glowPositions[i] = -5;
+            
+            for (let j = 0; j < rows; j++) {
+              if (Math.random() < 0.2) {
+                const charIndex = Math.floor(Math.random() * matrixChars.length);
+                matrix[i][j] = matrixChars[charIndex];
+              }
+            }
+          }
+        }
+        
+        requestAnimationFrame(draw);
+      }
+      draw();
+
+      function createLetterByLetterEffect(element, delay) {
+        if (!element) return;
+        
+        const text = element.textContent;
+        element.textContent = '';
+        
+        for (let i = 0; i < text.length; i++) {
+          const span = document.createElement('span');
+          span.className = 'letter';
+          span.textContent = text[i];
+          span.style.animationDelay = `${i * delay}s`;
+          element.appendChild(span);
+        }
+      }
+      
+      const titleElement = document.querySelector('.title');
+      if (titleElement) {
+        createLetterByLetterEffect(titleElement, 0.1);
+      }
+    });
+  </script>
+</body>
+</html>
