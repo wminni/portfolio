@@ -213,29 +213,34 @@
       50% { opacity: 0.2; }
     }
 
-    .project-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 25px;
-      margin-top: 20px;
-      justify-content: center;
+    .description {
+      color: #a0a0a0;
+      margin-bottom: 20px;
+      line-height: 1.7;
     }
+
+    .project-list {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-gap: 25px;
+      margin-top: 20px;
+    }
+
     .project-card {
       border: 1px solid var(--primary);
       border-radius: 5px;
-      padding: 20px;
       background-color: rgba(0, 0, 0, 0.7);
+      padding: 20px;
       transition: all 0.3s ease;
       overflow: hidden;
       cursor: pointer;
-
-      flex: 0 0 calc(33.33% - 25px);
-      max-width: calc(33.33% - 25px);
     }
+
     .project-card:hover {
       box-shadow: 0 0 15px var(--primary-glow);
       transform: translateY(-2px);
     }
+
     .project-title {
       color: var(--primary);
       font-size: 1.3rem;
@@ -250,6 +255,7 @@
       font-size: 1rem;
       color: rgba(123, 17, 19, 0.7);
     }
+
     .project-link {
       text-decoration: none;
       color: var(--primary);
@@ -260,10 +266,12 @@
     .project-link:hover {
       text-shadow: 0 0 5px var(--primary-glow);
     }
+
     .project-description {
       color: #a0a0a0;
       margin-bottom: 15px;
       font-size: 1rem;
+      line-height: 1.6;
     }
 
     @media (max-width: 768px) {
@@ -293,9 +301,12 @@
       .section-title {
         font-size: 1.5rem;
       }
+
+      .project-list {
+        grid-template-columns: repeat(1, 1fr);
+      }
       .project-card {
-        flex: 0 0 calc(33.33% - 25px);
-        max-width: calc(33.33% - 25px);
+        padding: 15px;
       }
       .project-title {
         font-size: 1.2rem;
@@ -325,7 +336,7 @@
       <div class="section-title">My Projects</div>
       
       <p class="description">
-        Here are some of my cybersecurity projects and learning exercises etc.
+        Here are some of my cybersecurity projects and learning exercises.
       </p>
       
       <div class="project-list">
@@ -425,7 +436,7 @@
       const glowPositions = [];
       const glowSpeeds = [];
       for (let i = 0; i < columns; i++) {
-        glowPositions[i] = -Math.floor(Math.random() * 20);
+        glowPositions[i] = -Math.floor(Math.random() * 20); 
         glowSpeeds[i] = 0.02 + Math.random() * 0.03;
       }
       
