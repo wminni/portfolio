@@ -749,13 +749,17 @@ MODULE_AUTHOR(<span class="code-string">"CTF Participant"</span>);
 MODULE_DESCRIPTION(<span class="code-string">"CTF demonstration kernel module for privilege escalation"</span>);</code></pre>
   </div>
 <div class="code-container">
-	<h4 class="code-title" style="color: black;">Makefile - Build Configuration for Kernel Module</h4>
-    	<pre class="code-block"><code>obj-m += cyberavengers.o
-all:
-	make -C /lib/modules/$(shell uname -r)/build M=$(PWD) modules
-clean:
-	make -C /lib/modules/$(shell uname -r)/build M=$(PWD) clean</code></pre>
-  </div>
+  <div class="code-title" style="color: black;">Makefile - Build Configuration for Kernel Module</div>
+  <pre class="code-block"><code><span class="code-comment"># Specify the kernel module object file to build</span>
+<span class="code-keyword">obj-m</span> += <span class="code-string">cyberavengers.o</span>
+
+<span class="code-comment"># Default build rule - builds the kernel module against current kernel headers</span>
+<span class="code-keyword">all:</span>
+	<span class="code-function">make</span> -C /lib/modules/$(shell uname -r)/build M=$(PWD) modules
+
+<span class="code-comment"># Clean rule - removes all generated files</span>
+<span class="code-keyword">clean:</span>
+	<span class="code-function">make</span> -C /lib/modules/$(shell uname -r)/build M=$(PWD) clean</code></pre>
 </div>
 </div>
 <style>
