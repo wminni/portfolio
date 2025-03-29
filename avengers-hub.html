@@ -682,7 +682,7 @@
   </div>
   
   <div class="code-container">
-    <h4 class="code-title">cyberavengers.c - Kernel Module for Privilege Escalation</h4>
+    <h4 class="code-title" style="color: black;">cyberavengers.c - Kernel Module for Privilege Escalation</h4>
     <pre class="code-block"><code><span class="code-comment">/*
  * cyberavengers.c - Kernel module for privilege escalation in CTF
  *
@@ -748,23 +748,16 @@ MODULE_LICENSE(<span class="code-string">"GPL"</span>);
 MODULE_AUTHOR(<span class="code-string">"CTF Participant"</span>);
 MODULE_DESCRIPTION(<span class="code-string">"CTF demonstration kernel module for privilege escalation"</span>);</code></pre>
   </div>
-</div>
-
-     <div class="code-container">
-  <div class="code-title">
-    Makefile - Build Configuration for Kernel Module
-  </div>
-  <div class="code-content">
-    <pre>
-obj-m += cyberavengers.o
+<div class="code-container">
+	<h4 class="code-title" style="color: black;">Makefile - Build Configuration for Kernel Module</h4>
+    	<pre class="code-block"><code>obj-m += cyberavengers.o
 all:
 	make -C /lib/modules/$(shell uname -r)/build M=$(PWD) modules
 clean:
-	make -C /lib/modules/$(shell uname -r)/build M=$(PWD) clean
-    </pre>
+	make -C /lib/modules/$(shell uname -r)/build M=$(PWD) clean</code></pre>
   </div>
 </div>
-
+</div>
 <style>
   /* Korjatut tyylit */
   .code-container {
