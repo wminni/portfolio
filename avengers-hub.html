@@ -525,7 +525,7 @@
         <div class="process-step">4. Flag Capture</div>
       </div>
 
-      <!-- Vaihe 1: Alkuvaiheen tiedustelu sivulla -->
+      <!-- Vaihe 1: Initial Reconnaissance -->
       <div class="challenge-section">
         <h3 class="step-title"><span class="step-number">1</span> Initial Reconnaissance</h3>
         
@@ -538,7 +538,7 @@
         </div>
       </div>
 
-      <!-- Vaihe 2: Nmap skannaus -->
+      <!-- Vaihe 2: Port Scanning -->
       <div class="challenge-section">
         <h3 class="step-title"><span class="step-number">2</span> Port Scanning</h3>
         
@@ -554,7 +554,7 @@
         </div>
       </div>
 
-      <!-- Vaihe 3: Gobuster hakemistoenumerointi -->
+      <!-- Vaihe 3: Directory Enumeration -->
       <div class="challenge-section">
         <h3 class="step-title"><span class="step-number">3</span> Directory Enumeration</h3>
         
@@ -570,7 +570,7 @@
         </div>
       </div>
 
-      <!-- Vaihe 4: Breakglass.zip ja salasana -->
+      <!-- Vaihe 4: Password Cracking -->
       <div class="challenge-section">
         <h3 class="step-title"><span class="step-number">4</span> Password Cracking</h3>
         
@@ -589,11 +589,11 @@
         </div>
         
         <div class="image-container">
-          <img src="images/avengershub5.png" alt="Zip File Download" class="challenge-image">
+          <img src="images/avengershub5.png" alt="Zip File Password Cracking" class="challenge-image">
         </div>
       </div>
 
-      <!-- Vaihe 5: WBCE CMS Sisäänkirjautuminen -->
+      <!-- Vaihe 5: CMS Access -->
       <div class="challenge-section">
         <h3 class="step-title"><span class="step-number">5</span> CMS Access</h3>
         
@@ -608,7 +608,7 @@
         </div>
       </div>
 
-      <!-- Vaihe 6: Msfvenom Reverse Shell -->
+      <!-- Vaihe 6: Reverse Shell Creation -->
       <div class="challenge-section">
         <h3 class="step-title"><span class="step-number">6</span> Reverse Shell Creation</h3>
         
@@ -627,9 +627,13 @@
         <div class="image-container">
           <img src="images/avengershub7.png" alt="Reverse Shell Creation" class="challenge-image">
         </div>
+        
+        <div class="image-container">
+          <img src="images/avengershub8.png" alt="Reverse Shell Upload" class="challenge-image">
+        </div>
       </div>
 
-      <!-- Vaihe 7: SSH Key Generation -->
+      <!-- Vaihe 7: SSH Key Authentication -->
       <div class="challenge-section">
         <h3 class="step-title"><span class="step-number">7</span> SSH Key Authentication</h3>
         
@@ -648,7 +652,11 @@
         </p>
         
         <div class="image-container">
-          <img src="images/avengershub8.png" alt="SSH Access" class="challenge-image">
+          <img src="images/avengershub9.png" alt="SSH Key Generation" class="challenge-image">
+        </div>
+        
+        <div class="image-container">
+          <img src="images/avengershub11.png" alt="SSH Access" class="challenge-image">
         </div>
       </div>
 
@@ -658,31 +666,20 @@
         
         <p class="writeup-text">
           Upon running the command <code>sudo -l</code>, I discovered that the <strong>void</strong> user could run the command <code>/sbin/insmod</code> without needing a password. This was a key opportunity for privilege escalation.
-        </p>
-        
-        <div class="image-container">
-          <img src="images/avengershub9.png" alt="Sudo Privileges" class="challenge-image">
-        </div>
-      </div>
-
-      <!-- Vaihe 9: Kernel Module Creation -->
-      <div class="challenge-section">
-        <h3 class="step-title"><span class="step-number">9</span> Kernel Module Creation</h3>
-        
-        <p class="writeup-text">
+          <br><br>
           I created the <strong>cyberavengers.c</strong> kernel module, which creates a <strong>SUID binary</strong>. This binary copies the /bin/bash executable to the /tmp/rootbash path and sets the SUID bit to give it root privileges.
           <br><br>
           After creating the module, I compiled it using the make command. Due to my attackbox crashing, I restarted it and re-ran the necessary steps to continue.
         </p>
         
         <div class="image-container">
-          <img src="images/avengershub10.png" alt="Kernel Module Creation" class="challenge-image">
+          <img src="images/avengershub10.png" alt="Privilege Escalation" class="challenge-image">
         </div>
       </div>
 
-      <!-- Vaihe 10: Root Access -->
+      <!-- Vaihe 9: Root Access -->
       <div class="challenge-section">
-        <h3 class="step-title"><span class="step-number">10</span> Root Access</h3>
+        <h3 class="step-title"><span class="step-number">9</span> Root Access</h3>
         
         <p class="writeup-text">
           Once I had successfully compiled the module, I uploaded it to the target machine using:
@@ -697,11 +694,7 @@
         </p>
         
         <div class="image-container">
-          <img src="images/avengershub11.png" alt="Module Loading" class="challenge-image">
-        </div>
-        
-        <div class="image-container">
-          <img src="images/avengershub12.png" alt="Root Privileges" class="challenge-image">
+          <img src="images/avengershub12.png" alt="Root Access" class="challenge-image">
         </div>
       </div>
 
