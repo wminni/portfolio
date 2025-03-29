@@ -563,7 +563,7 @@
         <h3 class="step-title"><span class="step-number">3</span> Directory Enumeration</h3>
         
         <p class="writeup-text">
-          Next, I used <strong>Gobuster</strong> for directory enumeration, which is an effective way to discover hidden directories on a website. By running the following command:
+          Next, I used <strong>Gobuster</strong> for directory enumeration by running the following command:
           <br><code>gobuster dir -u http://10.10.237.26 -w /usr/share/wordlists/dirb/common.txt</code>
           <br><br>
           I discovered the /backups directory, which contained an important file, <strong>breakglass.zip</strong>. I found that this file was password-protected.
