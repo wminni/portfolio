@@ -602,9 +602,7 @@
         <h3 class="step-title"><span class="step-number">5</span> CMS Access</h3>
         
         <p class="writeup-text">
-          Accessing WBCE CMS
-          <br><br>
-          I logged into the WBCE CMS using the admin credentials (admin, securepassword), which gave me access to the website's administration panel.
+          I logged into the WBCE CMS using the admin credentials (admin : securepassword), which gave me access to the website's administration panel.
         </p>
         
         <div class="image-container">
@@ -668,13 +666,16 @@
 <div class="challenge-section">
   <h3 class="step-title"><span class="step-number">8</span> Privilege Escalation Opportunity</h3>
   
-  <p class="writeup-text">
-    Upon running the command <code>sudo -l</code>, I discovered that the <strong>void</strong> user could run the command <code>/sbin/insmod</code> without needing a password. This was a key opportunity for privilege escalation.
-    <br><br>
-    I created the <strong>cyberavengers.c</strong> kernel module, which creates a <strong>SUID binary</strong>. This binary copies the /bin/bash executable to the /tmp/rootbash path and sets the SUID bit to give it root privileges.
-    <br><br>
-    After creating the module, I compiled it using the make command. Due to my attackbox crashing, I restarted it and re-ran the necessary steps to continue.
-  </p>
+ <p class="writeup-text">
+  Upon running the command <code>sudo -l</code>, I discovered that the <strong>void</strong> user could run the command <code>/sbin/insmod</code> without needing a password. This was a key opportunity for privilege escalation.
+  <br><br>
+  I created the <strong>cyberavengers.c</strong> kernel module, which creates a <strong>SUID binary</strong>. This binary copies the <code>/bin/bash</code> executable to the <code>/tmp/rootbash</code> path and sets the SUID bit to give it root privileges.
+  <br><br>
+  After creating the module, I created a Makefile and compiled the module with make.
+  <br><br>
+  Due to my attackbox crashing, I restarted it and re-ran the necessary steps to continue. As a result, some of the later screenshots and commands show different IP addresses, since the machine was assigned a new one after reboot.
+</p>
+
   
   <div class="image-container">
     <img src="images/avengershub10.png" alt="Privilege Escalation" class="challenge-image">
@@ -746,6 +747,21 @@ module_exit(rev_exit);
 MODULE_LICENSE(<span class="code-string">"GPL"</span>);
 MODULE_AUTHOR(<span class="code-string">"CTF Participant"</span>);
 MODULE_DESCRIPTION(<span class="code-string">"CTF demonstration kernel module for privilege escalation"</span>);</code></pre>
+  </div>
+</div>
+
+     <div class="code-container">
+  <div class="code-title">
+    Makefile - Build Configuration for Kernel Module
+  </div>
+  <div class="code-content">
+    <pre>
+obj-m += cyberavengers.o
+all:
+	make -C /lib/modules/$(shell uname -r)/build M=$(PWD) modules
+clean:
+	make -C /lib/modules/$(shell uname -r)/build M=$(PWD) clean
+    </pre>
   </div>
 </div>
 
