@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="fi">
 <head>
   <meta charset="UTF-8">
@@ -664,7 +664,7 @@
         </div>
       </div>
 
-      <!-- Vaihe 8: Privilege Escalation Opportunity -->
+<!-- Vaihe 8: Privilege Escalation Opportunity -->
 <div class="challenge-section">
   <h3 class="step-title"><span class="step-number">8</span> Privilege Escalation Opportunity</h3>
   
@@ -750,6 +750,7 @@ MODULE_DESCRIPTION(<span class="code-string">"CTF demonstration kernel module fo
 </div>
 
 <style>
+  /* Korjatut tyylit */
   .code-container {
     margin: 25px 0;
     padding: 0;
@@ -759,13 +760,14 @@ MODULE_DESCRIPTION(<span class="code-string">"CTF demonstration kernel module fo
   }
   
   .code-title {
-    background-color: #7B1113;
-    color: white;
+    background-color: #7B1113; /* Sama punainen kuin muualla sivustolla */
+    color: #a0a0a0; /* Sama harmaa kuin muut tekstit */
     font-family: 'DejaVu Sans Mono', monospace;
     font-size: 1.1rem;
     padding: 10px 15px;
     margin: 0;
     border-bottom: 1px solid #5d0d0f;
+    text-shadow: 0 0 2px rgba(123, 17, 19, 0.8);
   }
   
   .code-block {
@@ -776,7 +778,7 @@ MODULE_DESCRIPTION(<span class="code-string">"CTF demonstration kernel module fo
     font-family: 'DejaVu Sans Mono', monospace;
     font-size: 0.9rem;
     line-height: 1.5;
-    border-left: 3px solid #7B1113;
+    border-left: 3px solid #7B1113; /* Sama punainen kuin muualla */
   }
   
   .code-block code {
@@ -785,6 +787,25 @@ MODULE_DESCRIPTION(<span class="code-string">"CTF demonstration kernel module fo
     color: #f8f8f2;
     display: block;
     white-space: pre;
+  }
+  
+  /* Numeropallojen korjaus */
+  .step-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background-color: #7B1113; /* Sama punainen kuin muualla */
+    color: #000000; /* Musta tekstiväri numeroille */
+    border-radius: 50%;
+    margin-right: 15px;
+    font-weight: bold;
+    font-size: 1.2rem;
+    font-family: 'DejaVu Sans Mono', monospace;
+    box-shadow: 0 0 10px rgba(123, 17, 19, 0.5),
+                0 0 5px rgba(123, 17, 19, 0.3);
+    text-shadow: 0 0 2px rgba(255, 255, 255, 0.3);
   }
   
   /* Syntax highlighting for C code */
