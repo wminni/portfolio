@@ -58,7 +58,7 @@
 
     header {
       padding: 2rem 0;
-      margin-bottom: 3rem;
+      margin-bottom: 2rem;
       position: relative;
       width: 100%;
     }
@@ -148,7 +148,7 @@
 
     .hero-section {
       text-align: center;
-      margin-bottom: 3rem;
+      margin-bottom: 2rem;
       max-width: 800px;
       width: 100%;
     }
@@ -160,6 +160,7 @@
       color: var(--lighter-gray);
       margin-bottom: 1rem;
       letter-spacing: 0.5px;
+      white-space: nowrap;
     }
 
     .hero-accent {
@@ -211,7 +212,7 @@
       font-size: 1.6rem;
       font-weight: 600;
       color: var(--lighter-gray);
-      margin-bottom: 2.2rem;
+      margin-bottom: 1.5rem;
       display: flex;
       align-items: center;
       letter-spacing: 0.5px;
@@ -226,7 +227,7 @@
     }
 
     .about-content p {
-      margin-bottom: 1.8rem;
+      margin-bottom: 1.5rem;
       padding-left: 0.5rem;
       font-size: 1.05rem;
       line-height: 1.8;
@@ -234,89 +235,6 @@
     
     .about-content p:last-child {
       margin-bottom: 0;
-    }
-
-    .profile-section {
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-    }
-
-    .profile-image-container {
-      position: relative;
-      width: 100%;
-      max-width: 360px;
-      margin: 0 auto;
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-      border: 1px solid var(--medium-gray);
-    }
-
-    .profile-image {
-      width: 100%;
-      display: block;
-      border-radius: 6px;
-    }
-
-    .profile-image-container::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      border: 2px solid var(--accent);
-      border-radius: 8px;
-      box-shadow: 0 0 12px var(--glow-accent);
-      pointer-events: none;
-    }
-
-    .skills-card {
-      background-color: var(--dark-gray);
-      padding: 1.8rem;
-      border-radius: 4px;
-      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
-    }
-
-    .skills-title {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 1.2rem;
-      color: var(--lighter-gray);
-      margin-bottom: 1.2rem;
-      position: relative;
-      padding-left: 1rem;
-    }
-
-    .skills-title::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 4px;
-      height: 80%;
-      background-color: var(--accent);
-      border-radius: 2px;
-      box-shadow: 0 0 8px var(--glow-accent);
-    }
-
-    .skills-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.9rem;
-      list-style: none;
-    }
-
-    .skill-tag {
-      background-color: var(--medium-gray);
-      color: var(--light-gray);
-      padding: 0.4rem 0.9rem;
-      border-radius: 3px;
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.9rem;
-      border-left: 2px solid var(--accent);
-      box-shadow: 0 0 6px rgba(123, 45, 57, 0.3);
     }
 
     .header-accent {
@@ -345,6 +263,7 @@
       opacity: 0.5;
       z-index: 100;
       transition: opacity 0.3s ease;
+      animation: subtle-pulse 4s infinite ease-in-out;
     }
 
     .security-indicator:hover {
@@ -359,10 +278,6 @@
         box-shadow: 0 0 10px var(--glow-accent);
       }
     }
-
-    .security-indicator {
-      animation: subtle-pulse 4s infinite ease-in-out;
-    }
   </style>
 </head>
 <body>
@@ -372,7 +287,7 @@
       <div class="header-content">
         <div class="logo-area">
           <h1 class="name">Minni Wessman</h1>
-          <div class="title">Cybersecurity Student</div>
+          <div class="title">Portfolio</div>
         </div>
         <nav>
           <a href="#" class="nav-link active">Home</a>
@@ -386,7 +301,7 @@
     <main>
       <section class="hero-section">
         <h2 class="hero-headline">Digging into weaknesses to understand how systems <span class="hero-accent">break</span></h2>
-        <p class="hero-subheadline">Currently exploring offensive security, learning by doing, and aiming to apply what I’ve learned in the real world.</p>
+        <p class="hero-subheadline">Currently exploring offensive security, learning by doing, and aiming to apply what I've learned in the real world.</p>
       </section>
 
       <section class="about-section">
