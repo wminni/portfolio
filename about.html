@@ -285,9 +285,9 @@
       left: 0;
       right: 0;
       bottom: 0;
-      border: 2px solid var(--accent);
+      border: 1px solid rgba(139, 0, 0, 0.6);
       border-radius: 8px;
-      box-shadow: 0 0 12px var(--glow-accent);
+      box-shadow: 0 0 8px rgba(139, 0, 0, 0.4);
       pointer-events: none;
     }
 
@@ -297,6 +297,7 @@
       object-fit: cover;
       display: block;
       border-radius: 6px;
+      filter: brightness(0.95) contrast(0.95) saturate(0.85);
     }
 
     .clearfix::after {
