@@ -4,27 +4,27 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TryHackMe Hackfinity Battle CTF | Minni's Cybersecurity Portfolio</title>
-   <meta name="description" content="Minnin kyberturvallisuuden portfolio, joka sisältää CTF-haasteita sekä eettisen hakkeroinnin ja penetraatiotestauksen projekteja. | Ethical hacking and cybersecurity portfolio by Minni, featuring CTF challenges, ethical hacking and penetration testing projects.">
+  <meta name="description" content="Minnin kyberturvallisuuden portfolio, joka sisältää CTF-haasteita sekä eettisen hakkeroinnin ja penetraatiotestauksen projekteja. | Ethical hacking and cybersecurity portfolio by Minni, featuring CTF challenges, ethical hacking and penetration testing projects.">
   <meta name="keywords" content="Minni Wessman, kyberturvallisuus, tietoturva, kyberturvallisuuden opiskelija, penetraatiotestaaja harjoittelija, valkohattuhakkeri, eettisen hakkeroinnin harjoittelija, eettinen hakkerointi, eettinen hakkeri, penetraatiotestaus, kyberturvallisuuden työharjoittelija, hakee harjoittelupaikkaa kyberturvallisuudessa,kesätyö kyberturvallisuus, kyberturvallisuus Suomi, cybersecurity, cybersecurity student, cyber security, cybersecurity intern, cybersecurity internship, seeking cybersecurity internship, ethical hacking intern, CTF writeups, CTF write-ups, CTF walkthroughs, ethical hacker, ethical hacking, white hat hacker, penetration testing trainee, penetration testing, CTF, security, portfolio, red team, women in cybersecurity">
   
   <meta property="og:title" content="Minni's Cybersecurity Portfolio">
   <meta property="og:description" content="Ethical hacking and cybersecurity portfolio showcasing CTF challenges and cybersecurity projects">
   <meta property="og:url" content="https://wminni.github.io/portfolio/">
   <meta property="og:type" content="website">
+  
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=DejaVu+Sans+Mono:wght@400;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap');
 
     :root {
-      --primary: #7B1113;
-      --primary-dark: #5d0d0f;
-      --primary-glow: rgba(123, 17, 19, 0.5);
-      --primary-transparent: rgba(123, 17, 19, 0.2);
-      --dark: #000000;
-      --darker: #000000;
-    }
-
-    html {
-      overflow-y: scroll;
+      --accent: #cc3a4b;
+      --accent-light: #e84c5e;
+      --accent-subtle: rgba(204, 58, 75, 0.15);
+      --dark: #1a1a1a;
+      --dark-gray: #222222;
+      --medium-gray: #2a2a2a;
+      --light-gray: #AAAAAA;
+      --lighter-gray: #E0E0E0;
+      --glow-accent: rgba(204, 58, 75, 0.5);
     }
 
     * {
@@ -32,310 +32,321 @@
       padding: 0;
       box-sizing: border-box;
       scrollbar-width: thin;
-      scrollbar-color: var(--primary) var(--darker);
+      scrollbar-color: var(--accent) var(--dark);
     }
 
     *::-webkit-scrollbar {
       width: 8px;
     }
     *::-webkit-scrollbar-track {
-      background: var(--darker);
+      background: var(--dark);
     }
     *::-webkit-scrollbar-thumb {
-      background-color: var(--primary);
+      background-color: var(--accent);
       border-radius: 4px;
     }
 
     body {
-      font-family: 'DejaVu Sans Mono', monospace;
-      background-color: #000000;
-      color: #ffffff;
-      line-height: 1.6;
-      overflow-x: hidden;
-      position: relative;
+      background-color: var(--dark);
+      color: var(--light-gray);
+      font-family: 'Inter', sans-serif;
       min-height: 100vh;
-
+      line-height: 1.7;
+      font-size: 16px;
+      position: relative;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: flex-start; 
-      margin: 0;
     }
-
-    #matrix-canvas {
+    
+    body::before {
+      content: "";
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 400 400'%3E%3Cstyle%3E.binary %7B font: 10px monospace; fill: %23cc3a4b; opacity: 0.11; %7D%3C/style%3E%3Ctext x='10' y='20' class='binary'%3E01000001 00101110 01001001 00101110%3C/text%3E%3Ctext x='10' y='40' class='binary'%3E01110011 01100101 01100011 01110101%3C/text%3E%3Ctext x='10' y='60' class='binary'%3E01110010 01101001 01110100 01111001%3C/text%3E%3Ctext x='10' y='80' class='binary'%3E01001000 01100001 01100011 01101011%3C/text%3E%3Ctext x='10' y='100' class='binary'%3E01101001 01101110 01100111 00100000%3C/text%3E%3Ctext x='10' y='120' class='binary'%3E01000101 01110100 01101000 01101001%3C/text%3E%3Ctext x='10' y='140' class='binary'%3E01100011 01100001 01101100 00100000%3C/text%3E%3Ctext x='10' y='160' class='binary'%3E01001011 01100001 01101100 01101001%3C/text%3E%3Ctext x='10' y='180' class='binary'%3E01001100 01101001 01101110 01110101%3C/text%3E%3Ctext x='10' y='200' class='binary'%3E01111000 00100000 01010110 01010000%3C/text%3E%3Ctext x='10' y='220' class='binary'%3E01001110 00100000 01010011 01100101%3C/text%3E%3Ctext x='10' y='240' class='binary'%3E01100011 01110101 01110010 01101001%3C/text%3E%3Ctext x='10' y='260' class='binary'%3E01110100 01111001 00100000 01001111%3C/text%3E%3Ctext x='10' y='280' class='binary'%3E01010011 01001001 01001110 01010100%3C/text%3E%3Ctext x='10' y='300' class='binary'%3E01010000 01100101 01101110 01110100%3C/text%3E%3Ctext x='10' y='320' class='binary'%3E01100101 01110011 01110100 01101001%3C/text%3E%3Ctext x='10' y='340' class='binary'%3E01101110 01100111 00100000 01010111%3C/text%3E%3Ctext x='10' y='360' class='binary'%3E01101001 01110010 01100101 01110011%3C/text%3E%3Ctext x='10' y='380' class='binary'%3E01101000 01100001 01110010 01101011%3C/text%3E%3C/svg%3E");
+      background-repeat: repeat;
       z-index: -1;
+      opacity: 0.09;
+      pointer-events: none;
     }
 
-    .header-container {
-      position: relative;
-      z-index: 2;
-      width: 90%;
+    .container {
       max-width: 1200px;
-      margin: 40px auto 0;
+      margin: 0 auto;
+      padding: 2rem;
+      width: 100%;
     }
 
-    .header-box {
-      width: 100%;
-      margin-bottom: 0;
-      padding: 20px;
-      text-align: center;
-      background-color: #000000;
-      border: 1px solid var(--primary);
-      border-radius: 10px 10px 0 0;
-      border-bottom: none;
-      box-shadow: 0 0 15px var(--primary-glow),
-                  0 0 30px rgba(123, 17, 19, 0.3),
-                  inset 0 0 8px rgba(123, 17, 19, 0.2);
-    }
-
-    .nav {
-      width: 100%;
-      background-color: #000000;
-      border: 1px solid var(--primary);
-      border-top: none;
-      border-bottom: none;
-      box-shadow: 0 0 15px var(--primary-glow),
-                  0 0 30px rgba(123, 17, 19, 0.3),
-                  inset 0 0 8px rgba(123, 17, 19, 0.2);
-      padding: 8px;
-    }
-    .nav-list {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      list-style: none;
-      background-color: #000000;
-      padding: 0;
+    header {
+      padding: 2rem 0;
+      margin-bottom: 2rem;
       position: relative;
-      z-index: 1;
-    }
-    .nav-item a {
-      color: var(--primary);
-      text-decoration: none;
-      font-size: 1.5rem;
-      padding: 8px 12px;
-      transition: all 0.3s ease;
-      display: inline-block;
-      font-family: 'DejaVu Sans Mono', monospace;
-      letter-spacing: 1px;
-      text-shadow: 0 0 2px var(--primary-glow);
-    }
-    .nav-item a:hover {
-      color: #cc2428;
-      transform: scale(1.05);
-      text-shadow: 
-        0 0 10px rgba(204, 36, 40, 0.7),
-        0 0 20px rgba(204, 36, 40, 0.4),
-        0 0 30px rgba(204, 36, 40, 0.2);
-      transition: all 0.3s ease;
-    }
-    .nav-item a.active {
-      color: #cc2428;
-      border-bottom: 2px solid var(--primary);
-      text-shadow: 
-        0 0 5px var(--primary-glow),
-        0 0 10px var(--primary-glow);
+      width: 100%;
     }
 
-    .content-box {
-      width: 100%;
-      min-height: 500px;
-      padding: 40px 40px;
-      background-color: #000000;
-      border: 1px solid var(--primary);
-      border-top: none;
-      border-radius: 0 0 10px 10px;
-      box-shadow: 0 0 15px var(--primary-glow),
-                  0 0 30px rgba(123, 17, 19, 0.3),
-                  inset 0 0 8px rgba(123, 17, 19, 0.2);
-      margin-top: 0;
-      margin-bottom: 40px;
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo-area {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .name {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 2.8rem;
+      font-weight: 600;
+      color: var(--lighter-gray);
+      letter-spacing: -0.5px;
+      margin-bottom: 0.5rem;
     }
 
     .title {
-      font-family: 'DejaVu Sans Mono', monospace;
-      font-size: 2.5rem;
-      font-weight: 900;
-      color: #7B1113;
-      text-transform: uppercase;
-      margin-bottom: 30px;
-      letter-spacing: 2px;
-      position: relative;
-      text-align: center;
-    }
-    
-    .letter {
-      display: inline-block;
-      white-space: pre;
-      animation: letter-glow 4s infinite;
-    }
-    @keyframes letter-glow {
-      0%, 100% {
-        color: #7B1113;
-        text-shadow: 
-          0 0 5px rgba(123, 17, 19, 0.4),
-          0 0 10px rgba(123, 17, 19, 0.2);
-      }
-      50% {
-        color: #cc2428;
-        text-shadow: 
-          0 0 10px rgba(204, 36, 40, 0.7),
-          0 0 20px rgba(204, 36, 40, 0.4),
-          0 0 30px rgba(204, 36, 40, 0.2);
-      }
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: var(--accent);
+      letter-spacing: 0.5px;
+      text-shadow: 0 0 8px var(--glow-accent);
     }
 
-    .section-title {
-      font-family: 'DejaVu Sans Mono', monospace;
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: var(--primary);
-      margin-bottom: 20px;
-      text-shadow: 0 0 5px var(--primary-glow);
+    .subtitle {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 2.2rem;
+      font-weight: 600;
+      color: var(--lighter-gray);
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .subtle-accent {
+      color: var(--accent);
+    }
+
+    nav {
       display: flex;
+      gap: 2.5rem;
+    }
+
+    .nav-link {
+      color: var(--light-gray);
+      text-decoration: none;
+      font-size: 1rem;
+      position: relative;
+      transition: color 0.3s ease;
+      padding-bottom: 3px;
+      font-family: 'IBM Plex Mono', monospace;
+    }
+
+    .nav-link:hover {
+      color: var(--lighter-gray);
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: var(--accent);
+      transition: width 0.3s ease;
+      box-shadow: 0 0 8px var(--glow-accent);
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .nav-link.active {
+      color: var(--lighter-gray);
+    }
+
+    .nav-link.active::after {
+      width: 100%;
+    }
+
+    main {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
       align-items: center;
     }
-    .section-title::before {
-      content: ">_";
-      margin-right: 10px;
-      font-weight: bold;
-      opacity: 0.7;
-      text-shadow: 0 0 3px var(--primary-glow);
-      animation: blink 4s infinite;
+
+    .content-section {
+      background-color: var(--dark-gray);
+      padding: 2.8rem;
+      border-radius: 6px;
+      box-shadow: 0 3px 20px rgba(0, 0, 0, 0.25);
+      position: relative;
+      overflow: hidden;
+      max-width: 1000px;
+      width: 100%;
+      margin-bottom: 2rem;
     }
-    @keyframes blink {
-      0%, 100% { opacity: 0.7; }
-      50% { opacity: 0.2; }
+
+    .content-section::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        radial-gradient(var(--accent-subtle) 1px, transparent 1px),
+        linear-gradient(to right, var(--accent-subtle), transparent 2px);
+      background-size: 20px 20px, 100% 100%;
+      background-position: 0 0, 0 0;
+      opacity: 0.2;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .section-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .section-heading {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: var(--lighter-gray);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      letter-spacing: 0.5px;
+    }
+
+    .section-heading::before {
+      content: ">";
+      color: var(--accent);
+      margin-right: 0.8rem;
+      font-weight: 700;
+      text-shadow: 0 0 8px var(--glow-accent);
+    }
+
+    .section-content p {
+      margin-bottom: 1.5rem;
+      padding-left: 0.5rem;
+      font-size: 1.05rem;
+      line-height: 1.8;
+    }
+    
+    .section-content p:last-child {
+      margin-bottom: 0;
+    }
+
+    .header-accent {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(to right, var(--accent), var(--accent-light), transparent);
+      box-shadow: 0 0 12px var(--glow-accent);
+    }
+
+    .security-indicator {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: 1px solid var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      color: var(--accent);
+      opacity: 0.5;
+      z-index: 100;
+      transition: opacity 0.3s ease;
+      animation: subtle-pulse 4s infinite ease-in-out;
+    }
+
+    .security-indicator:hover {
+      opacity: 0.8;
     }
 
     .writeup-text {
-      color: #a0a0a0;
-      font-size: 1.1rem;
+      color: var(--light-gray);
+      font-size: 1.05rem;
       line-height: 1.8;
-      margin-bottom: 25px;
-      white-space: normal;
-      word-wrap: break-word;
-      overflow-wrap: break-word;
-      text-align: justify;
+      margin-bottom: 1.5rem;
+      padding-left: 0.5rem;
     }
 
     .challenge-quote {
-  margin: 20px 0;
-  padding: 15px 20px;
-  border-left: 4px solid var(--primary);
-  background-color: rgba(123, 17, 19, 0.1);
-  color: #a0a0a0;
-  font-style: italic;
-  font-size: 1.1rem;
-  line-height: 1.8;
-  position: relative;
-}
-
-.challenge-quote::before {
-  content: """;
-  font-size: 3rem;
-  font-family: Georgia, serif;
-  position: absolute;
-  top: -10px;
-  left: 5px;
-  color: var(--primary);
-  opacity: 0.4;
-}
-
-.writeup-text a {
-  color: var(--primary);
-  text-decoration: underline;
-  font-weight: bold;
-  transition: all 0.2s ease;
-}
-
-.writeup-text a:hover {
-  color: #cc2428;
-  text-shadow: 0 0 3px rgba(204, 36, 40, 0.3);
-}
-
-    .back-button-container {
-      margin: 30px 0;
-      text-align: center;
+      margin: 20px 0;
+      padding: 15px 20px;
+      border-left: 4px solid var(--accent);
+      background-color: rgba(204, 58, 75, 0.1);
+      color: var(--light-gray);
+      font-style: italic;
+      font-size: 1.05rem;
+      line-height: 1.8;
+      position: relative;
     }
-    .back-button {
+
+    .challenge-quote::before {
+      content: """;
+      font-size: 3rem;
+      font-family: Georgia, serif;
+      position: absolute;
+      top: -10px;
+      left: 5px;
+      color: var(--accent);
+      opacity: 0.4;
+    }
+
+    .writeup-text a {
+      color: var(--accent);
+      text-decoration: underline;
+      font-weight: bold;
+      transition: all 0.2s ease;
+    }
+
+    .writeup-text a:hover {
+      color: var(--accent-light);
+      text-shadow: 0 0 3px var(--glow-accent);
+    }
+
+    .back-button-container, .navigation-buttons {
+      margin: 30px 0;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .back-button, .next-button {
       display: inline-block;
       padding: 12px 25px;
-      background-color: var(--primary-transparent);
-      border: 2px solid var(--primary);
+      background-color: transparent;
+      border: 2px solid var(--accent);
       border-radius: 5px;
-      color: var(--primary);
-      font-size: 1.2rem;
+      color: var(--accent);
+      font-size: 1.1rem;
       font-weight: bold;
       text-decoration: none;
       transition: all 0.3s ease;
       letter-spacing: 1px;
-      text-shadow: 0 0 2px var(--primary-glow);
-      position: relative;
-      overflow: hidden;
-      z-index: 1;
+      text-shadow: 0 0 2px var(--glow-accent);
     }
-    .back-button:hover {
-      background-color: rgba(123, 17, 19, 0.4);
-      transform: translateY(-3px);
-      box-shadow: 0 0 20px var(--primary-glow);
-      color: #a0a0a0;
-    }
-    .back-button::before {
-      content: "";
-      position: absolute;
-      top: -5px;
-      left: -5px;
-      right: -5px;
-      bottom: -5px;
-      border: 1px solid var(--primary);
-      opacity: 0;
-      transition: all 0.3s ease;
-      z-index: -1;
-    }
-    .back-button:hover::before {
-      opacity: 0.5;
-      top: -2px;
-      left: -2px;
-      right: -2px;
-      bottom: -2px;
-    }
-  .navigation-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  margin: 30px 0;
-}
-    
-.next-button {
-  display: inline-block;
-  padding: 12px 25px;
-  background-color: var(--primary-transparent);
-  border: 2px solid var(--primary);
-  border-radius: 5px;
-  color: var(--primary);
-  font-size: 1.2rem;
-  font-weight: bold;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  letter-spacing: 1px;
-  text-shadow: 0 0 2px var(--primary-glow);
-  position: relative;
-  overflow: hidden;
-  z-index: 1;
-}
 
-.next-button:hover {
-  background-color: rgba(123, 17, 19, 0.4);
-  transform: translateY(-3px);
-  box-shadow: 0 0 20px var(--primary-glow);
-  color: #a0a0a0;
-}
+    .back-button:hover, .next-button:hover {
+      background-color: rgba(204, 58, 75, 0.2);
+      transform: translateY(-3px);
+      box-shadow: 0 0 20px var(--glow-accent);
+      color: var(--lighter-gray);
+    }
 
     .image-container {
       display: flex;
@@ -346,39 +357,100 @@
 
     .challenge-image {
       max-width: 90%;
-      border: 1px solid #7B1113;
+      border: 1px solid var(--accent);
       border-radius: 5px;
-      box-shadow: 0 0 10px rgba(123, 17, 19, 0.5);
+      box-shadow: 0 0 10px var(--glow-accent);
+    }
+
+    .featured-challenge {
+      padding: 20px;
+      border: 2px solid var(--accent);
+      background-color: var(--medium-gray);
+      border-radius: 10px;
+      margin: 30px 0;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 0 20px var(--glow-accent);
+    }
+
+    .section-title {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: var(--lighter-gray);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      letter-spacing: 0.5px;
+    }
+
+    .section-title::before {
+      content: ">";
+      color: var(--accent);
+      margin-right: 0.8rem;
+      font-weight: 700;
+      text-shadow: 0 0 8px var(--glow-accent);
+    }
+
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(204, 58, 75, 0.7);
+      }
+      70% {
+        box-shadow: 0 0 0 10px rgba(204, 58, 75, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(204, 58, 75, 0);
+      }
+    }
+
+    @keyframes subtle-pulse {
+      0%, 100% {
+        box-shadow: 0 0 5px rgba(123, 45, 57, 0);
+      }
+      50% {
+        box-shadow: 0 0 10px var(--glow-accent);
+      }
+    }
+
+    @keyframes letter-glow {
+      0%, 100% {
+        color: var(--accent);
+        text-shadow: 0 0 5px rgba(204, 58, 75, 0.4), 0 0 10px rgba(204, 58, 75, 0.2);
+      }
+      50% {
+        color: var(--accent-light);
+        text-shadow: 0 0 10px rgba(204, 58, 75, 0.7), 0 0 20px rgba(204, 58, 75, 0.4), 0 0 30px rgba(204, 58, 75, 0.2);
+      }
+    }
+
+    .letter {
+      display: inline-block;
+      white-space: pre;
+      animation: letter-glow 4s infinite;
     }
 
     @media (max-width: 768px) {
-      .header-container {
+      .container {
         width: 90%;
       }
-      .header-box {
-        padding: 20px 15px;
+      
+      .header-content {
+        flex-direction: column;
+        text-align: center;
       }
-      .nav {
-        padding: 5px;
-      }
-      .content-box {
-        padding: 30px 15px;
-      }
-      .title {
-        font-size: 2rem;
-      }
-      .nav-list {
+      
+      nav {
+        margin-top: 1.5rem;
+        justify-content: center;
         flex-wrap: wrap;
-        gap: 10px;
       }
-      .nav-item a {
-        font-size: 1.3rem;
-        padding: 5px 8px;
+      
+      .section-title, .section-heading {
+        font-size: 1.4rem;
       }
-      .section-title {
-        font-size: 1.5rem;
-      }
-      .writeup-text {
+      
+      .writeup-text, .challenge-quote {
         font-size: 1rem;
       }
     }
@@ -387,242 +459,229 @@
 <body>
   <canvas id="matrix-canvas"></canvas>
   
-  <div class="header-container">
-    <div class="header-box">
-      <h1 class="title" data-text="TryHackMe Hackfinity Battle CTF">TryHackMe Hackfinity Battle CTF</h1>
+  <div class="container">
+    <header>
+      <div class="header-accent"></div>
+      <div class="header-content">
+        <div class="logo-area">
+          <h1 class="name">Minni Wessman</h1>
+          <div class="title">Portfolio</div>
+        </div>
+        <nav>
+          <a href="index.html" class="nav-link">Home</a>
+          <a href="about.html" class="nav-link">About</a>
+          <a href="projects.html" class="nav-link active">Projects</a>
+          <a href="contact.html" class="nav-link">Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="content-section">
+        <div class="section-content">
+          <h1 class="subtitle">TryHackMe Hackfinity Battle CTF</h1>
+          
+          <!-- Write-up sisältö alkaa tästä --!> 
+          <div class="section-title">TryHackMe Hackfinity Battle CTF</div>
+
+          <p class="writeup-text">
+          I participated in TryHackMe's Hackfinity Battle in March 2025. Below is a write-up of some of the CTF challenges I solved.
+          </p>
+
+          <p class="writeup-text">
+          TryHackMe requested that flags should not be fully revealed in write-ups. For this reason I have obscured them.
+          </p>
+
+      <div class="section-title">Red Teaming / Avengers Hub</div>
+
+    <div class="featured-challenge">
+      <div class="image-container">
+        <img src="images/avengershub.png" alt="Avengers Hub Challenge" class="challenge-image">
+      </div>
+      
+      <p class="writeup-text" style="color: #a0a0a0;">
+        This was the most challenging but also the most educational challenge for me in this CTF. There is more documentation related to this, which is why it is on a separate page.
+      </p>
+      
+      <div style="text-align: center; margin: 30px 0;">
+        <a href="https://wminni.github.io/portfolio/avengers-hub.html" class="next-button" style="animation: pulse 2s infinite;">
+          View Complete Walkthrough
+        </a>
+      </div>
     </div>
 
-    <nav class="nav">
-      <ul class="nav-list">
-        <li class="nav-item"><a href="index.html">&lt;home&gt;</a></li>
-        <li class="nav-item"><a href="about.html">&lt;about&gt;</a></li>
-        <li class="nav-item"><a href="projects.html" class="active">&lt;projects&gt;</a></li>
-        <li class="nav-item"><a href="contact.html">&lt;contact&gt;</a></li>
-      </ul>
-    </nav>
-    
-    <div class="content-box">
-      <!-- Write-up sisältö alkaa tästä -->
-      <div class="section-title">TryHackMe Hackfinity Battle CTF</div>
+          <div class="section-title">OSINT / Catch Me if You Can 2</div>
 
-      <p class="writeup-text">
-      I participated in TryHackMe's Hackfinity Battle in March 2025. Below is a write-up of some of the CTF challenges I solved.
-      </p>
+          <div class="image-container">
+            <img src="images/catchmeifucan2_osint.png" alt="Challenge Description" class="challenge-image">
+          </div>
 
-      <p class="writeup-text">
-      TryHackMe requested that flags should not be fully revealed in write-ups. For this reason I have obscured them.
-      </p>
+          <blockquote class="challenge-quote">
+            "After leaving the restaurant, Phicer was seen enjoying the incredible street art Beco do Batman offers. However, he spent a while looking at this one. We believe they used some sort of cipher to communicate a location with each other. Flag format: THM{location_name}, no capitals, separate words with an underscore."
+          </blockquote>
 
-  <div class="section-title">Red Teaming / Avengers Hub</div>
+          <div class="image-container">
+            <img src="images/beco-batman-2-1741192876782.png" alt="Beco do Batmanr" class="challenge-image">
+          </div>
 
-<div class="featured-challenge">
-  <div class="image-container">
-    <img src="images/avengershub.png" alt="Avengers Hub Challenge" class="challenge-image">
+          <p class="writeup-text">
+          I used Google to find the original artwork, which did not contain the embedded text present in the challenge image. The challenge description also provided a hint: "We believe they used some sort of cipher to communicate a location with each other."
+          </p>
+
+          <p class="writeup-text">
+          Based on this, I examined the text more closely and identified the Pigpen cipher. Using the <a href="https://planetcalc.com/">PlanetCalc</a> online tool, I was able to decode the message.
+          </p>
+
+          <div class="image-container">
+            <img src="images/pigpencipher.png" alt="Pigpen Cipher" class="challenge-image">
+          </div>
+          
+          <p class="writeup-text" style="text-align: center;">The location shown here was the flag.</p>
+
+            <div class="section-title">Web / Dark Encryptor 2</div>
+
+          <div class="image-container">
+            <img src="images/darkencryptor2_3.png" alt="Dark Encryptor 2" class="challenge-image">
+          </div>
+
+          <blockquote class="challenge-quote">
+            "After pivoting through their internal network, we have found yet another encryption tool. Can you hack into the server and extract the secret data? Our intel tells us that the app is using the gpg tool." 
+          </blockquote>
+
+           <div class="image-container">
+            <img src="images/darkencryptor2_1.png" alt="DarkMatter Encryptor" class="challenge-image">
+          </div>
+
+          <p class="writeup-text">
+          -----------------------------------------
+          </p>
+
+          <div class="image-container">
+            <img src="images/darkencryptor2_5.png" alt="Netcat" class="challenge-image">
+          </div>
+
+          <p class="writeup-text">
+          -----------------------------------------
+          </p>
+
+          <div class="image-container">
+            <img src="images/darkencryptor2_2.png" alt="Burp Suite" class="challenge-image">
+          </div>
+
+          <p class="writeup-text">
+          -----------------------------------------
+          </p>
+          
+          <div class="image-container">
+            <img src="images/darkencryptor2_4.png" alt="Flag" class="challenge-image">
+          </div>
+
+          <p class="writeup-text">
+          -----------------------------------------
+          </p>
+
+           <div class="section-title">Crypto / Dark Matter</div>
+
+          <div class="image-container">
+            <img src="images/darkmatter.png" alt="Dark Matter" class="challenge-image">
+          </div>
+
+          <blockquote class="challenge-quote">
+            "The Hackfinitiy high school has been hit by DarkInjector's ransomware, and some of its critical files have been encrypted. We need you and Void to use your crypto skills to find the RSA private key and restore the files. After some research and reverse engineering, you discover they have forgotten to remove some debugging from their code. The ransomware saves this data to the tmp directory." 
+          </blockquote>
+
+           <div class="image-container">
+            <img src="images/darkmatter2.png" alt="Dark Matter" class="challenge-image">
+          </div>
+
+          <p class="writeup-text">
+          -----------------------------------------
+          </p>
+
+          <div class="image-container">
+            <img src="images/darkmatter3.png" alt="Dark Matter" class="challenge-image">
+          </div>
+
+          <p class="writeup-text">
+          -----------------------------------------
+          </p>
+
+          <div class="image-container">
+            <img src="images/darkmatter4.png" alt="Dark Matter" class="challenge-image">
+          </div>
+
+          <p class="writeup-text">
+          -----------------------------------------
+          </p>
+          
+          <div class="image-container">
+            <img src="images/darkmatter5.png" alt="Dark Matter" class="challenge-image">
+          </div>
+
+          <p class="writeup-text">
+          -----------------------------------------
+          </p>
+
+           <div class="image-container">
+            <img src="images/darkmatter6.png" alt="Dark Matter" class="challenge-image">
+          </div>
+
+          <p class="writeup-text">
+          -----------------------------------------
+          </p>
+
+           <div class="section-title">Red Teaming / Dump</div>
+
+          <div class="image-container">
+            <img src="images/dump1.png" alt="Dump" class="challenge-image">
+          </div>
+
+          <blockquote class="challenge-quote">
+            "We breached Cipher's machine, uncovering encrypted plans and compromised systems, but he detected us and locked us out. Just before losing access, we dumped the LSASS process, capturing critical credentials. Now, with the dump in hand, we have one last chance to infiltrate his network and stop his next attack before it's too late." 
+          </blockquote>
+
+           <p class="writeup-text" style="text-align: center;">
+            The dump can be found <a href="https://docs.google.com/document/d/1_lsGg9D7MrlBtq4z7YsfC9nYKsbFebIdAARr4qLJYsg/edit?pli=1&tab=t.0">here</a>.
+           </p>
+
+          <div class="image-container">
+            <img src="images/dump4.png" alt="Dump" class="challenge-image">
+          </div>
+
+          <p class="writeup-text">
+          -----------------------------------------
+          </p>
+
+           <div class="image-container">
+            <img src="images/dump2.png" alt="Dump" class="challenge-image">
+          </div>
+
+          <p class="writeup-text">
+          -----------------------------------------
+          </p>
+
+          <div class="image-container">
+            <img src="images/dump3.png" alt="Dump" class="challenge-image">
+          </div>
+
+          <p class="writeup-text">
+          -----------------------------------------
+          </p>
+
+          <!-- Write-up sisältö päättyy tähän -->
+
+          <div class="navigation-buttons">
+            <a href="hackfinity-ctf-part2.html" class="next-button">Continue to Part 2</a>
+            <a href="projects.html" class="back-button">Back to Projects</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div class="security-indicator">
+      <i>&#128274;</i>
+    </div>
   </div>
-  
-  <p class="writeup-text" style="color: #a0a0a0;">
-    This was the most challenging but also the most educational challenge for me in this CTF. There is more documentation related to this, which is why it is on a separate page.
-  </p>
-  
-  <div style="text-align: center; margin: 30px 0;">
-    <a href="https://wminni.github.io/portfolio/avengers-hub.html" class="next-button" style="animation: pulse 2s infinite;">
-      View Complete Walkthrough
-    </a>
-  </div>
-</div>
-
-<style>
-  .featured-challenge {
-    padding: 20px;
-    border: 2px solid var(--primary);
-    background-color: rgba(0,0,0,0.7);
-    border-radius: 10px;
-    margin: 30px 0;
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0 0 20px var(--primary-glow);
-  }
-  
-  @keyframes pulse {
-    0% {
-      box-shadow: 0 0 0 0 rgba(123, 17, 19, 0.7);
-    }
-    70% {
-      box-shadow: 0 0 0 10px rgba(123, 17, 19, 0);
-    }
-    100% {
-      box-shadow: 0 0 0 0 rgba(123, 17, 19, 0);
-    }
-  }
-</style>
-      
-
-      <div class="section-title">OSINT / Catch Me if You Can 2</div>
-
-      <div class="image-container">
-        <img src="images/catchmeifucan2_osint.png" alt="Challenge Description" class="challenge-image">
-      </div>
-
-      <blockquote class="challenge-quote">
-        "After leaving the restaurant, Phicer was seen enjoying the incredible street art Beco do Batman offers. However, he spent a while looking at this one. We believe they used some sort of cipher to communicate a location with each other. Flag format: THM{location_name}, no capitals, separate words with an underscore."
-      </blockquote>
-
-      <div class="image-container">
-        <img src="images/beco-batman-2-1741192876782.png" alt="Beco do Batmanr" class="challenge-image">
-      </div>
-
-      <p class="writeup-text">
-      I used Google to find the original artwork, which did not contain the embedded text present in the challenge image. The challenge description also provided a hint: "We believe they used some sort of cipher to communicate a location with each other."
-      </p>
-
-      <p class="writeup-text">
-      Based on this, I examined the text more closely and identified the Pigpen cipher. Using the <a href="https://planetcalc.com/">PlanetCalc</a> online tool, I was able to decode the message.
-      </p>
-
-      <div class="image-container">
-        <img src="images/pigpencipher.png" alt="Pigpen Cipher" class="challenge-image">
-      </div>
-      
-      <p class="writeup-text" style="text-align: center;">The location shown here was the flag.</p>
-
-        <div class="section-title">Web / Dark Encryptor 2</div>
-
-      <div class="image-container">
-        <img src="images/darkencryptor2_3.png" alt="Dark Encryptor 2" class="challenge-image">
-      </div>
-
-      <blockquote class="challenge-quote">
-        “After pivoting through their internal network, we have found yet another encryption tool. Can you hack into the server and extract the secret data? Our intel tells us that the app is using the gpg tool.” 
-      </blockquote>
-
-       <div class="image-container">
-        <img src="images/darkencryptor2_1.png" alt="DarkMatter Encryptor" class="challenge-image">
-      </div>
-
-      <p class="writeup-text">
-      -----------------------------------------
-      </p>
-
-      <div class="image-container">
-        <img src="images/darkencryptor2_5.png" alt="Netcat" class="challenge-image">
-      </div>
-
-      <p class="writeup-text">
-      -----------------------------------------
-      </p>
-
-      <div class="image-container">
-        <img src="images/darkencryptor2_2.png" alt="Burp Suite" class="challenge-image">
-      </div>
-
-      <p class="writeup-text">
-      -----------------------------------------
-      </p>
-      
-      <div class="image-container">
-        <img src="images/darkencryptor2_4.png" alt="Flag" class="challenge-image">
-      </div>
-
-      <p class="writeup-text">
-      -----------------------------------------
-      </p>
-
-       <div class="section-title">Crypto / Dark Matter</div>
-
-      <div class="image-container">
-        <img src="images/darkmatter.png" alt="Dark Matter" class="challenge-image">
-      </div>
-
-      <blockquote class="challenge-quote">
-        “The Hackfinitiy high school has been hit by DarkInjector's ransomware, and some of its critical files have been encrypted. We need you and Void to use your crypto skills to find the RSA private key and restore the files. After some research and reverse engineering, you discover they have forgotten to remove some debugging from their code. The ransomware saves this data to the tmp directory.” 
-      </blockquote>
-
-       <div class="image-container">
-        <img src="images/darkmatter2.png" alt="Dark Matter" class="challenge-image">
-      </div>
-
-      <p class="writeup-text">
-      -----------------------------------------
-      </p>
-
-      <div class="image-container">
-        <img src="images/darkmatter3.png" alt="Dark Matter" class="challenge-image">
-      </div>
-
-      <p class="writeup-text">
-      -----------------------------------------
-      </p>
-
-      <div class="image-container">
-        <img src="images/darkmatter4.png" alt="Dark Matter" class="challenge-image">
-      </div>
-
-      <p class="writeup-text">
-      -----------------------------------------
-      </p>
-      
-      <div class="image-container">
-        <img src="images/darkmatter5.png" alt="Dark Matter" class="challenge-image">
-      </div>
-
-      <p class="writeup-text">
-      -----------------------------------------
-      </p>
-
-       <div class="image-container">
-        <img src="images/darkmatter6.png" alt="Dark Matter" class="challenge-image">
-      </div>
-
-      <p class="writeup-text">
-      -----------------------------------------
-      </p>
-
-       <div class="section-title">Red Teaming / Dump</div>
-
-      <div class="image-container">
-        <img src="images/dump1.png" alt="Dump" class="challenge-image">
-      </div>
-
-      <blockquote class="challenge-quote">
-        “We breached Cipher's machine, uncovering encrypted plans and compromised systems, but he detected us and locked us out. Just before losing access, we dumped the LSASS process, capturing critical credentials. Now, with the dump in hand, we have one last chance to infiltrate his network and stop his next attack before it’s too late.” 
-      </blockquote>
-
-       <p class="writeup-text" style="text-align: center;">
-        The dump can be found <a href="https://docs.google.com/document/d/1_lsGg9D7MrlBtq4z7YsfC9nYKsbFebIdAARr4qLJYsg/edit?pli=1&tab=t.0">here</a>.
-       </p>
-
-      <div class="image-container">
-        <img src="images/dump4.png" alt="Dump" class="challenge-image">
-      </div>
-
-      <p class="writeup-text">
-      -----------------------------------------
-      </p>
-
-       <div class="image-container">
-        <img src="images/dump2.png" alt="Dump" class="challenge-image">
-      </div>
-
-      <p class="writeup-text">
-      -----------------------------------------
-      </p>
-
-      <div class="image-container">
-        <img src="images/dump3.png" alt="Dump" class="challenge-image">
-      </div>
-
-      <p class="writeup-text">
-      -----------------------------------------
-      </p>
-
-      
-
-      <!-- Write-up sisältö päättyy tähän -->
-
-      <div class="navigation-buttons">
-  <a href="hackfinity-ctf-part2.html" class="next-button">Continue to Part 2</a>
-  <a href="projects.html" class="back-button">Back to Projects</a>
-</div>
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -651,85 +710,4 @@
       const rows = Math.floor(canvas.height / rowHeight) + 1;
       
       const matrix = [];
-      for (let i = 0; i < columns; i++) {
-        matrix[i] = [];
-        for (let j = 0; j < rows; j++) {
-          const charIndex = Math.floor(Math.random() * matrixChars.length);
-          matrix[i][j] = matrixChars[charIndex];
-        }
-      }
-      
-      const glowPositions = [];
-      const glowSpeeds = [];
-      for (let i = 0; i < columns; i++) {
-        glowPositions[i] = -Math.floor(Math.random() * 20); 
-        glowSpeeds[i] = 0.02 + Math.random() * 0.03;
-      }
-      
-      function draw() {
-        ctx.fillStyle = "rgba(0, 0, 0, 1)";
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        
-        ctx.font = "16px 'DejaVu Sans Mono', monospace";
-        
-        for (let i = 0; i < columns; i++) {
-          for (let j = 0; j < rows; j++) {
-            const char = matrix[i][j];
-            const x = i * columnWidth;
-            const y = j * rowHeight;
-            
-            const glowPos = glowPositions[i];
-            const distance = Math.abs(j - glowPos);
-            
-            let brightness;
-            if (distance < 8) { 
-              brightness = 0.8 - (distance * 0.09);
-            } else {
-              brightness = 0.08;
-            }
-            
-            ctx.fillStyle = `rgba(123, 17, 19, ${brightness})`;
-            ctx.fillText(char, x, y);
-          }
-          
-          glowPositions[i] += glowSpeeds[i];
-          
-          if (glowPositions[i] > rows + 5) {
-            glowPositions[i] = -5;
-            
-            for (let j = 0; j < rows; j++) {
-              if (Math.random() < 0.2) {
-                const charIndex = Math.floor(Math.random() * matrixChars.length);
-                matrix[i][j] = matrixChars[charIndex];
-              }
-            }
-          }
-        }
-        
-        requestAnimationFrame(draw);
-      }
-      draw();
-
-      function createLetterByLetterEffect(element, delay) {
-        if (!element) return;
-        
-        const text = element.textContent;
-        element.textContent = '';
-        
-        for (let i = 0; i < text.length; i++) {
-          const span = document.createElement('span');
-          span.className = 'letter';
-          span.textContent = text[i];
-          span.style.animationDelay = `${i * delay}s`;
-          element.appendChild(span);
-        }
-      }
-      
-      const titleElement = document.querySelector('.title');
-      if (titleElement) {
-        createLetterByLetterEffect(titleElement, 0.1);
-      }
-    });
-  </script>
-</body>
-</html>
+      for (let i
