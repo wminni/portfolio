@@ -1,6 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="fi">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MiniCTF – Web Challenge | Minni's Cybersecurity Portfolio</title>
+  <meta name="description" content="Minnin kyberturvallisuuden portfolio, joka sisältää CTF-haasteita sekä eettisen hakkeroinnin ja penetraatiotestauksen projekteja. | Ethical hacking and cybersecurity portfolio by Minni, featuring CTF challenges, ethical hacking and penetration testing projects.">
+  
   <style>
     @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap');
 
@@ -20,6 +25,19 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
+      scrollbar-width: thin;
+      scrollbar-color: var(--accent) var(--dark);
+    }
+
+    *::-webkit-scrollbar {
+      width: 8px;
+    }
+    *::-webkit-scrollbar-track {
+      background: var(--dark);
+    }
+    *::-webkit-scrollbar-thumb {
+      background-color: var(--accent);
+      border-radius: 4px;
     }
 
     body {
@@ -92,6 +110,22 @@
       text-shadow: 0 0 8px var(--glow-accent);
     }
 
+    .subtitle {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 2.2rem;
+      font-weight: 600;
+      color: var(--lighter-gray);
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .subtitle-small {
+      font-style: italic;
+      color: var(--light-gray);
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
     .subtle-accent {
       color: var(--accent);
     }
@@ -144,43 +178,21 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 3rem;
     }
 
-    .project-header {
-      text-align: center;
-      margin-bottom: 1rem;
-      max-width: 800px;
-      width: 100%;
-    }
-
-    .project-title {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 2rem;
-      font-weight: 600;
-      color: var(--lighter-gray);
-      margin-bottom: 1rem;
-      letter-spacing: 0.5px;
-    }
-
-    .project-subtitle {
-      font-style: italic;
-      color: var(--light-gray);
-      margin-bottom: 2rem;
-    }
-
-    .project-section {
+    .content-section {
       background-color: var(--dark-gray);
       padding: 2.8rem;
       border-radius: 6px;
       box-shadow: 0 3px 20px rgba(0, 0, 0, 0.25);
       position: relative;
       overflow: hidden;
-      max-width: 800px;
+      max-width: 1000px;
       width: 100%;
+      margin-bottom: 2rem;
     }
 
-    .project-section::before {
+    .content-section::before {
       content: "";
       position: absolute;
       top: 0;
@@ -197,7 +209,7 @@
       z-index: 0;
     }
 
-    .project-content {
+    .section-content {
       position: relative;
       z-index: 1;
     }
@@ -221,14 +233,14 @@
       text-shadow: 0 0 8px var(--glow-accent);
     }
 
-    .project-content p {
+    .section-content p {
       margin-bottom: 1.5rem;
       padding-left: 0.5rem;
       font-size: 1.05rem;
       line-height: 1.8;
     }
     
-    .project-content p:last-child {
+    .section-content p:last-child {
       margin-bottom: 0;
     }
 
@@ -265,82 +277,124 @@
       opacity: 0.8;
     }
 
-    .tech-list {
-      list-style-type: none;
-      padding-left: 1.5rem;
+    .writeup-text {
+      color: var(--light-gray);
+      font-size: 1.05rem;
+      line-height: 1.8;
       margin-bottom: 1.5rem;
+      padding-left: 0.5rem;
     }
 
-    .tech-list li {
+    .challenge-quote {
+      margin: 20px 0;
+      padding: 15px 20px;
+      border-left: 4px solid var(--accent);
+      background-color: rgba(204, 58, 75, 0.1);
+      color: var(--light-gray);
+      font-style: italic;
+      font-size: 1.05rem;
+      line-height: 1.8;
       position: relative;
-      margin-bottom: 0.5rem;
-      line-height: 1.6;
     }
 
-    .tech-list li::before {
-      content: "•";
-      color: var(--accent);
+    .challenge-quote::before {
+      content: """;
+      font-size: 3rem;
+      font-family: Georgia, serif;
       position: absolute;
-      left: -1rem;
-      font-weight: bold;
-      text-shadow: 0 0 8px var(--glow-accent);
-    }
-
-    .ref-list {
-      list-style-type: none;
-      padding-left: 1.5rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .ref-list li {
-      position: relative;
-      margin-bottom: 0.5rem;
-      line-height: 1.6;
-    }
-
-    .ref-list li::before {
-      content: "•";
+      top: -10px;
+      left: 5px;
       color: var(--accent);
-      position: absolute;
-      left: -1rem;
-      font-weight: bold;
-      text-shadow: 0 0 8px var(--glow-accent);
+      opacity: 0.4;
     }
 
-    .ctf-button {
+    .writeup-text a {
+      color: var(--accent);
+      text-decoration: underline;
+      font-weight: bold;
+      transition: all 0.2s ease;
+    }
+
+    .writeup-text a:hover {
+      color: var(--accent-light);
+      text-shadow: 0 0 3px var(--glow-accent);
+    }
+
+    .back-button-container, .navigation-buttons {
+      margin: 30px 0;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .back-button, .next-button, .challenge-button {
       display: inline-block;
-      padding: 0.8rem 1.5rem;
-      background-color: var(--accent);
-      color: white;
+      padding: 12px 25px;
+      background-color: transparent;
+      border: 2px solid var(--accent);
+      border-radius: 5px;
+      color: var(--accent);
+      font-size: 1.1rem;
+      font-weight: bold;
       text-decoration: none;
-      font-family: 'IBM Plex Mono', monospace;
-      font-weight: 500;
-      border-radius: 4px;
-      margin-top: 1rem;
       transition: all 0.3s ease;
-      box-shadow: 0 0 8px var(--glow-accent);
-      border: none;
-      cursor: pointer;
-      letter-spacing: 0.5px;
+      letter-spacing: 1px;
+      text-shadow: 0 0 2px var(--glow-accent);
     }
 
-    .ctf-button:hover {
-      background-color: var(--accent-light);
-      box-shadow: 0 0 12px var(--glow-accent);
-      transform: translateY(-2px);
+    .back-button:hover, .next-button:hover, .challenge-button:hover {
+      background-color: rgba(204, 58, 75, 0.2);
+      transform: translateY(-3px);
+      box-shadow: 0 0 20px var(--glow-accent);
+      color: var(--lighter-gray);
     }
 
-    .ctf-section {
+    .tech-list, .ref-list {
+      list-style-type: none;
+      padding-left: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .tech-list li, .ref-list li {
+      position: relative;
+      margin-bottom: 0.5rem;
+      line-height: 1.6;
+    }
+
+    .tech-list li::before, .ref-list li::before {
+      content: "•";
+      color: var(--accent);
+      position: absolute;
+      left: -1rem;
+      font-weight: bold;
+    }
+
+    .direct-link {
+      font-size: 0.9rem;
+      color: var(--light-gray);
+      margin-top: 0.8rem;
+    }
+
+    .direct-link a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .direct-link a:hover {
+      text-decoration: underline;
+    }
+
+    .try-section {
       text-align: center;
       margin: 2rem 0;
     }
 
-    .section-subheading {
+    .try-heading {
       font-family: 'IBM Plex Mono', monospace;
       font-size: 1.3rem;
       font-weight: 600;
-      color: var(--lighter-gray);
-      margin: 2rem 0 1rem 0;
+      color: white;
+      margin-bottom: 1.5rem;
     }
 
     @keyframes subtle-pulse {
@@ -349,6 +403,31 @@
       }
       50% {
         box-shadow: 0 0 10px var(--glow-accent);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        width: 90%;
+      }
+      
+      .header-content {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      nav {
+        margin-top: 1.5rem;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+      
+      .section-title, .section-heading {
+        font-size: 1.4rem;
+      }
+      
+      .writeup-text, .challenge-quote {
+        font-size: 1rem;
       }
     }
   </style>
@@ -372,30 +451,36 @@
     </header>
 
     <main>
-      <section class="project-header">
-        <h2 class="project-title">MiniCTF – Web Challenge</h2>
-        <h3 class="project-subtitle">SQL Injection & Command Injection</h3>
-        
-        <div class="ctf-section">
-          <h3 class="section-subheading">Try the challenge</h3>
-          <a href="https://mini-ctf.onrender.com/" class="ctf-button">Launch MiniCTF Challenge</a>
-          <p style="margin-top: 0.8rem; font-size: 0.9rem;">
-            Direct link: <a href="https://mini-ctf.onrender.com/" style="color: var(--accent);">https://mini-ctf.onrender.com/</a>
-          </p>
-        </div>
-      </section>
+      <section class="content-section">
+        <div class="section-content">
+          <h1 class="subtitle">MiniCTF – Web Challenge</h1>
+          <p class="subtitle-small">SQL Injection & Command Injection</p>
+          
+          <div class="try-section">
+            <h3 class="try-heading">Try the challenge</h3>
+            <a href="https://mini-ctf.onrender.com/" class="challenge-button">Launch MiniCTF Challenge</a>
+            <p class="direct-link">
+              Direct link: <a href="https://mini-ctf.onrender.com/">https://mini-ctf.onrender.com/</a>
+            </p>
+          </div>
 
-      <section class="project-section">
-        <div class="project-content">
-          <p><em>This is a lightweight, beginner-friendly project built as an introduction to CTF challenge development and practical web exploitation.</em></p>
+          <p class="writeup-text">
+            <em>This is a lightweight, beginner-friendly project built as an introduction to CTF challenge development and practical web exploitation.</em>
+          </p>
           
-          <p>This project is a self-built Capture the Flag (CTF) web challenge designed to demonstrate two common web application vulnerabilities: SQL Injection and Command Injection.</p>
+          <p class="writeup-text">
+            This project is a self-built Capture the Flag (CTF) web challenge designed to demonstrate two common web application vulnerabilities: SQL Injection and Command Injection.
+          </p>
           
-          <p>The challenge simulates a vulnerable login page that can be bypassed with crafted input, followed by an interface that accepts shell commands. The user can execute user-level OS commands such as `whoami` through unsanitized input and retrieve a base64-encoded flag, which must be decoded and submitted to complete the challenge.</p>
+          <p class="writeup-text">
+            The challenge simulates a vulnerable login page that can be bypassed with crafted input, followed by an interface that accepts shell commands. The user can execute user-level OS commands such as `whoami` through unsanitized input and retrieve a base64-encoded flag, which must be decoded and submitted to complete the challenge.
+          </p>
           
-          <p>The project includes a flag verification mechanism and a final summary explaining how the vulnerabilities were exploited and how they could be prevented. It reflects both offensive techniques and basic secure coding principles.</p>
-          
-          <h3 class="section-subheading">Technologies used:</h3>
+          <p class="writeup-text">
+            The project includes a flag verification mechanism and a final summary explaining how the vulnerabilities were exploited and how they could be prevented. It reflects both offensive techniques and basic secure coding principles.
+          </p>
+
+          <div class="section-heading">Technologies used</div>
           <ul class="tech-list">
             <li>Python (Flask)</li>
             <li>HTML and CSS</li>
@@ -403,10 +488,14 @@
             <li>Render for deployment</li>
           </ul>
           
-          <p>This was my first self-designed CTF challenge, created to explore offensive security from the perspective of a challenge builder.</p>
-          
-          <h3 class="section-subheading">References & Learning Resources</h3>
-          <p>This project was built independently using publicly available resources to study web exploitation, CTF design, and secure coding principles. Key sources include:</p>
+          <p class="writeup-text">
+            This was my first self-designed CTF challenge, created to explore offensive security from the perspective of a challenge builder.
+          </p>
+
+          <div class="section-heading">References & Learning Resources</div>
+          <p class="writeup-text">
+            This project was built independently using publicly available resources to study web exploitation, CTF design, and secure coding principles. Key sources include:
+          </p>
           <ul class="ref-list">
             <li>SQL Injection – W3Schools</li>
             <li>Snyk Learn – SQL Injection Tutorial</li>
@@ -420,17 +509,16 @@
             <li>CSS Tricks – Flexbox Guide</li>
           </ul>
 
+          <div class="navigation-buttons">
+            <a href="projects.html" class="back-button">Back to Projects</a>
+          </div>
         </div>
       </section>
-      
-      <div style="text-align: center; margin: 2rem 0 1rem 0;">
-        <a href="projects.html" class="ctf-button">Back to Projects</a>
-      </div>
     </main>
-  </div>
 
-  <div class="security-indicator">
-    <i>&#128274;</i>
+    <div class="security-indicator">
+      <i>&#128274;</i>
+    </div>
   </div>
 </body>
 </html>
