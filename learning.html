@@ -157,12 +157,40 @@
       box-shadow: 0 3px 20px rgba(0, 0, 0, 0.25);
       position: relative;
       overflow: hidden;
-      max-width: 800px;
+      max-width: 1000px;
       width: 100%;
       margin-bottom: 2rem;
     }
 
-    .content-section::before {
+    .two-column-row {
+      display: flex;
+      gap: 2rem;
+      width: 100%;
+      max-width: 1000px;
+      margin-bottom: 2rem;
+    }
+
+    .column-box {
+      background-color: var(--dark-gray);
+      padding: 2.8rem;
+      border-radius: 6px;
+      box-shadow: 0 3px 20px rgba(0, 0, 0, 0.25);
+      position: relative;
+      overflow: hidden;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .column-left {
+      flex: 3;
+    }
+
+    .column-right {
+      flex: 2;
+    }
+
+    .content-section::before,
+    .column-box::before {
       content: "";
       position: absolute;
       top: 0;
@@ -255,6 +283,14 @@
       margin-bottom: 1.5rem;
     }
 
+    .subsection:first-child {
+      margin-top: 0;
+    }
+
+    .subsection:last-child {
+      margin-bottom: 0;
+    }
+
     .subsection-heading {
       font-family: 'IBM Plex Mono', monospace;
       font-size: 1.3rem;
@@ -307,6 +343,16 @@
       color: var(--accent);
     }
 
+    @media (max-width: 900px) {
+      .two-column-row {
+        flex-direction: column;
+      }
+      
+      .column-box {
+        width: 100%;
+      }
+    }
+
     @media (max-width: 600px) {
       .header-content {
         flex-direction: column;
@@ -353,8 +399,8 @@
         <nav>
          <a href="index.html" class="nav-link">Home</a>
          <a href="about.html" class="nav-link">About</a>
-         <a href="projects.html" class="nav-link">Projects</a>
          <a href="learning.html" class="nav-link active">Learning</a>
+         <a href="projects.html" class="nav-link">Projects</a>
          <a href="contact.html" class="nav-link">Contact</a>
         </nav>
       </div>
@@ -384,7 +430,7 @@
             <li>Working in Technical Support Services</li>
             <li>Working in System Support</li>
             <li>Maintaining Cybersecurity</li>
-            </ul>
+          </ul>
           <p>
             The program has also covered the fundamentals of offensive security, including commonly used tools and their practical usage.
           </p>
@@ -394,43 +440,71 @@
           <p>
             In addition to my formal education, I actively pursue self-directed learning focused primarily on offensive cybersecurity. I build my skills through practical labs, learning platforms, and independent research. This learning is part of my self-study and supports my development alongside my formal education. My goal is to specialize in offensive security, particularly in ethical hacking and penetration testing.
           </p>
-          <p>The following sections highlight some of the platforms, tools, and practices I've used independently to build my offensive security skillset.
+          <p>
+            The following sections highlight some of the platforms, tools, and practices I've used independently to build my offensive security skillset.
           </p>
-          
-          <div class="subsection">
-            <h3 class="subsection-heading">Learning Platforms & Resources</h3>
-            <p>I've been actively learning through platforms like:</p>
-            <ul class="bullet-list">
-              <li>TryHackMe</li>
-              <li>Hack The Box</li>
-              <li>PortSwigger Web Security Academy</li>
-              <li>TCM Security Academy</li>
-            </ul>
-          </div>
-          
-          <div class="subsection">
-            <h3 class="subsection-heading">Lab Practice</h3>
-              <p>
-                I regularly build lab environments using Kali Linux and VirtualBox to practice what I learn in a safe, isolated setting. These labs have helped me apply concepts like vulnerability scanning, basic exploitation, and privilege escalation.
-              </p>
-          </div>
-          
-          <div class="subsection">
-            <h3 class="subsection-heading">Course Completions / Certifications</h3>
-            <ul class="bullet-list">
-              <li></li>
-              <li></li>
-            </ul>
-          </div>
-          
-          <div class="subsection">
-            <h3 class="subsection-heading">Current Focus / What's Next</h3>
-            <ul class="bullet-list">
-              <li><strong>eJPT Certification</strong></li>
-            </ul>
-          </div>
         </div>
       </section>
+
+      <div class="two-column-row">
+        <div class="column-box column-left">
+          <div class="section-content">
+            <div class="subsection">
+              <h3 class="subsection-heading">Learning Platforms & Resources</h3>
+              <p>I've been actively learning through platforms like:</p>
+              <ul class="bullet-list">
+                <li>TryHackMe</li>
+                <li>Hack The Box</li>
+                <li>PortSwigger Web Security Academy</li>
+                <li>TCM Security Academy</li>
+              </ul>
+            </div>
+            
+            <div class="subsection">
+              <h3 class="subsection-heading">Lab Practice</h3>
+              <p>
+                I regularly build lab environments using <strong>Kali Linux</strong> and <strong>VirtualBox</strong> to practice what I learn in a safe, isolated setting. These labs have helped me apply concepts like vulnerability scanning, basic exploitation, and privilege escalation.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="column-box column-right">
+          <div class="section-content">
+            <div class="subsection">
+              <h3 class="subsection-heading">Skills & Tools</h3>
+              <p>Through self-study, I've gained experience with:</p>
+              <ul class="bullet-list">
+                <li>Kali Linux</li>
+                <li>Metasploit Framework</li>
+                <li>Burp Suite</li>
+                <li>Nmap</li>
+                <li>OWASP ZAP</li>
+                <li>Wireshark</li>
+                <li>John the Ripper</li>
+                <li>Hashcat</li>
+              </ul>
+            </div>
+            
+            <div class="subsection">
+              <h3 class="subsection-heading">Course Completions / Certifications</h3>
+              <ul class="bullet-list">
+                <li></li>
+                <li></li>
+              </ul>
+            </div>
+            
+            <div class="subsection">
+              <h3 class="subsection-heading">Current Focus / What's Next</h3>
+              <ul class="bullet-list">
+                <li><strong>eJPT Certification</strong></li>
+                <li>Web application security</li>
+                <li>Network penetration testing</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
     </main>
 
     <footer>
