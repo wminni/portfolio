@@ -320,6 +320,36 @@
       color: var(--accent-light);
       text-shadow: 0 0 3px var(--glow-accent);
     }
+    
+    .navigation-buttons {
+      margin: 30px 0;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .back-button, .next-button {
+      display: inline-block;
+      padding: 12px 25px;
+      background-color: transparent;
+      border: 2px solid var(--accent);
+      border-radius: 5px;
+      color: var(--accent);
+      font-size: 1.1rem;
+      font-weight: bold;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      letter-spacing: 1px;
+      text-shadow: 0 0 2px var(--glow-accent);
+    }
+
+    .back-button:hover, .next-button:hover {
+      background-color: rgba(204, 58, 75, 0.2);
+      transform: translateY(-3px);
+      box-shadow: 0 0 20px var(--glow-accent);
+      color: var(--lighter-gray);
+    }
   </style>
 </head>
 <body>
@@ -367,6 +397,11 @@
             <p>
               I'm currently preparing for the <a href="https://security.ine.com/certifications/ejpt-certification/">eJPT Certification</a>, which will help solidify my practical skills. I am also actively seeking an internship where I can apply what I've learned, further develop my skills, and contribute to hands-on security work.
             </p>
+            
+            <div class="navigation-buttons">
+              <a href="cv.html" class="back-button">View my CV in Finnish</a>
+              <a href="cv-en.html" class="next-button">View my CV in English</a>
+            </div>
           </div>
         </div>
       </section>
