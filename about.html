@@ -54,6 +54,9 @@
       margin: 0 auto;
       padding: 2rem;
       width: 100%;
+      min-height: calc(100vh - 60px);
+      display: flex;
+      flex-direction: column;
     }
 
     header {
@@ -144,6 +147,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      flex-grow: 1;
     }
 
     .content-section {
@@ -220,48 +224,6 @@
       box-shadow: 0 0 12px var(--glow-accent);
     }
 
-    .security-indicator {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      border: 1px solid var(--accent);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 16px;
-      color: var(--accent);
-      opacity: 0.5;
-      z-index: 100;
-      transition: opacity 0.3s ease;
-      animation: subtle-pulse 4s infinite ease-in-out;
-    }
-
-    .security-indicator:hover {
-      opacity: 0.8;
-    }
-
-    .skill-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.7rem;
-      margin: 1.5rem 0;
-      padding-left: 0.5rem;
-    }
-
-    .skill-tag {
-      background-color: var(--medium-gray);
-      color: var(--light-gray);
-      padding: 0.4rem 0.8rem;
-      border-radius: 3px;
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.9rem;
-      border-left: 2px solid var(--accent);
-      box-shadow: 0 0 6px rgba(204, 58, 75, 0.3);
-    }
-
     .about-content {
       position: relative;
     }
@@ -307,6 +269,27 @@
       content: "";
       display: table;
       clear: both;
+    }
+
+    footer {
+      width: 100%;
+      padding: 1rem 0;
+      text-align: center;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--light-gray);
+      opacity: 0.7;
+      margin-top: auto;
+    }
+
+    footer .copyright {
+      display: inline-block;
+    }
+
+    footer .copyright::before {
+      content: "©";
+      margin-right: 0.3rem;
+      color: var(--accent);
     }
 
     @media (max-width: 600px) {
@@ -381,39 +364,16 @@
               My focus is on developing my skills in ethical hacking and penetration testing, while also broadening my expertise across other areas of cybersecurity.
             </p>
             <p>
-            I'm currently preparing for the <a href="https://security.ine.com/certifications/ejpt-certification/">eJPT Certification</a>, which will help solidify my practical skills. I am also actively seeking an internship where I can apply what I've learned, further develop my skills, and contribute to hands-on security work.
+              I'm currently preparing for the <a href="https://security.ine.com/certifications/ejpt-certification/">eJPT Certification</a>, which will help solidify my practical skills. I am also actively seeking an internship where I can apply what I've learned, further develop my skills, and contribute to hands-on security work.
             </p>
           </div>
         </div>
       </section>
-
-      <section class="content-section">
-        <div class="section-content">
-          <h2 class="section-heading">Skills</h2>
-          <p>
-            Here are some of the technical skills I've developed through my studies and personal projects:
-          </p>
-          <div class="skill-list">
-            <span class="skill-tag">Vulnerability Assessment</span>
-            <span class="skill-tag">Network Security</span>
-            <span class="skill-tag">Kali Linux</span>
-            <span class="skill-tag">Python</span>
-            <span class="skill-tag">Bash</span>
-            <span class="skill-tag">Wireshark</span>
-            <span class="skill-tag">Metasploit</span>
-            <span class="skill-tag">Burp Suite</span>
-            <span class="skill-tag">OWASP Top 10</span>
-             <span class="skill-tag">OWASP ZAP</span>
-          </div>
-          <p>
-          </p>
-        </div>
-      </section>
     </main>
-  </div>
-
-  <div class="security-indicator">
-    <i>&#128274;</i>
+    
+    <footer>
+      <span class="copyright">Minni Wessman 2025</span>
+    </footer>
   </div>
 </body>
 </html>
