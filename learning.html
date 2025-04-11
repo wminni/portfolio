@@ -587,11 +587,11 @@
   <script>
     function openImage(src) {
       document.getElementById("lightbox-img").src = src;
-      document.getElementById("lightbox").style.display = "flex";
+      document.getElementById("lightbox").classList.add("active");
     }
     
     function closeImage() {
-      document.getElementById("lightbox").style.display = "none";
+      document.getElementById("lightbox").classList.remove("active");
       document.getElementById("lightbox-img").src = "";
     }
   </script>
