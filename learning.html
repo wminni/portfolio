@@ -1,396 +1,418 @@
-import React from 'react';
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap');
 
-const LearningPage = () => {
-  return (
-    <div style={{
-      display: 'flex',
-      flexDirection: 'column',
-      fontFamily: 'Inter, sans-serif',
-      color: '#AAAAAA',
-      background: '#1a1a1a',
-      width: '100%',
-      minHeight: '600px',
-      borderRadius: '8px',
-      overflow: 'hidden',
-      boxShadow: '0 4px 20px rgba(0, 0, 0, 0.3)',
-      position: 'relative'
-    }}>
-      {/* Header */}
-      <header style={{
-        padding: '1.5rem 2rem',
-        position: 'relative',
-        borderBottom: '1px solid #2a2a2a'
-      }}>
-        <div style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '3px',
-          background: 'linear-gradient(to right, #cc3a4b, #e84c5e, transparent)'
-        }}></div>
-        <div style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center'
-        }}>
-          <div>
-            <h1 style={{
-              margin: 0,
-              fontFamily: 'monospace',
-              fontSize: '1.8rem',
-              fontWeight: 600,
-              color: '#E0E0E0'
-            }}>Minni Wessman</h1>
-            <div style={{
-              fontFamily: 'monospace',
-              fontSize: '0.9rem',
-              color: '#cc3a4b'
-            }}>Portfolio</div>
-          </div>
-          <nav style={{
-            display: 'flex',
-            gap: '1.5rem'
-          }}>
-            <a style={{
-              color: '#AAAAAA',
-              textDecoration: 'none',
-              fontFamily: 'monospace'
-            }}>Home</a>
-            <a style={{
-              color: '#AAAAAA',
-              textDecoration: 'none',
-              fontFamily: 'monospace'
-            }}>About</a>
-            <a style={{
-              color: '#E0E0E0',
-              textDecoration: 'none',
-              fontFamily: 'monospace',
-              position: 'relative'
-            }}>
-              Learning
-              <span style={{
-                position: 'absolute',
-                width: '100%',
-                height: '2px',
-                bottom: '-3px',
-                left: 0,
-                background: '#cc3a4b'
-              }}></span>
-            </a>
-            <a style={{
-              color: '#AAAAAA',
-              textDecoration: 'none',
-              fontFamily: 'monospace'
-            }}>Projects</a>
-            <a style={{
-              color: '#AAAAAA',
-              textDecoration: 'none',
-              fontFamily: 'monospace'
-            }}>Contact</a>
-          </nav>
-        </div>
-      </header>
-      
-      {/* Main content */}
-      <main style={{
-        padding: '2rem',
-        display: 'flex',
-        justifyContent: 'center',
-        flexGrow: 1
-      }}>
-        {/* Learning section */}
-        <div style={{
-          maxWidth: '800px',
-          width: '100%',
-          background: '#222222',
-          borderRadius: '6px',
-          padding: '1.8rem',
-          position: 'relative',
-          overflow: 'hidden',
-          boxShadow: '0 3px 15px rgba(0, 0, 0, 0.2)'
-        }}>
-          <div style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            width: '100%',
-            height: '100%',
-            background: 'radial-gradient(rgba(204, 58, 75, 0.15) 1px, transparent 1px), linear-gradient(to right, rgba(204, 58, 75, 0.15), transparent 2px)',
-            backgroundSize: '20px 20px, 100% 100%',
-            opacity: 0.2,
-            pointerEvents: 'none'
-          }}></div>
-          
-          <div style={{
-            marginBottom: '1.5rem',
-            display: 'flex',
-            alignItems: 'center',
-            position: 'relative',
-            zIndex: 1
-          }}>
-            <span style={{
-              color: '#cc3a4b',
-              marginRight: '0.8rem',
-              fontWeight: 700
-            }}>{'>'}</span>
-            <span style={{
-              fontFamily: 'monospace',
-              fontSize: '1.4rem',
-              fontWeight: 600,
-              color: '#E0E0E0'
-            }}>Learning Journey</span>
-          </div>
-          
-          <div style={{ position: 'relative', zIndex: 1 }}>
-            <p style={{
-              marginBottom: '1.5rem',
-              fontSize: '0.95rem',
-              lineHeight: 1.7,
-              paddingLeft: '0.5rem'
-            }}>This learning is part of my self-study and supports my development alongside my formal education.</p>
-            
-            {/* Learning Platforms */}
-            <div style={{
-              background: '#2a2a2a',
-              borderRadius: '6px',
-              padding: '1.5rem',
-              marginBottom: '1.5rem',
-              boxShadow: '0 2px 10px rgba(0, 0, 0, 0.2)'
-            }}>
-              <div style={{
-                display: 'flex',
-                alignItems: 'center',
-                marginBottom: '1rem'
-              }}>
-                <span style={{
-                  color: '#cc3a4b',
-                  marginRight: '0.8rem'
-                }}>{'>'}</span>
-                <span style={{
-                  fontFamily: 'monospace',
-                  fontSize: '1.2rem',
-                  fontWeight: 600,
-                  color: '#E0E0E0'
-                }}>Learning Platforms & Resources</span>
-              </div>
-              
-              <p style={{
-                marginBottom: '1rem',
-                fontSize: '0.95rem',
-                lineHeight: 1.7,
-                paddingLeft: '0.5rem'
-              }}>I've been actively learning through platforms like:</p>
-              
-              <ul style={{
-                listStyle: 'none',
-                margin: '1rem 0 0.5rem 2rem'
-              }}>
-                <li style={{
-                  position: 'relative',
-                  paddingLeft: '1.5rem',
-                  marginBottom: '0.8rem'
-                }}>
-                  <span style={{
-                    position: 'absolute',
-                    left: 0,
-                    color: '#cc3a4b',
-                    fontWeight: 'bold'
-                  }}>•</span>
-                  <span></span>
-                </li>
-                <li style={{
-                  position: 'relative',
-                  paddingLeft: '1.5rem',
-                  marginBottom: '0.8rem'
-                }}>
-                  <span style={{
-                    position: 'absolute',
-                    left: 0,
-                    color: '#cc3a4b',
-                    fontWeight: 'bold'
-                  }}>•</span>
-                  <span></span>
-                </li>
-              </ul>
-            </div>
-            
-            {/* Lab Practice */}
-            <div style={{
-              background: '#2a2a2a',
-              borderRadius: '6px',
-              padding: '1.5rem',
-              marginBottom: '1.5rem',
-              boxShadow: '0 2px 10px rgba(0, 0, 0, 0.2)'
-            }}>
-              <div style={{
-                display: 'flex',
-                alignItems: 'center',
-                marginBottom: '1rem'
-              }}>
-                <span style={{
-                  color: '#cc3a4b',
-                  marginRight: '0.8rem'
-                }}>{'>'}</span>
-                <span style={{
-                  fontFamily: 'monospace',
-                  fontSize: '1.2rem',
-                  fontWeight: 600,
-                  color: '#E0E0E0'
-                }}>Lab Practice</span>
-              </div>
-              
-              <div style={{
-                background: 'rgba(0, 0, 0, 0.2)',
-                borderLeft: '3px solid #cc3a4b',
-                padding: '1.5rem',
-                marginTop: '0.5rem',
-                borderRadius: '0 5px 5px 0'
-              }}>
-                <p style={{
-                  fontSize: '0.95rem',
-                  lineHeight: 1.7
-                }}>
-                  I regularly build lab environments using <strong style={{color: '#E0E0E0'}}>Kali Linux</strong> and <strong style={{color: '#E0E0E0'}}>VirtualBox</strong> to practice what I learn in a safe, isolated setting. These labs have helped me apply concepts like vulnerability scanning, basic exploitation, and privilege escalation.
-                </p>
-              </div>
-            </div>
-            
-            {/* Course Completions */}
-            <div style={{
-              background: '#2a2a2a',
-              borderRadius: '6px',
-              padding: '1.5rem',
-              marginBottom: '1.5rem',
-              boxShadow: '0 2px 10px rgba(0, 0, 0, 0.2)'
-            }}>
-              <div style={{
-                display: 'flex',
-                alignItems: 'center',
-                marginBottom: '1rem'
-              }}>
-                <span style={{
-                  color: '#cc3a4b',
-                  marginRight: '0.8rem'
-                }}>{'>'}</span>
-                <span style={{
-                  fontFamily: 'monospace',
-                  fontSize: '1.2rem',
-                  fontWeight: 600,
-                  color: '#E0E0E0'
-                }}>Course Completions / Certifications</span>
-              </div>
-              
-              <ul style={{
-                listStyle: 'none',
-                margin: '1rem 0 0.5rem 2rem'
-              }}>
-                <li style={{
-                  position: 'relative',
-                  paddingLeft: '1.5rem',
-                  marginBottom: '0.8rem'
-                }}>
-                  <span style={{
-                    position: 'absolute',
-                    left: 0,
-                    color: '#cc3a4b',
-                    fontWeight: 'bold'
-                  }}>•</span>
-                  <span></span>
-                </li>
-                <li style={{
-                  position: 'relative',
-                  paddingLeft: '1.5rem',
-                  marginBottom: '0.8rem'
-                }}>
-                  <span style={{
-                    position: 'absolute',
-                    left: 0,
-                    color: '#cc3a4b',
-                    fontWeight: 'bold'
-                  }}>•</span>
-                  <span></span>
-                </li>
-              </ul>
-            </div>
-            
-            {/* Current Focus */}
-            <div style={{
-              background: '#2a2a2a',
-              borderRadius: '6px',
-              padding: '1.5rem',
-              boxShadow: '0 2px 10px rgba(0, 0, 0, 0.2)'
-            }}>
-              <div style={{
-                display: 'flex',
-                alignItems: 'center',
-                marginBottom: '1rem'
-              }}>
-                <span style={{
-                  color: '#cc3a4b',
-                  marginRight: '0.8rem'
-                }}>{'>'}</span>
-                <span style={{
-                  fontFamily: 'monospace',
-                  fontSize: '1.2rem',
-                  fontWeight: 600,
-                  color: '#E0E0E0'
-                }}>Current Focus / What's Next</span>
-              </div>
-              
-              <ul style={{
-                listStyle: 'none',
-                margin: '1rem 0 0.5rem 2rem'
-              }}>
-                <li style={{
-                  position: 'relative',
-                  paddingLeft: '1.5rem',
-                  marginBottom: '0.8rem'
-                }}>
-                  <span style={{
-                    position: 'absolute',
-                    left: 0,
-                    color: '#cc3a4b',
-                    fontWeight: 'bold'
-                  }}>•</span>
-                  <span><strong style={{color: '#E0E0E0'}}>eJPT Certification</strong></span>
-                </li>
-                <li style={{
-                  position: 'relative',
-                  paddingLeft: '1.5rem'
-                }}>
-                  <span style={{
-                    position: 'absolute',
-                    left: 0,
-                    color: '#cc3a4b',
-                    fontWeight: 'bold'
-                  }}>•</span>
-                  <span></span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </main>
-      
-      {/* Footer */}
-      <footer style={{
-        width: '100%',
-        padding: '1rem',
-        textAlign: 'center',
-        fontFamily: 'monospace',
-        fontSize: '0.8rem',
-        color: '#AAAAAA',
-        opacity: 0.7,
-        marginTop: 'auto'
-      }}>
-        <span style={{ display: 'inline-block' }}>
-          <span style={{ color: '#cc3a4b', marginRight: '0.3rem' }}>©</span>
-          Minni Wessman 2025
-        </span>
-      </footer>
-    </div>
-  );
-};
+    :root {
+      --accent: #cc3a4b;
+      --accent-light: #e84c5e;
+      --accent-subtle: rgba(204, 58, 75, 0.15);
+      --dark: #1a1a1a;
+      --dark-gray: #222222;
+      --medium-gray: #2a2a2a;
+      --light-gray: #AAAAAA;
+      --lighter-gray: #E0E0E0;
+      --glow-accent: rgba(204, 58, 75, 0.5);
+    }
 
-export default LearningPage;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: var(--dark);
+      color: var(--light-gray);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      line-height: 1.7;
+      font-size: 16px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 400 400'%3E%3Cstyle%3E.binary %7B font: 10px monospace; fill: %23cc3a4b; opacity: 0.11; %7D%3C/style%3E%3Ctext x='10' y='20' class='binary'%3E01000001 00101110 01001001 00101110%3C/text%3E%3Ctext x='10' y='40' class='binary'%3E01110011 01100101 01100011 01110101%3C/text%3E%3Ctext x='10' y='60' class='binary'%3E01110010 01101001 01110100 01111001%3C/text%3E%3Ctext x='10' y='80' class='binary'%3E01001000 01100001 01100011 01101011%3C/text%3E%3Ctext x='10' y='100' class='binary'%3E01101001 01101110 01100111 00100000%3C/text%3E%3Ctext x='10' y='120' class='binary'%3E01000101 01110100 01101000 01101001%3C/text%3E%3Ctext x='10' y='140' class='binary'%3E01100011 01100001 01101100 00100000%3C/text%3E%3Ctext x='10' y='160' class='binary'%3E01001011 01100001 01101100 01101001%3C/text%3E%3Ctext x='10' y='180' class='binary'%3E01001100 01101001 01101110 01110101%3C/text%3E%3Ctext x='10' y='200' class='binary'%3E01111000 00100000 01010110 01010000%3C/text%3E%3Ctext x='10' y='220' class='binary'%3E01001110 00100000 01010011 01100101%3C/text%3E%3Ctext x='10' y='240' class='binary'%3E01100011 01110101 01110010 01101001%3C/text%3E%3Ctext x='10' y='260' class='binary'%3E01110100 01111001 00100000 01001111%3C/text%3E%3Ctext x='10' y='280' class='binary'%3E01010011 01001001 01001110 01010100%3C/text%3E%3Ctext x='10' y='300' class='binary'%3E01010000 01100101 01101110 01110100%3C/text%3E%3Ctext x='10' y='320' class='binary'%3E01100101 01110011 01110100 01101001%3C/text%3E%3Ctext x='10' y='340' class='binary'%3E01101110 01100111 00100000 01010111%3C/text%3E%3Ctext x='10' y='360' class='binary'%3E01101001 01110010 01100101 01110011%3C/text%3E%3Ctext x='10' y='380' class='binary'%3E01101000 01100001 01110010 01101011%3C/text%3E%3C/svg%3E");
+      background-repeat: repeat;
+      z-index: -1;
+      opacity: 0.09;
+      pointer-events: none;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+      width: 100%;
+      min-height: calc(100vh - 60px);
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      padding: 2rem 0;
+      margin-bottom: 2rem;
+      position: relative;
+      width: 100%;
+    }
+
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo-area {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .name {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 2.8rem;
+      font-weight: 600;
+      color: var(--lighter-gray);
+      letter-spacing: -0.5px;
+      margin-bottom: 0.5rem;
+    }
+
+    .title {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: var(--accent);
+      letter-spacing: 0.5px;
+      text-shadow: 0 0 8px var(--glow-accent);
+    }
+
+    .subtle-accent {
+      color: var(--accent);
+    }
+
+    nav {
+      display: flex;
+      gap: 2.5rem;
+    }
+
+    .nav-link {
+      color: var(--light-gray);
+      text-decoration: none;
+      font-size: 1rem;
+      position: relative;
+      transition: color 0.3s ease;
+      padding-bottom: 3px;
+      font-family: 'IBM Plex Mono', monospace;
+    }
+
+    .nav-link:hover {
+      color: var(--lighter-gray);
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: var(--accent);
+      transition: width 0.3s ease;
+      box-shadow: 0 0 8px var(--glow-accent);
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .nav-link.active {
+      color: var(--lighter-gray);
+    }
+
+    .nav-link.active::after {
+      width: 100%;
+    }
+
+    main {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex-grow: 1;
+    }
+
+    .content-section {
+      background-color: var(--dark-gray);
+      padding: 2.8rem;
+      border-radius: 6px;
+      box-shadow: 0 3px 20px rgba(0, 0, 0, 0.25);
+      position: relative;
+      overflow: hidden;
+      max-width: 800px;
+      width: 100%;
+      margin-bottom: 2rem;
+    }
+
+    .content-section::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        radial-gradient(var(--accent-subtle) 1px, transparent 1px),
+        linear-gradient(to right, var(--accent-subtle), transparent 2px);
+      background-size: 20px 20px, 100% 100%;
+      background-position: 0 0, 0 0;
+      opacity: 0.2;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .section-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .section-heading {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: var(--lighter-gray);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      letter-spacing: 0.5px;
+    }
+
+    .section-heading::before {
+      content: ">";
+      color: var(--accent);
+      margin-right: 0.8rem;
+      font-weight: 700;
+      text-shadow: 0 0 8px var(--glow-accent);
+    }
+
+    .section-content p {
+      margin-bottom: 1.5rem;
+      padding-left: 0.5rem;
+      font-size: 1.05rem;
+      line-height: 1.8;
+    }
+    
+    .section-content p:last-child {
+      margin-bottom: 0;
+    }
+
+    .header-accent {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(to right, var(--accent), var(--accent-light), transparent);
+      box-shadow: 0 0 12px var(--glow-accent);
+    }
+
+    .bullet-list {
+      list-style: none;
+      margin: 1rem 0 1.5rem 1.5rem;
+    }
+
+    .bullet-list li {
+      position: relative;
+      padding-left: 1.5rem;
+      margin-bottom: 0.8rem;
+      line-height: 1.6;
+    }
+
+    .bullet-list li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: bold;
+      font-size: 1.2rem;
+      text-shadow: 0 0 5px var(--glow-accent);
+    }
+
+    .bullet-list li:last-child {
+      margin-bottom: 0;
+    }
+
+    .learning-section {
+      margin-bottom: 2.5rem;
+    }
+
+    .learning-section:last-child {
+      margin-bottom: 0;
+    }
+
+    .learning-heading {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--lighter-gray);
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+    }
+
+    .learning-heading::before {
+      content: ">";
+      color: var(--accent);
+      margin-right: 0.8rem;
+      font-weight: 700;
+    }
+
+    .lab-box {
+      background-color: var(--medium-gray);
+      border-left: 3px solid var(--accent);
+      padding: 1.5rem;
+      margin: 1rem 0 1rem 0.5rem;
+      border-radius: 0 5px 5px 0;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    strong {
+      color: var(--lighter-gray);
+      font-weight: 600;
+    }
+
+    footer {
+      width: 100%;
+      padding: 1rem 0;
+      text-align: center;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--light-gray);
+      opacity: 0.7;
+      margin-top: auto;
+    }
+
+    footer .copyright {
+      display: inline-block;
+    }
+
+    footer .copyright::before {
+      content: "©";
+      margin-right: 0.3rem;
+      color: var(--accent);
+    }
+
+    @media (max-width: 600px) {
+      .header-content {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      nav {
+        margin-top: 1rem;
+        gap: 1.5rem;
+      }
+    }
+
+    @keyframes subtle-pulse {
+      0%, 100% {
+        box-shadow: 0 0 5px rgba(123, 45, 57, 0);
+      }
+      50% {
+        box-shadow: 0 0 10px var(--glow-accent);
+      }
+    }
+    
+    .section-content a {
+      color: var(--accent);
+      text-decoration: underline;
+      font-weight: bold;
+      transition: all 0.2s ease;
+    }
+
+    .section-content a:hover {
+      color: var(--accent-light);
+      text-shadow: 0 0 3px var(--glow-accent);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="header-accent"></div>
+      <div class="header-content">
+        <div class="logo-area">
+          <h1 class="name">Minni Wessman</h1>
+          <div class="title">Portfolio</div>
+        </div>
+        <nav>
+         <a href="index.html" class="nav-link">Home</a>
+         <a href="about.html" class="nav-link">About</a>
+         <a href="learning.html" class="nav-link active">Learning</a>
+         <a href="projects.html" class="nav-link">Projects</a>
+         <a href="contact.html" class="nav-link">Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="content-section">
+        <div class="section-content">
+          <h2 class="section-heading">Learning Journey</h2>
+          <p>
+            This learning is part of my self-study and supports my development alongside my formal education.
+          </p>
+          
+          <div class="learning-section">
+            <h3 class="learning-heading">Learning Platforms & Resources</h3>
+            <p>I've been actively learning through platforms like:</p>
+            <ul class="bullet-list">
+              <li></li>
+              <li></li>
+              <li></li>
+            </ul>
+          </div>
+          
+          <div class="learning-section">
+            <h3 class="learning-heading">Lab Practice</h3>
+            <div class="lab-box">
+              <p>
+                I regularly build lab environments using <strong>Kali Linux</strong> and <strong>VirtualBox</strong> to practice what I learn in a safe, isolated setting. These labs have helped me apply concepts like vulnerability scanning, basic exploitation, and privilege escalation.
+              </p>
+            </div>
+          </div>
+
+          <div class="learning-section">
+            <h3 class="learning-heading">Course Completions / Certifications</h3>
+            <ul class="bullet-list">
+              <li></li>
+              <li></li>
+              <li></li>
+            </ul>
+          </div>
+          
+          <div class="learning-section">
+            <h3 class="learning-heading">Current Focus / What's Next</h3>
+            <ul class="bullet-list">
+              <li><strong>eJPT Certification</strong></li>
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </main>
+    
+    <footer>
+      <span class="copyright">Minni Wessman 2025</span>
+    </footer>
+  </div>
+</body>
+</html>
