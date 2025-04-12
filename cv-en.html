@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap');
+
+    :root {
+      --accent: #cc3a4b;
+      --accent-light: #e84c5e;
+      --accent-subtle: rgba(204, 58, 75, 0.15);
+      --dark: #1a1a1a;
+      --dark-gray: #222222;
+      --medium-gray: #2a2a2a;
+      --light-gray: #AAAAAA;
+      --lighter-gray: #E0E0E0;
+      --glow-accent: rgba(204, 58, 75, 0.5);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: var(--dark);
+      color: var(--light-gray);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      line-height: 1.7;
+      font-size: 16px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 400 400'%3E%3Cstyle%3E.binary %7B font: 10px monospace; fill: %23cc3a4b; opacity: 0.11; %7D%3C/style%3E%3Ctext x='10' y='20' class='binary'%3E01000001 00101110 01001001 00101110%3C/text%3E%3Ctext x='10' y='40' class='binary'%3E01110011 01100101 01100011 01110101%3C/text%3E%3Ctext x='10' y='60' class='binary'%3E01110010 01101001 01110100 01111001%3C/text%3E%3Ctext x='10' y='80' class='binary'%3E01001000 01100001 01100011 01101011%3C/text%3E%3Ctext x='10' y='100' class='binary'%3E01101001 01101110 01100111 00100000%3C/text%3E%3Ctext x='10' y='120' class='binary'%3E01000101 01110100 01101000 01101001%3C/text%3E%3Ctext x='10' y='140' class='binary'%3E01100011 01100001 01101100 00100000%3C/text%3E%3Ctext x='10' y='160' class='binary'%3E01001011 01100001 01101100 01101001%3C/text%3E%3Ctext x='10' y='180' class='binary'%3E01001100 01101001 01101110 01110101%3C/text%3E%3Ctext x='10' y='200' class='binary'%3E01111000 00100000 01010110 01010000%3C/text%3E%3Ctext x='10' y='220' class='binary'%3E01001110 00100000 01010011 01100101%3C/text%3E%3Ctext x='10' y='240' class='binary'%3E01100011 01110101 01110010 01101001%3C/text%3E%3Ctext x='10' y='260' class='binary'%3E01110100 01111001 00100000 01001111%3C/text%3E%3Ctext x='10' y='280' class='binary'%3E01010011 01001001 01001110 01010100%3C/text%3E%3Ctext x='10' y='300' class='binary'%3E01010000 01100101 01101110 01110100%3C/text%3E%3Ctext x='10' y='320' class='binary'%3E01100101 01110011 01110100 01101001%3C/text%3E%3Ctext x='10' y='340' class='binary'%3E01101110 01100111 00100000 01010111%3C/text%3E%3Ctext x='10' y='360' class='binary'%3E01101001 01110010 01100101 01110011%3C/text%3E%3Ctext x='10' y='380' class='binary'%3E01101000 01100001 01110010 01101011%3C/text%3E%3C/svg%3E");
+      background-repeat: repeat;
+      z-index: -1;
+      opacity: 0.09;
+      pointer-events: none;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+      width: 100%;
+      min-height: calc(100vh - 60px);
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      padding: 2rem 0;
+      margin-bottom: 2rem;
+      position: relative;
+      width: 100%;
+    }
+
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo-area {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .name {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 2.8rem;
+      font-weight: 600;
+      color: var(--lighter-gray);
+      letter-spacing: -0.5px;
+      margin-bottom: 0.5rem;
+    }
+
+    .title {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: var(--accent);
+      letter-spacing: 0.5px;
+      text-shadow: 0 0 8px var(--glow-accent);
+    }
+
+    .subtle-accent {
+      color: var(--accent);
+    }
+
+    nav {
+      display: flex;
+      gap: 2.5rem;
+    }
+
+    .nav-link {
+      color: var(--light-gray);
+      text-decoration: none;
+      font-size: 1rem;
+      position: relative;
+      transition: color 0.3s ease;
+      padding-bottom: 3px;
+      font-family: 'IBM Plex Mono', monospace;
+    }
+
+    .nav-link:hover {
+      color: var(--lighter-gray);
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: var(--accent);
+      transition: width 0.3s ease;
+      box-shadow: 0 0 8px var(--glow-accent);
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .nav-link.active {
+      color: var(--lighter-gray);
+    }
+
+    .nav-link.active::after {
+      width: 100%;
+    }
+
+    main {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex-grow: 1;
+    }
+
+    .cv-layout {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 2rem;
+      width: 100%;
+      max-width: 1200px;
+      margin-bottom: 2rem;
+    }
+
+    .cv-main, .cv-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .cv-box {
+      background-color: var(--dark-gray);
+      padding: 2.5rem;
+      border-radius: 6px;
+      box-shadow: 0 3px 20px rgba(0, 0, 0, 0.25);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cv-box::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        radial-gradient(var(--accent-subtle) 1px, transparent 1px),
+        linear-gradient(to right, var(--accent-subtle), transparent 2px);
+      background-size: 20px 20px, 100% 100%;
+      background-position: 0 0, 0 0;
+      opacity: 0.2;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .section-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .section-heading {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: var(--lighter-gray);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      letter-spacing: 0.5px;
+    }
+
+    .section-heading::before {
+      content: ">";
+      color: var(--accent);
+      margin-right: 0.8rem;
+      font-weight: 700;
+      text-shadow: 0 0 8px var(--glow-accent);
+    }
+
+    .sidebar-heading {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--lighter-gray);
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+    }
+
+    .sidebar-heading::before {
+      content: ">";
+      color: var(--accent);
+      margin-right: 0.8rem;
+      font-weight: 700;
+    }
+
+    .cv-job {
+      margin-bottom: 2rem;
+    }
+
+    .cv-job:last-child {
+      margin-bottom: 0;
+    }
+
+    .job-title {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--lighter-gray);
+      margin-bottom: 0.2rem;
+    }
+
+    .job-company {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .job-period {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--light-gray);
+      margin-bottom: 0.8rem;
+      display: block;
+    }
+
+    .job-description {
+      margin-bottom: 0.8rem;
+    }
+
+    .section-content p {
+      margin-bottom: 1.5rem;
+      padding-left: 0.5rem;
+      font-size: 1.05rem;
+      line-height: 1.8;
+    }
+    
+    .section-content p:last-child {
+      margin-bottom: 0;
+    }
+
+    .header-accent {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(to right, var(--accent), var(--accent-light), transparent);
+      box-shadow: 0 0 12px var(--glow-accent);
+    }
+
+    .bullet-list {
+      list-style: none;
+      margin: 0.5rem 0 1rem 0.5rem;
+    }
+
+    .bullet-list li {
+      position: relative;
+      padding-left: 1.5rem;
+      margin-bottom: 0.8rem;
+      line-height: 1.6;
+    }
+
+    .bullet-list li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: bold;
+      font-size: 1.2rem;
+      text-shadow: 0 0 5px var(--glow-accent);
+    }
+
+    .bullet-list li:last-child {
+      margin-bottom: 0;
+    }
+
+    .contact-info {
+      margin-bottom: 1.5rem;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .contact-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .contact-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-weight: 500;
+      color: var(--accent);
+      margin-right: 0.5rem;
+      min-width: 80px;
+    }
+
+    .contact-value {
+      color: var(--lighter-gray);
+    }
+
+    .contact-value a {
+      color: var(--lighter-gray);
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .contact-value a:hover {
+      color: var(--accent);
+      text-shadow: 0 0 3px var(--glow-accent);
+    }
+
+    .cv-education {
+      margin-bottom: 1.5rem;
+    }
+
+    .cv-education:last-child {
+      margin-bottom: 0;
+    }
+
+    .education-title {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--lighter-gray);
+      margin-bottom: 0.2rem;
+    }
+
+    .education-institution {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.95rem;
+      color: var(--accent);
+      margin-bottom: 0.2rem;
+    }
+
+    .education-period {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.9rem;
+      color: var(--light-gray);
+      margin-bottom: 0.5rem;
+      font-style: italic;
+    }
+
+    .cv-citation {
+      font-style: italic;
+      color: var(--lighter-gray);
+      border-left: 2px solid var(--accent);
+      padding-left: 1rem;
+      margin: 0.8rem 0 0.8rem 0.5rem;
+    }
+
+    strong {
+      color: var(--lighter-gray);
+      font-weight: 600;
+    }
+
+    footer {
+      width: 100%;
+      padding: 1rem 0;
+      text-align: center;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--light-gray);
+      opacity: 0.7;
+      margin-top: auto;
+    }
+
+    footer .copyright {
+      display: inline-block;
+    }
+
+    footer .copyright::before {
+      content: "©";
+      margin-right: 0.3rem;
+      color: var(--accent);
+    }
+
+    .emoji-heading {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--lighter-gray);
+      margin-bottom: 1rem;
+    }
+
+    .emoji-heading::before {
+      content: ">";
+      color: var(--accent);
+      margin-right: 0.3rem;
+      font-weight: 700;
+    }
+
+    @media (max-width: 900px) {
+      .cv-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .header-content {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      nav {
+        margin-top: 1rem;
+        gap: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="header-accent"></div>
+      <div class="header-content">
+        <div class="logo-area">
+          <h1 class="name">Minni Wessman</h1>
+          <div class="title">Curriculum Vitae</div>
+        </div>
+        <nav>
+         <a href="index.html" class="nav-link">Home</a>
+         <a href="about.html" class="nav-link">About</a>
+         <a href="projects.html" class="nav-link">Projects</a>
+         <a href="learning.html" class="nav-link">Learning</a>
+         <a href="contact.html" class="nav-link">Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <div class="cv-layout">
+        <div class="cv-sidebar">
+          <div class="cv-box">
+            <div class="section-content">
+              <h3 class="sidebar-heading">Profile</h3>
+              <div class="contact-info">
+                <div class="contact-item">
+                  <span class="contact-label">Location:</span>
+                  <span class="contact-value">Espoo, Finland</span>
+                </div>
+                <div class="contact-item">
+                  <span class="contact-label">Email:</span>
+                  <span class="contact-value"><a href="mailto:minni.wessman@gmail.com">minni.wessman@gmail.com</a></span>
+                </div>
+                <div class="contact-item">
+                  <span class="contact-label">Phone:</span>
+                  <span class="contact-value">+358 40 415 7953</span>
+                </div>
+                <div class="contact-item">
+                  <span class="contact-label">Portfolio:</span>
+                  <span class="contact-value"><a href="https://wminni.github.io/portfolio/" target="_blank">wminni.github.io/portfolio</a></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="cv-box">
+            <div class="section-content">
+              <h3 class="emoji-heading">Education</h3>
+              <div class="cv-education">
+                <div class="education-title">SOC Specialist</div>
+                <div class="education-institution">Business College Helsinki</div>
+                <div class="education-period">07/2024 – ongoing</div>
+                <div class="education-note">Will graduate after completing internship.</div>
+              </div>
+              <div class="cv-education">
+                <div class="education-title">Vocational Qualification in Information and Communications Technology</div>
+                <div class="education-institution">Business College Helsinki</div>
+                <div class="education-period">08/2024 – ongoing</div>
+              </div>
+              <div class="cv-education">
+                <div class="education-title">Vocational Qualification in Safety and Security</div>
+                <div class="education-institution">Omnia</div>
+                <div class="education-period">Graduated 05/2024</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="cv-box">
+            <div class="section-content">
+              <h3 class="emoji-heading">Courses & Additional Studies</h3>
+              <div class="cv-education">
+                <div class="education-title">Pathway Studies in Cybersecurity (BBA)</div>
+                <div class="education-institution">Laurea University of Applied Sciences</div>
+                <div class="education-period">01/2025 – ongoing</div>
+              </div>
+              <div class="cv-education">
+                <div class="education-title">Cybersecurity I: Fundamentals</div>
+                <div class="education-institution">Tampere University (Open University)</div>
+                <div class="education-period">Completed 03/2024</div>
+              </div>
+              <div class="cv-education">
+                <div class="education-title">Basics of Security Management and Risk Assessment</div>
+                <div class="education-institution">Laurea University of Applied Sciences</div>
+                <div class="education-period">Completed 02/2024</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="cv-box">
+            <div class="section-content">
+              <h3 class="emoji-heading">Licenses</h3>
+              <ul class="bullet-list">
+                <li>Security Guard License</li>
+                <li>Driving License, Category B</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="cv-box">
+            <div class="section-content">
+              <h3 class="emoji-heading">Languages</h3>
+              <ul class="bullet-list">
+                <li>Finnish – Native</li>
+                <li>English – Good</li>
+                <li>Swedish – Basic</li>
+                <li>Spanish – Basic</li>
+              </ul>
+            </div>
+          </div>
+          
+          <div class="cv-box">
+            <div class="section-content">
+              <h3 class="emoji-heading">Hobbies & Interests</h3>
+              <p>
+                I sometimes unwind by playing video games and enjoy building computers and exploring electronics in general. I also deepen my cybersecurity skills in my free time through practice labs, articles, and online courses.
+              </p>
+              <p>
+                To balance things out, I enjoy hiking and spending time outdoors. I'm also a lifelong horse enthusiast – riding and caring for horses has been part of my life since childhood, teaching me responsibility, patience, and perseverance.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="cv-main">
+          <div class="cv-box">
+            <div class="section-content">
+              <p>
+                I'm an ICT student with a focus on cybersecurity, aiming to grow especially in offensive security. I hold a vocational qualification in safety and security and have experience working within critical infrastructure, which has given me a strong understanding of risk management and the connection between physical and digital security.
+              </p>
+              <p>
+                I actively build my skills through hands-on labs, CTF challenges, and personal projects. I'm used to learning both independently and as part of a team.
+              </p>
+              <p>
+                As a mother of two, my earlier years were focused on family life, which has naturally resulted in some gaps in my work history. Now, I have the opportunity to fully dedicate myself to cybersecurity, and my goal is to grow into a skilled professional and build a meaningful career in the field.
+              </p>
+              <p>
+                I've documented my learning, practical work, and developing projects more extensively in my portfolio, which I continue to update as I progress.
+              </p>
+            </div>
+          </div>
+
+          <div class="cv-box">
+            <div class="section-content">
+              <h2 class="section-heading">Work Experience</h2>
+              
+              <div class="cv-job">
+                <div class="job-title">Security Guard</div>
+                <div class="job-company">Etelävartiointi Oy</div>
+                <div class="job-period">02/2021 – 04/2022</div>
+                <div class="job-description">
+                  Worked in the control room of a critical infrastructure site as part of the security team.
+                </div>
+                <ul class="bullet-list">
+                  <li>Operated electronic monitoring and alarm systems, tracked anomalies.</li>
+                  <li>Responded to alerts according to protocol and reported incidents.</li>
+                  <li>Required attention to detail, calmness under pressure, and fast decision-making.</li>
+                </ul>
+                <div class="cv-citation">
+                  "I can warmly recommend her for similar positions." – HR Manager, employment certificate
+                </div>
+              </div>
+              
+              <div class="cv-job">
+                <div class="job-title">Nanny</div>
+                <div class="job-company">Milla Wessman</div>
+                <div class="job-period">01/2016 – 12/2017</div>
+                <div class="job-description">
+                  Took care of a child in a private family setting.
+                </div>
+                <ul class="bullet-list">
+                  <li>Required trust, responsibility, and long-term commitment.</li>
+                </ul>
+              </div>
+              
+              <div class="cv-job">
+                <div class="job-title">Personal Assistant</div>
+                <div class="job-company">Asser Pekkarinen</div>
+                <div class="job-period">02/2014 – 12/2015</div>
+                <div class="job-description">
+                  Assisted in daily activities both at home and outside.
+                </div>
+                <ul class="bullet-list">
+                  <li>Required reliability, empathy, and initiative.</li>
+                </ul>
+              </div>
+              
+              <div class="cv-job">
+                <div class="job-title">Sales Assistant</div>
+                <div class="job-company">Varusteleka Oy</div>
+                <div class="job-period">03/2011 – 06/2013</div>
+                <div class="job-description">
+                  Handled customer service, sales, product presentation, campaign execution, inventory, and supported the online store.
+                </div>
+                <div class="cv-citation">
+                  "Performed all tasks excellently, adapted well to the team, and showed exceptional initiative." – Store Manager, employment certificate
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <span class="copyright">Minni Wessman 2025</span>
+    </footer>
+  </div>
+</body>
+</html>
