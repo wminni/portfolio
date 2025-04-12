@@ -54,6 +54,9 @@
       margin: 0 auto;
       padding: 2rem;
       width: 100%;
+      min-height: calc(100vh - 60px);
+      display: flex;
+      flex-direction: column;
     }
 
     header {
@@ -144,6 +147,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      flex-grow: 1;
     }
 
     .contact-section {
@@ -269,27 +273,25 @@
       box-shadow: 0 0 12px var(--glow-accent);
     }
 
-    .security-indicator {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      border: 1px solid var(--accent);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 16px;
-      color: var(--accent);
-      opacity: 0.5;
-      z-index: 100;
-      transition: opacity 0.3s ease;
-      animation: subtle-pulse 4s infinite ease-in-out;
+    footer {
+      width: 100%;
+      padding: 1rem 0;
+      text-align: center;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--light-gray);
+      opacity: 0.7;
+      margin-top: auto;
     }
 
-    .security-indicator:hover {
-      opacity: 0.8;
+    footer .copyright {
+      display: inline-block;
+    }
+
+    footer .copyright::before {
+      content: "©";
+      margin-right: 0.3rem;
+      color: var(--accent);
     }
 
     @keyframes subtle-pulse {
@@ -342,10 +344,10 @@
         </div>
       </section>
     </main>
-  </div>
-
-  <div class="security-indicator">
-    <i>&#128274;</i>
+    
+    <footer>
+      <span class="copyright">Minni Wessman 2025</span>
+    </footer>
   </div>
 </body>
 </html>
